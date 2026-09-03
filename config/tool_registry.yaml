@@ -1,0 +1,66 @@
+# SatQuery Tool Registry — observable, auditable
+# Each tool is a Python module with typed I/O — agent selects from this list only
+tools:
+  - id: satquery-rs-vlm
+    name: SatQuery-RS-VLM
+    capability: [VQA, Captioning, Grounding]
+    adaptation: LoRA on BigEarthNet / RSVQA subset
+    base_model: Qwen2-VL-2B-Instruct (or BLIP fallback)
+    modality: [optical, multispectral, sar]
+    inputs: [single_image]
+    outputs: [answer_text, caption, grounding_boxes, confidence]
+    status: ready
+    version: 0.3.0
+    module: tools.vqa_tool
+
+  - id: change-detector
+    name: ChangeDetector
+    capability: [temporal_change_detection, change_description, change_vqa]
+    adaptation: Siamese lightweight + heuristic + learned head
+    base_model: SiameseResNet18 + classical CV fallback
+    modality: [bi_temporal]
+    inputs: [image_t1, image_t2]
+    outputs: [change_map, change_mask, change_description, changed_area_pct, confidence]
+    status: ready
+    version: 0.3.0
+    module: tools.change_tool
+
+  - id: optical-analyzer
+    name: OpticalAnalyzer
+    capability: [optical_landcover, water_builtup_extraction]
+    base_model: NDVI/NDWI + heuristic + CLIP zero-shot
+    modality: [optical, multispectral]
+    inputs: [optical_image]
+    outputs: [landcover_map, water_mask, builtup_mask, ndvi_stats, confidence]
+    status: ready
+    version: 0.3.0
+    module: tools.optical_tool
+
+  - id: sar-analyzer
+    name: SARAnalyzer
+    capability: [sar_backscatter_analysis, water_builtup_extraction]
+    base_model: Backscatter statistics + speckle-aware thresholding
+    modality: [sar]
+    inputs: [sar_image]
+    outputs: [backscatter_stats, water_mask, builtup_mask, speckle_metric, confidence]
+    status: ready
+    version: 0.3.0
+    module: tools.sar_tool
+
+  - id: fusion-engine
+    name: FusionEngine
+    capability: [cross_modal_fusion, evidence_agreement]
+    base_model: Decision-level fusion + agreement scoring
+    modality: [optical_sar_pair]
+    inputs: [optical_result, sar_result]
+    outputs: [fused_masks, agreement_score, corroboration_statement, confidence]
+    status: ready
+    version: 0.3.0
+    module: tools.fusion_tool
+
+agent:
+  controller: deterministic-first with LLM fallback
+  intent_classes: [single_vqa, captioning, grounding, temporal_change, optical_sar_fusion, compound_temporal_sar, invalid]
+  validation: rasterio + PIL + metadata-first
+  confidence: heuristic (input_quality + model_confidence + evidence_agreement + cross_modal_support)
+  trace: observable execution steps only

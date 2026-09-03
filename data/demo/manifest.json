@@ -1,0 +1,12 @@
+{
+  "hero_demo": {
+    "description": "Flood inundation: T1 (before) + T2 (after) + SAR corroboration",
+    "files": [
+      "temporal_pairs/flood_T1.png",
+      "temporal_pairs/flood_T2.png",
+      "optical_sar_pairs/flood_sar.png"
+    ],
+    "query": "What changed between the two dates, and can the SAR imagery corroborate the change?",
+    "expected": "Extensive water expansion ~8-12% -> SAR dark smooth confirms inundation"
+  }
+}

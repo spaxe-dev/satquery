@@ -1,0 +1,602 @@
+[
+  {
+    "image": "synthetic_0.png",
+    "query": "Describe the land-cover",
+    "answer": "This Sentinel-2 patch shows mixed agricultural fields and sparse settlement.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_1.png",
+    "query": "Describe the land-cover",
+    "answer": "This Sentinel-2 patch shows mixed agricultural fields and sparse settlement.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_2.png",
+    "query": "What is the dominant land-cover?",
+    "answer": "Forest dominates (~60%), with adjacent barren patches.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_3.png",
+    "query": "Is there water visible?",
+    "answer": "Yes \u2014 a river traverses the southern portion.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_4.png",
+    "query": "Is there water visible?",
+    "answer": "Yes \u2014 a river traverses the southern portion.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_5.png",
+    "query": "Is there water visible?",
+    "answer": "Yes \u2014 a river traverses the southern portion.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_6.png",
+    "query": "Describe the land-cover",
+    "answer": "This Sentinel-2 patch shows mixed agricultural fields and sparse settlement.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_7.png",
+    "query": "Describe the land-cover",
+    "answer": "This Sentinel-2 patch shows mixed agricultural fields and sparse settlement.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_8.png",
+    "query": "Highlight the built-up area",
+    "answer": "Built-up appears in the northeast quadrant.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_9.png",
+    "query": "Describe the land-cover",
+    "answer": "This Sentinel-2 patch shows mixed agricultural fields and sparse settlement.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_10.png",
+    "query": "Describe the land-cover",
+    "answer": "This Sentinel-2 patch shows mixed agricultural fields and sparse settlement.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_11.png",
+    "query": "Describe the land-cover",
+    "answer": "This Sentinel-2 patch shows mixed agricultural fields and sparse settlement.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_12.png",
+    "query": "Is there water visible?",
+    "answer": "Yes \u2014 a river traverses the southern portion.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_13.png",
+    "query": "Is there water visible?",
+    "answer": "Yes \u2014 a river traverses the southern portion.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_14.png",
+    "query": "Describe the land-cover",
+    "answer": "This Sentinel-2 patch shows mixed agricultural fields and sparse settlement.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_15.png",
+    "query": "Is there water visible?",
+    "answer": "Yes \u2014 a river traverses the southern portion.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_16.png",
+    "query": "Highlight the built-up area",
+    "answer": "Built-up appears in the northeast quadrant.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_17.png",
+    "query": "Is there water visible?",
+    "answer": "Yes \u2014 a river traverses the southern portion.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_18.png",
+    "query": "Highlight the built-up area",
+    "answer": "Built-up appears in the northeast quadrant.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_19.png",
+    "query": "What is the dominant land-cover?",
+    "answer": "Forest dominates (~60%), with adjacent barren patches.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_20.png",
+    "query": "Describe the land-cover",
+    "answer": "This Sentinel-2 patch shows mixed agricultural fields and sparse settlement.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_21.png",
+    "query": "Is there water visible?",
+    "answer": "Yes \u2014 a river traverses the southern portion.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_22.png",
+    "query": "Highlight the built-up area",
+    "answer": "Built-up appears in the northeast quadrant.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_23.png",
+    "query": "What is the dominant land-cover?",
+    "answer": "Forest dominates (~60%), with adjacent barren patches.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_24.png",
+    "query": "What is the dominant land-cover?",
+    "answer": "Forest dominates (~60%), with adjacent barren patches.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_25.png",
+    "query": "Is there water visible?",
+    "answer": "Yes \u2014 a river traverses the southern portion.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_26.png",
+    "query": "Is there water visible?",
+    "answer": "Yes \u2014 a river traverses the southern portion.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_27.png",
+    "query": "What is the dominant land-cover?",
+    "answer": "Forest dominates (~60%), with adjacent barren patches.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_28.png",
+    "query": "Describe the land-cover",
+    "answer": "This Sentinel-2 patch shows mixed agricultural fields and sparse settlement.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_29.png",
+    "query": "Describe the land-cover",
+    "answer": "This Sentinel-2 patch shows mixed agricultural fields and sparse settlement.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_30.png",
+    "query": "Highlight the built-up area",
+    "answer": "Built-up appears in the northeast quadrant.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_31.png",
+    "query": "Describe the land-cover",
+    "answer": "This Sentinel-2 patch shows mixed agricultural fields and sparse settlement.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_32.png",
+    "query": "What is the dominant land-cover?",
+    "answer": "Forest dominates (~60%), with adjacent barren patches.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_33.png",
+    "query": "What is the dominant land-cover?",
+    "answer": "Forest dominates (~60%), with adjacent barren patches.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_34.png",
+    "query": "What is the dominant land-cover?",
+    "answer": "Forest dominates (~60%), with adjacent barren patches.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_35.png",
+    "query": "Describe the land-cover",
+    "answer": "This Sentinel-2 patch shows mixed agricultural fields and sparse settlement.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_36.png",
+    "query": "Highlight the built-up area",
+    "answer": "Built-up appears in the northeast quadrant.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_37.png",
+    "query": "Describe the land-cover",
+    "answer": "This Sentinel-2 patch shows mixed agricultural fields and sparse settlement.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_38.png",
+    "query": "Highlight the built-up area",
+    "answer": "Built-up appears in the northeast quadrant.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_39.png",
+    "query": "Describe the land-cover",
+    "answer": "This Sentinel-2 patch shows mixed agricultural fields and sparse settlement.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_40.png",
+    "query": "What is the dominant land-cover?",
+    "answer": "Forest dominates (~60%), with adjacent barren patches.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_41.png",
+    "query": "What is the dominant land-cover?",
+    "answer": "Forest dominates (~60%), with adjacent barren patches.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_42.png",
+    "query": "Is there water visible?",
+    "answer": "Yes \u2014 a river traverses the southern portion.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_43.png",
+    "query": "Describe the land-cover",
+    "answer": "This Sentinel-2 patch shows mixed agricultural fields and sparse settlement.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_44.png",
+    "query": "Describe the land-cover",
+    "answer": "This Sentinel-2 patch shows mixed agricultural fields and sparse settlement.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_45.png",
+    "query": "Is there water visible?",
+    "answer": "Yes \u2014 a river traverses the southern portion.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_46.png",
+    "query": "What is the dominant land-cover?",
+    "answer": "Forest dominates (~60%), with adjacent barren patches.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_47.png",
+    "query": "Describe the land-cover",
+    "answer": "This Sentinel-2 patch shows mixed agricultural fields and sparse settlement.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_48.png",
+    "query": "Is there water visible?",
+    "answer": "Yes \u2014 a river traverses the southern portion.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_49.png",
+    "query": "Describe the land-cover",
+    "answer": "This Sentinel-2 patch shows mixed agricultural fields and sparse settlement.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_50.png",
+    "query": "Highlight the built-up area",
+    "answer": "Built-up appears in the northeast quadrant.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_51.png",
+    "query": "What is the dominant land-cover?",
+    "answer": "Forest dominates (~60%), with adjacent barren patches.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_52.png",
+    "query": "Highlight the built-up area",
+    "answer": "Built-up appears in the northeast quadrant.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_53.png",
+    "query": "What is the dominant land-cover?",
+    "answer": "Forest dominates (~60%), with adjacent barren patches.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_54.png",
+    "query": "Is there water visible?",
+    "answer": "Yes \u2014 a river traverses the southern portion.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_55.png",
+    "query": "What is the dominant land-cover?",
+    "answer": "Forest dominates (~60%), with adjacent barren patches.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_56.png",
+    "query": "What is the dominant land-cover?",
+    "answer": "Forest dominates (~60%), with adjacent barren patches.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_57.png",
+    "query": "Is there water visible?",
+    "answer": "Yes \u2014 a river traverses the southern portion.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_58.png",
+    "query": "What is the dominant land-cover?",
+    "answer": "Forest dominates (~60%), with adjacent barren patches.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_59.png",
+    "query": "Describe the land-cover",
+    "answer": "This Sentinel-2 patch shows mixed agricultural fields and sparse settlement.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_60.png",
+    "query": "Is there water visible?",
+    "answer": "Yes \u2014 a river traverses the southern portion.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_61.png",
+    "query": "Is there water visible?",
+    "answer": "Yes \u2014 a river traverses the southern portion.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_62.png",
+    "query": "Is there water visible?",
+    "answer": "Yes \u2014 a river traverses the southern portion.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_63.png",
+    "query": "Highlight the built-up area",
+    "answer": "Built-up appears in the northeast quadrant.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_64.png",
+    "query": "Highlight the built-up area",
+    "answer": "Built-up appears in the northeast quadrant.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_65.png",
+    "query": "What is the dominant land-cover?",
+    "answer": "Forest dominates (~60%), with adjacent barren patches.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_66.png",
+    "query": "Is there water visible?",
+    "answer": "Yes \u2014 a river traverses the southern portion.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_67.png",
+    "query": "What is the dominant land-cover?",
+    "answer": "Forest dominates (~60%), with adjacent barren patches.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_68.png",
+    "query": "Describe the land-cover",
+    "answer": "This Sentinel-2 patch shows mixed agricultural fields and sparse settlement.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_69.png",
+    "query": "Is there water visible?",
+    "answer": "Yes \u2014 a river traverses the southern portion.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_70.png",
+    "query": "Describe the land-cover",
+    "answer": "This Sentinel-2 patch shows mixed agricultural fields and sparse settlement.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_71.png",
+    "query": "What is the dominant land-cover?",
+    "answer": "Forest dominates (~60%), with adjacent barren patches.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_72.png",
+    "query": "Highlight the built-up area",
+    "answer": "Built-up appears in the northeast quadrant.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_73.png",
+    "query": "What is the dominant land-cover?",
+    "answer": "Forest dominates (~60%), with adjacent barren patches.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_74.png",
+    "query": "Describe the land-cover",
+    "answer": "This Sentinel-2 patch shows mixed agricultural fields and sparse settlement.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_75.png",
+    "query": "Is there water visible?",
+    "answer": "Yes \u2014 a river traverses the southern portion.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_76.png",
+    "query": "What is the dominant land-cover?",
+    "answer": "Forest dominates (~60%), with adjacent barren patches.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_77.png",
+    "query": "Is there water visible?",
+    "answer": "Yes \u2014 a river traverses the southern portion.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_78.png",
+    "query": "Highlight the built-up area",
+    "answer": "Built-up appears in the northeast quadrant.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_79.png",
+    "query": "Highlight the built-up area",
+    "answer": "Built-up appears in the northeast quadrant.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_80.png",
+    "query": "Highlight the built-up area",
+    "answer": "Built-up appears in the northeast quadrant.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_81.png",
+    "query": "Is there water visible?",
+    "answer": "Yes \u2014 a river traverses the southern portion.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_82.png",
+    "query": "What is the dominant land-cover?",
+    "answer": "Forest dominates (~60%), with adjacent barren patches.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_83.png",
+    "query": "Is there water visible?",
+    "answer": "Yes \u2014 a river traverses the southern portion.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_84.png",
+    "query": "Is there water visible?",
+    "answer": "Yes \u2014 a river traverses the southern portion.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_85.png",
+    "query": "What is the dominant land-cover?",
+    "answer": "Forest dominates (~60%), with adjacent barren patches.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_86.png",
+    "query": "Highlight the built-up area",
+    "answer": "Built-up appears in the northeast quadrant.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_87.png",
+    "query": "Highlight the built-up area",
+    "answer": "Built-up appears in the northeast quadrant.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_88.png",
+    "query": "What is the dominant land-cover?",
+    "answer": "Forest dominates (~60%), with adjacent barren patches.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_89.png",
+    "query": "Is there water visible?",
+    "answer": "Yes \u2014 a river traverses the southern portion.",
+    "split": "train"
+  },
+  {
+    "image": "synthetic_90.png",
+    "query": "Is there water visible?",
+    "answer": "Yes \u2014 a river traverses the southern portion.",
+    "split": "val"
+  },
+  {
+    "image": "synthetic_91.png",
+    "query": "Highlight the built-up area",
+    "answer": "Built-up appears in the northeast quadrant.",
+    "split": "val"
+  },
+  {
+    "image": "synthetic_92.png",
+    "query": "Describe the land-cover",
+    "answer": "This Sentinel-2 patch shows mixed agricultural fields and sparse settlement.",
+    "split": "val"
+  },
+  {
+    "image": "synthetic_93.png",
+    "query": "Describe the land-cover",
+    "answer": "This Sentinel-2 patch shows mixed agricultural fields and sparse settlement.",
+    "split": "val"
+  },
+  {
+    "image": "synthetic_94.png",
+    "query": "Describe the land-cover",
+    "answer": "This Sentinel-2 patch shows mixed agricultural fields and sparse settlement.",
+    "split": "val"
+  },
+  {
+    "image": "synthetic_95.png",
+    "query": "Is there water visible?",
+    "answer": "Yes \u2014 a river traverses the southern portion.",
+    "split": "val"
+  },
+  {
+    "image": "synthetic_96.png",
+    "query": "Is there water visible?",
+    "answer": "Yes \u2014 a river traverses the southern portion.",
+    "split": "val"
+  },
+  {
+    "image": "synthetic_97.png",
+    "query": "Highlight the built-up area",
+    "answer": "Built-up appears in the northeast quadrant.",
+    "split": "val"
+  },
+  {
+    "image": "synthetic_98.png",
+    "query": "Describe the land-cover",
+    "answer": "This Sentinel-2 patch shows mixed agricultural fields and sparse settlement.",
+    "split": "val"
+  },
+  {
+    "image": "synthetic_99.png",
+    "query": "Highlight the built-up area",
+    "answer": "Built-up appears in the northeast quadrant.",
+    "split": "val"
+  }
+]

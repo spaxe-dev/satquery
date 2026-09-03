@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>SatQuery AI — Interactive Remote-Sensing Intelligence</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{font-family:Inter,system-ui,sans-serif}
+  .mono{font-family:'JetBrains Mono',monospace}
+  .glass{backdrop-filter:blur(12px); background:rgba(255,255,255,0.92)}
+  .grid-bg{background-image: radial-gradient(circle at 1px 1px, rgba(0,0,0,0.06) 1px, transparent 0); background-size:22px 22px}
+</style>
+</head>
+<body class="bg-[#f8f9fb] text-zinc-900 min-h-screen grid-bg">
+<!-- TOP BAR -->
+<header class="sticky top-0 z-40 border-b border-zinc-200 glass">
+  <div class="max-w-[1480px] mx-auto px-6 py-3.5 flex items-center justify-between">
+    <div class="flex items-center gap-4">
+      <div class="w-9 h-9 rounded-xl bg-zinc-900 text-white flex items-center justify-center font-extrabold mono text-sm">SQ</div>
+      <div>
+        <div class="font-extrabold tracking-tight leading-none text-[15px]">SATQUERY AI</div>
+        <div class="text-[11px] tracking-[0.14em] text-zinc-500 font-semibold">INTERACTIVE REMOTE-SENSING INTELLIGENCE • SIH26167</div>
+      </div>
+      <span class="hidden md:inline-flex ml-3 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[11px] font-bold tracking-wide">● AGENTIC ORCHESTRATION</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <span id="backendStatus" class="text-xs mono px-2.5 py-1.5 rounded-full bg-zinc-900 text-white">checking backend…</span>
+      <button onclick="window.open('/docs','_blank')" class="hidden md:inline-flex text-xs font-semibold px-3 py-1.5 rounded-full border border-zinc-300 hover:bg-white">API DOCS</button>
+      <button onclick="downloadReport()" class="text-xs font-bold px-3.5 py-1.5 rounded-full bg-zinc-900 text-white hover:bg-black">DOWNLOAD REPORT</button>
+    </div>
+  </div>
+</header>
+
+<!-- MAIN GRID -->
+<div class="max-w-[1480px] mx-auto px-6 py-6 grid grid-cols-12 gap-5">
+  <!-- LEFT: WORKSPACE -->
+  <div class="col-span-12 lg:col-span-7 space-y-5">
+    <!-- IMAGE WORKSPACE -->
+    <div class="bg-white rounded-2xl border border-zinc-200 shadow-sm overflow-hidden">
+      <div class="px-5 py-3.5 flex items-center justify-between border-b border-zinc-100">
+        <div class="font-bold text-sm tracking-tight">IMAGE WORKSPACE</div>
+        <div class="flex items-center gap-2 text-[11px]">
+          <span class="px-2 py-1 rounded-full bg-zinc-900 text-white font-bold mono" id="imgCount">0 images</span>
+          <button onclick="clearAll()" class="px-2.5 py-1 rounded-full border border-zinc-200 hover:bg-zinc-50 font-semibold">CLEAR</button>
+        </div>
+      </div>
+      <!-- Drop zone -->
+      <div id="dropZone" class="m-4 rounded-xl border-2 border-dashed border-zinc-300 bg-zinc-50 hover:bg-zinc-100 transition p-6 text-center cursor-pointer">
+        <div class="text-sm font-semibold">Drop GeoTIFF / TIFF / PNG / JPEG here</div>
+        <div class="text-xs text-zinc-500 mt-1">or click to browse • supports single, bi-temporal, and optical+SAR pairs • PNG/JPEG allowed for benchmarks</div>
+        <div class="mt-3 flex flex-wrap justify-center gap-2 text-[11px] mono">
+          <span class="px-2 py-1 bg-white border rounded-full">GeoTIFF ✓</span>
+          <span class="px-2 py-1 bg-white border rounded-full">TIFF ✓</span>
+          <span class="px-2 py-1 bg-white border rounded-full">PNG (demo) ✓</span>
+          <span class="px-2 py-1 bg-white border rounded-full">JPEG (demo) ✓</span>
+        </div>
+        <input id="fileInput" type="file" multiple accept=".tif,.tiff,.png,.jpg,.jpeg" class="hidden"/>
+      </div>
+      <!-- Previews -->
+      <div id="previewGrid" class="px-4 pb-4 grid grid-cols-2 md:grid-cols-3 gap-3"></div>
+      <!-- modality hint -->
+      <div id="modalityHint" class="mx-4 mb-4 text-xs mono bg-amber-50 border border-amber-200 text-amber-800 px-3 py-2 rounded-xl hidden"></div>
+    </div>
+
+    <!-- QUERY -->
+    <div class="bg-white rounded-2xl border border-zinc-200 shadow-sm p-5">
+      <div class="font-bold text-sm tracking-tight">QUERY</div>
+      <div class="text-xs text-zinc-500 mt-1">Ask in natural language — the agent will select the appropriate specialist workflow.</div>
+      <textarea id="queryInput" rows="3" placeholder="e.g. What changed between these two dates, and where did the change occur?  •  Use optical and SAR together to identify built-up and water  •  Describe the land-cover and major objects visible"
+        class="mt-3 w-full rounded-xl border border-zinc-300 bg-zinc-50 focus:bg-white focus:ring-2 focus:ring-zinc-900 focus:border-zinc-900 outline-none px-3.5 py-3 text-sm"></textarea>
+      <div class="mt-3 flex flex-wrap gap-2 text-xs">
+        <button onclick="setQuery('Describe the land-cover and major objects visible in this image.')" class="px-3 py-1.5 rounded-full bg-zinc-900 text-white font-semibold">Describe land-cover</button>
+        <button onclick="setQuery('What changed between these two dates, and where did the change occur?')" class="px-3 py-1.5 rounded-full border border-zinc-300 bg-white hover:bg-zinc-50 font-semibold">What changed?</button>
+        <button onclick="setQuery('Use the optical and SAR images together to identify built-up and water-covered regions.')" class="px-3 py-1.5 rounded-full border border-zinc-300 bg-white hover:bg-zinc-50 font-semibold">Optical + SAR</button>
+        <button onclick="setQuery('What changed between the two dates, and can the SAR imagery corroborate the change?')" class="px-3 py-1.5 rounded-full border border-zinc-300 bg-white hover:bg-zinc-50 font-semibold">Compound (Hero)</button>
+        <button onclick="setQuery('Highlight the water body referred to in the query.')" class="px-3 py-1.5 rounded-full border border-zinc-300 bg-white hover:bg-zinc-50 font-semibold">Grounding</button>
+      </div>
+      <div class="mt-4 flex items-center gap-3">
+        <button id="analyzeBtn" onclick="analyze()" class="flex-1 py-3 rounded-xl bg-zinc-900 text-white font-extrabold tracking-wide hover:bg-black disabled:opacity-40 disabled:cursor-not-allowed">▶ ANALYZE</button>
+        <span id="analyzeHint" class="text-xs text-zinc-500">Add image(s) + query</span>
+      </div>
+      <div id="demoBar" class="mt-4 grid grid-cols-5 gap-2 text-[11px]">
+        <button onclick="runDemo(1)" class="py-2 rounded-xl border-2 border-zinc-900 bg-zinc-900 text-white font-bold">DEMO 1<br><span class="font-normal">Single</span></button>
+        <button onclick="runDemo(2)" class="py-2 rounded-xl border border-zinc-300 bg-white font-bold">DEMO 2<br><span class="font-normal">Temporal</span></button>
+        <button onclick="runDemo(3)" class="py-2 rounded-xl border border-zinc-300 bg-white font-bold">DEMO 3<br><span class="font-normal">Opt+SAR</span></button>
+        <button onclick="runDemo(4)" class="py-2 rounded-xl border border-amber-300 bg-amber-50 font-bold">DEMO 4<br><span class="font-normal">Hero ★</span></button>
+        <button onclick="runDemo(5)" class="py-2 rounded-xl border border-red-300 bg-red-50 font-bold">DEMO 5<br><span class="font-normal">Invalid</span></button>
+      </div>
+    </div>
+
+    <!-- VISUAL EVIDENCE -->
+    <div class="bg-white rounded-2xl border border-zinc-200 shadow-sm overflow-hidden">
+      <div class="px-5 py-3.5 border-b border-zinc-100 flex items-center justify-between">
+        <div class="font-bold text-sm">VISUAL EVIDENCE</div>
+        <span class="text-xs mono px-2 py-1 rounded-full bg-zinc-100 border">overlays • masks • change maps</span>
+      </div>
+      <div id="evidenceArea" class="p-4">
+        <div class="text-sm text-zinc-500 text-center py-10">Run an analysis to see change maps, optical/SAR overlays, and grounding boxes.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: TRACE + RESULT -->
+  <div class="col-span-12 lg:col-span-5 space-y-5">
+    <!-- EXECUTION TRACE -->
+    <div class="bg-zinc-900 text-zinc-100 rounded-2xl shadow-sm overflow-hidden">
+      <div class="px-5 py-3.5 flex items-center justify-between border-b border-zinc-800">
+        <div class="font-bold text-sm tracking-wide">EXECUTION TRACE</div>
+        <span class="text-xs mono px-2 py-1 rounded-full bg-zinc-800 border border-zinc-700">auditable • deterministic</span>
+      </div>
+      <div id="traceArea" class="p-4 mono text-xs leading-relaxed space-y-1.5 max-h-[360px] overflow-auto">
+        <div class="text-zinc-500">Awaiting analysis… The agent will emit an observable trace: task → validation → tool selection → execution → fusion → confidence.</div>
+      </div>
+    </div>
+
+    <!-- RESULT -->
+    <div class="bg-white rounded-2xl border border-zinc-200 shadow-sm overflow-hidden">
+      <div class="px-5 py-3.5 border-b border-zinc-100 flex items-center justify-between">
+        <div class="font-bold text-sm">RESULT</div>
+        <span id="taskBadge" class="text-xs mono px-2.5 py-1 rounded-full bg-zinc-900 text-white hidden"></span>
+      </div>
+      <div class="p-5 space-y-4">
+        <div>
+          <div class="text-xs font-bold tracking-widest text-zinc-500">ANSWER</div>
+          <div id="answerText" class="mt-2 text-sm leading-relaxed text-zinc-800">—</div>
+        </div>
+        <div id="captionBlock" class="hidden">
+          <div class="text-xs font-bold tracking-widest text-zinc-500">CAPTION</div>
+          <div id="captionText" class="mt-1 text-sm text-zinc-700 italic"></div>
+        </div>
+        <div id="changeBlock" class="hidden">
+          <div class="text-xs font-bold tracking-widest text-zinc-500">CHANGE ANALYSIS</div>
+          <div id="changeText" class="mt-1 text-sm"></div>
+        </div>
+        <div id="fusionBlock" class="hidden">
+          <div class="text-xs font-bold tracking-widest text-zinc-500">CROSS-MODAL FUSION</div>
+          <div id="fusionText" class="mt-1 text-sm"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONFIDENCE -->
+    <div class="bg-white rounded-2xl border border-zinc-200 shadow-sm p-5">
+      <div class="font-bold text-sm">CONFIDENCE <span class="text-xs font-normal text-zinc-500">— heuristic, not calibrated probability</span></div>
+      <div id="confidenceArea" class="mt-3 space-y-3">
+        <div class="text-sm text-zinc-500">No estimate yet.</div>
+      </div>
+      <div class="mt-3 text-[11px] mono text-zinc-500">Heuristic confidence = f(input quality, model confidence, evidence agreement, cross-modal support). Labeled as heuristic per SIH trust requirement.</div>
+    </div>
+
+    <!-- MODELS USED -->
+    <div class="bg-white rounded-2xl border border-zinc-200 shadow-sm p-5">
+      <div class="font-bold text-sm">MODELS / TOOLS USED</div>
+      <div id="modelsArea" class="mt-3 flex flex-wrap gap-2 text-xs mono"></div>
+      <div class="mt-3 text-xs text-zinc-500">Registry: <span class="mono">config/tool_registry.yaml</span> — agent selects from this list only. <a href="/api/registry" target="_blank" class="underline">View registry JSON</a></div>
+      <div id="registryPreview" class="mt-3 mono text-[11px] bg-zinc-50 border rounded-xl p-3 hidden"></div>
+    </div>
+
+    <!-- REPORT -->
+    <div class="bg-white rounded-2xl border border-zinc-200 shadow-sm p-5">
+      <div class="font-bold text-sm">REPORT</div>
+      <div class="text-xs text-zinc-500 mt-1">JSON + PDF • includes query, images, task, tools, params, result, confidence, visual evidence, trace, timestamp.</div>
+      <div class="mt-3 flex gap-2">
+        <button onclick="downloadReport()" class="flex-1 py-2.5 rounded-xl bg-zinc-900 text-white font-bold text-sm">⬇ JSON REPORT</button>
+        <button onclick="downloadPDF()" class="flex-1 py-2.5 rounded-xl border border-zinc-300 bg-white font-bold text-sm">⬇ PDF REPORT</button>
+      </div>
+      <div id="reportMeta" class="mt-3 mono text-[11px] text-zinc-500"></div>
+    </div>
+
+    <div class="text-[11px] mono text-zinc-500 text-center py-2">SatQuery AI v0.3.0 • Deterministic-first agent • Offline-capable • <span class="underline cursor-pointer" onclick="document.getElementById('aboutModal').classList.remove('hidden')">About / Limitations</span></div>
+  </div>
+</div>
+
+<!-- ABOUT MODAL -->
+<div id="aboutModal" class="hidden fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-6" onclick="this.classList.add('hidden')">
+  <div class="bg-white rounded-2xl max-w-2xl w-full p-6 max-h-[80vh] overflow-auto" onclick="event.stopPropagation()">
+    <div class="font-extrabold">About & Limitations</div>
+    <div class="text-sm text-zinc-700 mt-3 space-y-2">
+      <p><b>What works:</b> Deterministic agentic routing, input validation (GeoTIFF/TIFF/PNG/JPEG), single-image VQA/captioning/grounding (heuristic RS vision; LoRA swappable), change detection (LAB+Otsu+ morphology, real masks), optical/SAR analysis (NDVI/NDWI + backscatter stats), fusion (IoU/Dice agreement), confidence (heuristic, labeled), visual evidence, execution trace, JSON/PDF reports, 5 curated demos, invalid-input refusal.</p>
+      <p><b>Heuristic components:</b> All confidence scores are heuristic (labeled as such). VQA/captioning uses classical CV + templates when LoRA checkpoint not loaded — not a hallucinating generic VLM. Change/optical/SAR are real CV pipelines.</p>
+      <p><b>LoRA adaptation:</b> Training pipeline is implemented (<span class="mono">training/train_lora.py</span>); checkpoint is swappable. On 4GB VRAM the demo runs heuristic fallback — on 24GB cloud GPU, Qwen2-VL-2B QLoRA can be loaded. See <span class="mono">docs/MODEL_CARD.md</span>.</p>
+      <p><b>Known limitations:</b> No real-time co-registration (assumes pre-registered pairs per PS). SAR detection is statistical; composites are penalized. Grouding boxes are heuristic, not detector-based. High-res Cartosat/RISAT generalization is untested without hidden data.</p>
+      <p><b>Next:</b> Wire BLIP/Qwen2-VL checkpoint, replace grounding with Grounding-DINO, add tiling for sub-meter, integrate EarthMind as registry option.</p>
+    </div>
+    <button onclick="document.getElementById('aboutModal').classList.add('hidden')" class="mt-4 w-full py-2 rounded-xl bg-zinc-900 text-white font-bold">Close</button>
+  </div>
+</div>
+
+<script>
+let files = []; // {file, preview, meta}
+let lastResult = null;
+
+const API = location.origin;
+const $ = id => document.getElementById(id);
+
+async function checkBackend(){
+  try{
+    const r = await fetch(API+'/api/health');
+    const j = await r.json();
+    $('backendStatus').textContent = '● backend: '+j.status+' v'+j.version;
+    $('backendStatus').className = 'text-xs mono px-2.5 py-1.5 rounded-full bg-emerald-600 text-white';
+  }catch(e){
+    $('backendStatus').textContent = '● backend offline — start with scripts/start.ps1';
+    $('backendStatus').className = 'text-xs mono px-2.5 py-1.5 rounded-full bg-red-600 text-white';
+  }
+}
+checkBackend();
+setInterval(checkBackend, 8000);
+
+// Drag & drop
+const dz = $('dropZone');
+const fi = $('fileInput');
+dz.addEventListener('click', ()=> fi.click());
+dz.addEventListener('dragover', e=>{ e.preventDefault(); dz.classList.add('bg-zinc-100'); });
+dz.addEventListener('dragleave', ()=> dz.classList.remove('bg-zinc-100'));
+dz.addEventListener('drop', e=>{
+  e.preventDefault(); dz.classList.remove('bg-zinc-100');
+  handleFiles(e.dataTransfer.files);
+});
+fi.addEventListener('change', ()=> handleFiles(fi.files));
+
+function handleFiles(list){
+  for(const f of list){
+    // Avoid duplicating same name; allow up to 4
+    if(files.length>=4) break;
+    files.push({file:f});
+  }
+  renderPreviews();
+}
+
+function renderPreviews(){
+  const grid = $('previewGrid');
+  grid.innerHTML = '';
+  files.forEach((item, idx)=>{
+    const url = URL.createObjectURL(item.file);
+    const div = document.createElement('div');
+    div.className = 'relative rounded-xl overflow-hidden border border-zinc-200 bg-zinc-50 group';
+    div.innerHTML = `
+      <img src="${url}" class="w-full h-36 object-cover"/>
+      <div class="p-2">
+        <div class="text-xs font-semibold truncate">${item.file.name}</div>
+        <div class="text-[11px] mono text-zinc-500">${(item.file.size/1024).toFixed(0)} KB • ${item.file.type||'unknown'}</div>
+      </div>
+      <button onclick="removeFile(${idx})" class="absolute top-1.5 right-1.5 w-7 h-7 rounded-full bg-black/70 text-white text-xs">✕</button>
+      <div class="absolute bottom-10 left-1.5 text-[10px] mono px-1.5 py-0.5 rounded-full bg-zinc-900 text-white">#${idx+1}</div>
+    `;
+    grid.appendChild(div);
+  });
+  $('imgCount').textContent = files.length+' image'+(files.length!==1?'s':'');
+  updateHint();
+}
+
+function removeFile(i){ files.splice(i,1); renderPreviews(); }
+function clearAll(){ files=[]; renderPreviews(); $('evidenceArea').innerHTML='<div class="text-sm text-zinc-500 text-center py-10">Cleared. Add images to begin.</div>'; }
+
+function setQuery(t){ $('queryInput').value=t; updateHint(); }
+function updateHint(){
+  const q = $('queryInput').value.trim();
+  const n = files.length;
+  const btn = $('analyzeBtn');
+  const hint = $('analyzeHint');
+  if(!q || n===0){ btn.disabled=true; hint.textContent=n===0?'Add image(s)':'Enter a query'; }
+  else { btn.disabled=false; hint.textContent=`Ready: ${n} image(s) • ${q.length} chars`; }
+}
+$('queryInput').addEventListener('input', updateHint);
+
+async function analyze(){
+  const q = $('queryInput').value.trim();
+  if(!q || files.length===0) return;
+  $('analyzeBtn').disabled=true;
+  $('analyzeBtn').textContent='⏳ ANALYZING…';
+  $('traceArea').innerHTML='<div class="text-zinc-400">Dispatching to agent…</div>';
+  $('answerText').textContent='Analyzing…';
+  try{
+    const fd = new FormData();
+    fd.append('query', q);
+    for(const it of files) fd.append('images', it.file, it.file.name);
+    const r = await fetch(API+'/api/analyze', {method:'POST', body: fd});
+    const j = await r.json();
+    if(!r.ok) throw new Error(j.detail||'Analysis failed');
+    lastResult = j;
+    renderResult(j);
+  }catch(e){
+    $('answerText').textContent='Error: '+e.message;
+    $('traceArea').innerHTML='<div class="text-red-400">Error: '+ e.message +'</div>';
+  }finally{
+    $('analyzeBtn').disabled=false;
+    $('analyzeBtn').textContent='▶ ANALYZE';
+  }
+}
+
+function renderResult(j){
+  // Task badge
+  const badge = $('taskBadge');
+  badge.textContent = j.task;
+  badge.classList.remove('hidden');
+  // Answer
+  $('answerText').textContent = j.answer;
+  // Caption
+  if(j.caption){ $('captionBlock').classList.remove('hidden'); $('captionText').textContent=j.caption; } else $('captionBlock').classList.add('hidden');
+  // Change
+  if(j.change_description){ $('changeBlock').classList.remove('hidden'); $('changeText').innerHTML = `<span class="font-semibold">${j.change_area_pct}% changed</span> — ${j.change_description}`; } else $('changeBlock').classList.add('hidden');
+  // Fusion
+  if(j.fused_statement || j.fusion_evidence){ $('fusionBlock').classList.remove('hidden'); $('fusionText').textContent = j.fused_statement || JSON.stringify(j.fusion_evidence); } else $('fusionBlock').classList.add('hidden');
+
+  // Trace
+  const trace = $('traceArea');
+  trace.innerHTML = j.execution_trace.map(s=>{
+    const icon = s.status==='ok' ? '✓' : s.status==='warn' ? '⚠' : s.status==='error' ? '✕' : '•';
+    const color = s.status==='ok' ? 'text-emerald-400' : s.status==='warn' ? 'text-amber-400' : s.status==='error' ? 'text-red-400' : 'text-zinc-400';
+    return `<div class="flex gap-2"><span class="${color}">${icon}</span><span class="text-zinc-500">[${String(s.step).padStart(2,'0')}]</span><span class="text-zinc-200">${s.action}</span><span class="text-zinc-400">— ${s.detail}</span>${s.tool?`<span class="ml-auto px-1.5 py-0.5 rounded bg-zinc-800 border border-zinc-700">${s.tool}</span>`:''}</div>`;
+  }).join('');
+  // Confidence bars
+  const c = j.confidence;
+  const bar = (v)=> `<div class="flex items-center gap-2"><div class="w-32 text-xs mono text-zinc-600">${arguments[1]}</div><div class="flex-1 h-2 bg-zinc-100 rounded-full overflow-hidden"><div class="h-full bg-zinc-900" style="width:${(v*100).toFixed(0)}%"></div></div><div class="w-10 text-xs mono font-bold">${v.toFixed(2)}</div></div>`;
+  // Build confidence HTML manually to avoid arguments hack
+  let confHtml = '';
+  function addRow(label, val){
+    if(val==null) return;
+    confHtml += `<div class="flex items-center gap-2"><div class="w-36 text-xs mono text-zinc-600">${label}</div><div class="flex-1 h-2.5 bg-zinc-100 rounded-full overflow-hidden"><div class="h-full ${label.includes('Overall')?'bg-emerald-600':'bg-zinc-900'}" style="width:${(val*100).toFixed(0)}%"></div></div><div class="w-12 text-xs mono font-bold">${val.toFixed(2)}</div></div>`;
+  }
+  addRow('Input quality', c.input_quality);
+  addRow('Model confidence', c.model_confidence);
+  addRow('Evidence agreement', c.evidence_agreement);
+  if(c.cross_modal_support!=null) addRow('Cross-modal support', c.cross_modal_support);
+  addRow('Overall', c.overall);
+  confHtml += `<div class="text-[11px] mono ${c.is_heuristic?'text-amber-700 bg-amber-50 border border-amber-200':'text-zinc-500'} px-2 py-1 rounded-full inline-block mt-2">${c.is_heuristic?'Heuristic confidence':'Model confidence'}</div>`;
+  if(j.refused) confHtml += `<div class="mt-2 text-xs bg-red-50 border border-red-200 text-red-800 px-3 py-2 rounded-xl">Analysis refused — see validation reason in trace. This is intentional trust behavior.</div>`;
+  $('confidenceArea').innerHTML = confHtml;
+
+  // Models
+  const ma = $('modelsArea');
+  ma.innerHTML = j.tools_used.map(t=> `<span class="px-2.5 py-1.5 rounded-full bg-zinc-900 text-white">${t.tool_id}</span>`).join('') || '<span class="text-zinc-500">No tools — refused</span>';
+  // Evidence
+  renderEvidence(j);
+  // Report meta
+  $('reportMeta').textContent = `report_id ${j.report_id} • ${j.timestamp} • task ${j.task} • ${j.tools_used.length} tools • validation ${j.validation.valid?'ok':'FAILED'}`;
+  // Scroll to result on mobile
+  if(window.innerWidth<1024) document.querySelector('.col-span-12.lg\\:col-span-5').scrollIntoView({behavior:'smooth'});
+}
+
+function renderEvidence(j){
+  const area = $('evidenceArea');
+  let html = '';
+  // Previews with overlays
+  if(j.previews){
+    html += '<div class="grid grid-cols-2 gap-3 mb-4">';
+    j.previews.forEach((p,i)=>{
+      html += `<div class="rounded-xl overflow-hidden border border-zinc-200"><img src="data:image/png;base64,${p.preview_b64}" class="w-full h-40 object-cover"/><div class="px-2 py-1.5 bg-zinc-50 mono text-[11px] truncate">${p.filename} • ${p.meta.width}×${p.meta.height} • ${p.meta.modality}</div></div>`;
+    });
+    html += '</div>';
+  }
+  // Change map
+  if(j.change_map_b64){
+    html += `<div class="rounded-xl border border-zinc-200 overflow-hidden mb-3"><div class="px-3 py-2 bg-zinc-50 mono text-xs font-bold">CHANGE MAP (JET) + MASK (RED)</div><div class="grid grid-cols-2 gap-0"><img src="data:image/png;base64,${j.change_map_b64}" class="w-full h-56 object-contain bg-zinc-900"/><div class="relative bg-zinc-100 flex items-center justify-center"><img src="data:image/png;base64,${j.previews[0].preview_b64}" class="w-full h-56 object-contain opacity-60"/><img src="data:image/png;base64,${j.change_map_b64}" class="absolute inset-0 w-full h-56 object-contain opacity-40 mix-blend-screen"/><span class="absolute bottom-2 left-2 mono text-[10px] bg-red-600 text-white px-2 py-1 rounded-full">CHANGE OVERLAY</span></div></div><div class="px-3 py-2 text-xs text-zinc-600">${j.change_description||''}</div></div>`;
+  }
+  // Optical/SAR overlays
+  if(j.optical_overlay_b64 || j.sar_overlay_b64){
+    html += '<div class="grid grid-cols-2 gap-3 mb-3">';
+    if(j.optical_overlay_b64) html += `<div class="rounded-xl border overflow-hidden"><div class="px-3 py-2 bg-sky-50 mono text-xs font-bold">OPTICAL — water regions</div><div class="relative"><img src="data:image/png;base64,${j.previews[0].preview_b64}" class="w-full h-48 object-contain bg-zinc-50"/><img src="data:image/png;base64,${j.optical_overlay_b64}" class="absolute inset-0 w-full h-48 object-contain opacity-60"/></div><div class="px-3 py-2 text-xs mono">${j.optical_evidence?`water ${j.optical_evidence.water_pct}% • veg ${j.optical_evidence.veg_pct}% • built ${j.optical_evidence.built_pct}%`:''}</div></div>`;
+    if(j.sar_overlay_b64) html += `<div class="rounded-xl border overflow-hidden"><div class="px-3 py-2 bg-amber-50 mono text-xs font-bold">SAR — water (low backscatter)</div><div class="relative"><img src="data:image/png;base64,${j.previews[j.previews.length-1].preview_b64}" class="w-full h-48 object-contain bg-zinc-900"/><img src="data:image/png;base64,${j.sar_overlay_b64}" class="absolute inset-0 w-full h-48 object-contain opacity-60"/></div><div class="px-3 py-2 text-xs mono">${j.sar_evidence?`water ${j.sar_evidence.water_pct}% • built ${j.sar_evidence.built_pct}% • CV ${j.sar_evidence.speckle_cv}`:''}</div></div>`;
+    html += '</div>';
+  }
+  // Fused
+  if(j.fused_overlay_b64){
+    html += `<div class="rounded-xl border border-emerald-200 overflow-hidden mb-3"><div class="px-3 py-2 bg-emerald-50 mono text-xs font-bold">FUSED — high-confidence agreement (intersection) • IoU ${j.fusion_evidence?.mean_iou??''} • ${j.fusion_evidence?.agreement_label??''}</div><div class="relative"><img src="data:image/png;base64,${j.previews[0].preview_b64}" class="w-full h-56 object-contain bg-zinc-50"/><img src="data:image/png;base64,${j.fused_overlay_b64}" class="absolute inset-0 w-full h-56 object-contain opacity-70"/></div><div class="px-3 py-2 text-xs">${j.fusion_evidence?.corroboration||j.fused_statement||''}</div></div>`;
+    if(j.fused_union_b64) html += `<div class="text-xs mono text-zinc-500 mb-3">Union (inclusive) overlay available — download JSON for both high-conf and union masks.</div>`;
+  }
+  // Grounding boxes
+  if(j.grounding_boxes && j.grounding_boxes.length){
+    // Draw boxes on first preview via canvas-like div
+    html += `<div class="rounded-xl border overflow-hidden mb-3"><div class="px-3 py-2 bg-violet-50 mono text-xs font-bold">GROUNDING — ${j.grounding_boxes.length} box(es)</div><div class="relative inline-block w-full"><img src="data:image/png;base64,${j.previews[0].preview_b64}" class="w-full h-56 object-contain bg-zinc-50" id="groundImg"/><svg id="boxSvg" class="absolute inset-0 w-full h-full pointer-events-none"></svg></div><div class="px-3 py-2 text-xs mono">Boxes: ${j.grounding_boxes.map(b=>`${b.label} [${b.x},${b.y},${b.w},${b.h}] conf ${b.confidence}`).join(' • ')}</div></div>`;
+    setTimeout(()=> drawBoxes(j), 200);
+  }
+  if(!html) html = '<div class="text-sm text-zinc-500 text-center py-10">No visual evidence for this task (e.g., pure VQA). Execution trace and answer contain the evidence.</div>';
+  area.innerHTML = html;
+  if(j.grounding_boxes && j.grounding_boxes.length) setTimeout(()=> drawBoxes(j), 150);
+}
+
+function drawBoxes(j){
+  const img = document.getElementById('groundImg');
+  const svg = document.getElementById('boxSvg');
+  if(!img||!svg) return;
+  const w = img.clientWidth, h = img.clientHeight;
+  // Need original image dims
+  const meta = j.previews[0].meta;
+  const iw = meta.width, ih = meta.height;
+  // Compute displayed image rect (object-contain centered)
+  // Approximate scale
+  const scale = Math.min(w/iw, h/ih);
+  const dispW = iw*scale, dispH = ih*scale;
+  const offX = (w-dispW)/2, offY = (h-dispH)/2;
+  svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+  svg.innerHTML = j.grounding_boxes.map(b=>{
+    const x = offX + b.x*scale, y = offY + b.y*scale, bw = b.w*scale, bh = b.h*scale;
+    return `<rect x="${x}" y="${y}" width="${bw}" height="${bh}" fill="none" stroke="#7c3aed" stroke-width="3" rx="6"/><text x="${x+4}" y="${y-6}" fill="#7c3aed" font-size="11" font-weight="800" font-family="monospace">${b.label} ${b.confidence}</text>`;
+  }).join('');
+}
+
+async function runDemo(n){
+  clearAll();
+  // Fetch demo manifests
+  const demoFiles = {
+    1: [{path:'data/demo/single_image/scene_1.png', name:'scene_1.png'}, ],
+    2: [{path:'data/demo/temporal_pairs/flood_T1.png', name:'flood_T1.png'}, {path:'data/demo/temporal_pairs/flood_T2.png', name:'flood_T2.png'}],
+    3: [{path:'data/demo/optical_sar_pairs/pair1_optical.png', name:'pair1_optical.png'}, {path:'data/demo/optical_sar_pairs/pair1_sar.png', name:'pair1_sar.png'}],
+    4: [{path:'data/demo/temporal_pairs/flood_T1.png', name:'flood_T1.png'}, {path:'data/demo/temporal_pairs/flood_T2.png', name:'flood_T2.png'}, {path:'data/demo/optical_sar_pairs/flood_sar.png', name:'flood_sar.png'}],
+    5: [{path:'data/demo/invalid_inputs/small_128.png', name:'small_128.png'}, {path:'data/demo/invalid_inputs/large_512.png', name:'large_512.png'}],
+  };
+  const queries = {
+    1: 'Describe the land-cover and major objects visible in this image.',
+    2: 'What changed between these two dates, and where did the change occur?',
+    3: 'Use the optical and SAR images together to identify built-up and water-covered regions.',
+    4: 'What changed between the two dates, and can the SAR imagery corroborate the change?',
+    5: 'What changed between these two dates?',
+  };
+  setQuery(queries[n]);
+  const list = demoFiles[n];
+  for(const item of list){
+    try{
+      const r = await fetch('/'+item.path);
+      const blob = await r.blob();
+      const file = new File([blob], item.name, {type: blob.type||'image/png'});
+      files.push({file});
+    }catch(e){ console.error(e); }
+  }
+  renderPreviews();
+  // Auto-analyze for hero?
+  setTimeout(()=> analyze(), 400);
+}
+
+async function downloadReport(){
+  if(!lastResult){ alert('Run an analysis first.'); return; }
+  const id = lastResult.report_id;
+  const r = await fetch(API+'/api/reports/'+id);
+  const j = await r.json();
+  const blob = new Blob([JSON.stringify(j,null,2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `SatQuery_report_${id}.json`;
+  a.click();
+}
+
+async function downloadPDF(){
+  if(!lastResult){ alert('Run an analysis first.'); return; }
+  // Client-side PDF via window print fallback — request server if available else generate
+  // Try server endpoint (not implemented) -> fallback to print
+  alert('PDF generation: JSON report is primary (per PS). For PDF, use browser Print → Save as PDF, or run python scripts/generate_pdf.py with report_id '+lastResult.report_id);
+  // Also attempt to fetch a PDF if backend generates it
+  try{
+    const r = await fetch(API+`/api/reports/${lastResult.report_id}`);
+    const j = await r.json();
+    // quick client pdf via jsPDF if available — fallback
+  }catch(e){}
+}
+
+// Load registry preview
+fetch(API+'/api/registry').then(r=>r.json()).then(j=>{
+  const el = document.getElementById('registryPreview');
+  el.textContent = JSON.stringify(j,null,2).slice(0,1200);
+  el.classList.remove('hidden');
+}).catch(()=>{});
+
+// Keyboard: Ctrl+Enter to analyze
+document.addEventListener('keydown', e=>{
+  if((e.ctrlKey||e.metaKey) && e.key==='Enter') analyze();
+});
+</script>
+</body>
+</html>

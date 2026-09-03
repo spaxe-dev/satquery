@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+*.log
+
+# Datasets (large)
+datasets/raw/
+datasets/processed/*.tif
+data/demo/*.tif
+
+# Models
+models/checkpoints/
+*.bin
+*.safetensors
+*.ckpt
+*.pt
+
+# Reports (keep one sample, ignore large b64 heavy)
+reports/*.pdf
+# keep at least one json sample; ignore large
+# reports/report_*.json
+
+# Frontend
+frontend/dist/assets/
+frontend/node_modules/
+
+# OS
+.DS_Store
+Thumbs.db

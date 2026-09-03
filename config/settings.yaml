@@ -1,0 +1,36 @@
+app:
+  name: SatQuery AI
+  version: 0.3.0
+  port: 8000
+  host: 0.0.0.0
+  cors_origins: ["*"]
+
+paths:
+  demo_data: data/demo
+  datasets: datasets
+  models: models
+  reports: reports
+  checkpoints: models/checkpoints
+
+models:
+  vqa:
+    primary: Qwen/Qwen2-VL-2B-Instruct
+    fallback: Salesforce/blip-image-captioning-base
+    use_4bit: true
+    max_tokens: 256
+  change:
+    method: siamese+classical
+    threshold: otsu
+  fusion:
+    agreement_threshold: 0.6
+
+validation:
+  supported_formats: [".tif", ".tiff", ".png", ".jpg", ".jpeg"]
+  max_image_size: 4096
+  min_image_size: 64
+  warn_on_crs_mismatch: true
+  reject_on_dimension_mismatch: false
+
+reports:
+  include_visual_evidence: true
+  pdf_enabled: true
