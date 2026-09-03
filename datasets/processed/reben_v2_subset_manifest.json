@@ -1,0 +1,1620 @@
+{
+  "dataset": "BigEarthNet v2.0 / reBEN",
+  "version": "v2.0 (reBEN, 549,488 pairs, Zenodo 10891137, CDLA-Permissive-1.0)",
+  "source": "https://bigearth.net + https://zenodo.org/records/10891137/files/metadata.parquet?download=1",
+  "source_metadata": "D:\\Projects\\satquery\\datasets\\raw\\bigearthnet\\metadata.parquet",
+  "source_metadata_size": 3616349,
+  "selection_method": "deterministic random.sample with seed=42 from train split of metadata.parquet (480k rows, excludes snow/cloud)",
+  "seed": 42,
+  "date": "2026-09-04",
+  "num_samples": 100,
+  "modalities": [
+    "Sentinel-1 SAR (VV,VH)",
+    "Sentinel-2 multispectral (B02,B03,B04,B08,B05,B06,B07,B8A,B11,B12)"
+  ],
+  "s1_channels": [
+    "VV",
+    "VH"
+  ],
+  "s2_channels": [
+    "B02",
+    "B03",
+    "B04",
+    "B05",
+    "B06",
+    "B07",
+    "B08",
+    "B8A",
+    "B11",
+    "B12"
+  ],
+  "s2_full_channels": [
+    "B01",
+    "B02",
+    "B03",
+    "B04",
+    "B05",
+    "B06",
+    "B07",
+    "B08",
+    "B8A",
+    "B11",
+    "B12"
+  ],
+  "bands_note": "S2 10 bands used for training (B02,B03,B04,B08 at 10m; B05,B06,B07,B8A,B11,B12 at 20m upsampled); S1 2 bands VV,VH; total 12 channels for S1+S2",
+  "labels": "19-class multi-label from CLC2018 (reBEN, not 43-class old BEN)",
+  "license": "CDLA-Permissive-1.0",
+  "storage_location": "D:\\Projects\\satquery\\datasets\\raw\\bigearthnet\\ (metadata.parquet 3.6MB, future S1/S2 patches ~21MB for 100 pairs)",
+  "samples": [
+    {
+      "patch_id": "S2A_MSIL2A_20180529T115401_N9999_R023_T29UNB_90_39",
+      "labels": [
+        "Marine waters"
+      ],
+      "split": "train",
+      "country": "Ireland",
+      "s1_name": "S1A_IW_GRDH_1SDV_20180529T181504_29UNB_90_39",
+      "s2v1_name": "S2A_MSIL2A_20180529T115401_90_39",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20180529T181504_29UNB_90_39.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20180529T115401_90_39.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20171002T112111_N9999_R037_T29SNC_03_86",
+      "labels": [
+        "Marine waters"
+      ],
+      "split": "train",
+      "country": "Portugal",
+      "s1_name": "S1B_IW_GRDH_1SDV_20171004T064231_29SNC_3_86",
+      "s2v1_name": "S2A_MSIL2A_20171002T112111_3_86",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20171004T064231_29SNC_3_86.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20171002T112111_3_86.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20170709T094029_N9999_R036_T35VNL_43_10",
+      "labels": [
+        "Coniferous forest",
+        "Inland wetlands",
+        "Mixed forest",
+        "Transitional woodland, shrub"
+      ],
+      "split": "train",
+      "country": "Finland",
+      "s1_name": "S1B_IW_GRDH_1SDV_20170709T043159_35VNL_43_10",
+      "s2v1_name": "S2B_MSIL2A_20170709T094029_43_10",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20170709T043159_35VNL_43_10.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20170709T094029_43_10.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20180225T114351_N9999_R123_T29UPU_05_53",
+      "labels": [
+        "Pastures"
+      ],
+      "split": "train",
+      "country": "Ireland",
+      "s1_name": "S1B_IW_GRDH_1SDV_20180225T063817_29UPU_5_53",
+      "s2v1_name": "S2A_MSIL2A_20180225T114351_5_53",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20180225T063817_29UPU_5_53.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20180225T114351_5_53.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20170717T113321_N9999_R080_T29UPV_60_04",
+      "labels": [
+        "Land principally occupied by agriculture, with significant areas of natural vegetation",
+        "Mixed forest",
+        "Pastures",
+        "Transitional woodland, shrub"
+      ],
+      "split": "train",
+      "country": "Ireland",
+      "s1_name": "S1B_IW_GRDH_1SDV_20170717T064605_29UPV_60_4",
+      "s2v1_name": "S2A_MSIL2A_20170717T113321_60_4",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20170717T064605_29UPV_60_4.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20170717T113321_60_4.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20170911T092019_N9999_R093_T34TFN_10_51",
+      "labels": [
+        "Broad-leaved forest",
+        "Natural grassland and sparsely vegetated areas",
+        "Transitional woodland, shrub"
+      ],
+      "split": "train",
+      "country": "Serbia",
+      "s1_name": "S1A_IW_GRDH_1SDV_20170913T043820_34TFN_10_51",
+      "s2v1_name": "S2B_MSIL2A_20170911T092019_10_51",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20170913T043820_34TFN_10_51.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20170911T092019_10_51.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20170701T093031_N9999_R136_T35VPK_17_00",
+      "labels": [
+        "Coniferous forest",
+        "Mixed forest",
+        "Transitional woodland, shrub"
+      ],
+      "split": "train",
+      "country": "Finland",
+      "s1_name": "S1B_IW_GRDH_1SDV_20170629T153202_35VPK_17_0",
+      "s2v1_name": "S2A_MSIL2A_20170701T093031_17_0",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20170629T153202_35VPK_17_0.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20170701T093031_17_0.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20170709T094029_N9999_R036_T35VNL_79_65",
+      "labels": [
+        "Coniferous forest",
+        "Inland waters",
+        "Transitional woodland, shrub"
+      ],
+      "split": "train",
+      "country": "Finland",
+      "s1_name": "S1B_IW_GRDH_1SDV_20170709T043159_35VNL_79_65",
+      "s2v1_name": "S2B_MSIL2A_20170709T094029_79_65",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20170709T043159_35VNL_79_65.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20170709T094029_79_65.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20170914T093029_N9999_R136_T34TEQ_48_79",
+      "labels": [
+        "Broad-leaved forest",
+        "Land principally occupied by agriculture, with significant areas of natural vegetation",
+        "Pastures"
+      ],
+      "split": "train",
+      "country": "Serbia",
+      "s1_name": "S1A_IW_GRDH_1SDV_20170914T162516_34TEQ_48_79",
+      "s2v1_name": "S2B_MSIL2A_20170914T093029_48_79",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20170914T162516_34TEQ_48_79.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20170914T093029_48_79.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20170709T094029_N9999_R036_T35VNL_12_20",
+      "labels": [
+        "Coniferous forest",
+        "Mixed forest",
+        "Transitional woodland, shrub"
+      ],
+      "split": "train",
+      "country": "Finland",
+      "s1_name": "S1B_IW_GRDH_1SDV_20170709T043159_35VNL_12_20",
+      "s2v1_name": "S2B_MSIL2A_20170709T094029_12_20",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20170709T043159_35VNL_12_20.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20170709T094029_12_20.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20180509T101031_N9999_R022_T34VDR_67_88",
+      "labels": [
+        "Marine waters"
+      ],
+      "split": "train",
+      "country": "Finland",
+      "s1_name": "S1A_IW_GRDH_1SDV_20180509T160543_34VDR_67_88",
+      "s2v1_name": "S2A_MSIL2A_20180509T101031_67_88",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20180509T160543_34VDR_67_88.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20180509T101031_67_88.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20180430T094031_N9999_R036_T34TCR_72_88",
+      "labels": [
+        "Arable land"
+      ],
+      "split": "train",
+      "country": "Serbia",
+      "s1_name": "S1B_IW_GRDH_1SDV_20180429T163254_34TCR_72_88",
+      "s2v1_name": "S2A_MSIL2A_20180430T094031_72_88",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20180429T163254_34TCR_72_88.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20180430T094031_72_88.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20170808T094029_N9999_R036_T35ULA_42_89",
+      "labels": [
+        "Coniferous forest",
+        "Mixed forest",
+        "Transitional woodland, shrub"
+      ],
+      "split": "train",
+      "country": "Lithuania",
+      "s1_name": "S1A_IW_GRDH_1SDV_20170808T043524_35ULA_42_89",
+      "s2v1_name": "S2B_MSIL2A_20170808T094029_42_89",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20170808T043524_35ULA_42_89.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20170808T094029_42_89.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20171002T094031_N9999_R036_T34TCR_72_03",
+      "labels": [
+        "Arable land"
+      ],
+      "split": "train",
+      "country": "Serbia",
+      "s1_name": "S1B_IW_GRDH_1SDV_20170929T045327_34TCR_72_3",
+      "s2v1_name": "S2A_MSIL2A_20171002T094031_72_3",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20170929T045327_34TCR_72_3.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20171002T094031_72_3.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20180506T100031_N9999_R122_T33UWP_40_87",
+      "labels": [
+        "Coniferous forest",
+        "Mixed forest",
+        "Natural grassland and sparsely vegetated areas",
+        "Pastures"
+      ],
+      "split": "train",
+      "country": "Austria",
+      "s1_name": "S1A_IW_GRDH_1SDV_20180507T050948_33UWP_40_87",
+      "s2v1_name": "S2A_MSIL2A_20180506T100031_40_87",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20180507T050948_33UWP_40_87.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20180506T100031_40_87.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20171221T112501_N9999_R037_T29SND_05_09",
+      "labels": [
+        "Broad-leaved forest",
+        "Complex cultivation patterns",
+        "Coniferous forest",
+        "Mixed forest",
+        "Transitional woodland, shrub"
+      ],
+      "split": "train",
+      "country": "Portugal",
+      "s1_name": "S1A_IW_GRDH_1SDV_20171221T064238_29SND_5_9",
+      "s2v1_name": "S2A_MSIL2A_20171221T112501_5_9",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20171221T064238_29SND_5_9.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20171221T112501_5_9.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20170813T112121_N9999_R037_T29SNC_00_60",
+      "labels": [
+        "Marine waters"
+      ],
+      "split": "train",
+      "country": "Portugal",
+      "s1_name": "S1B_IW_GRDH_1SDV_20170812T063420_29SNC_0_60",
+      "s2v1_name": "S2A_MSIL2A_20170813T112121_0_60",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20170812T063420_29SNC_0_60.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20170813T112121_0_60.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20170927T094019_N9999_R036_T35ULB_89_11",
+      "labels": [
+        "Arable land",
+        "Complex cultivation patterns",
+        "Coniferous forest",
+        "Mixed forest",
+        "Pastures",
+        "Transitional woodland, shrub",
+        "Urban fabric"
+      ],
+      "split": "train",
+      "country": "Lithuania",
+      "s1_name": "S1A_IW_GRDH_1SDV_20170925T043501_35ULB_89_11",
+      "s2v1_name": "S2B_MSIL2A_20170927T094019_89_11",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20170925T043501_35ULB_89_11.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20170927T094019_89_11.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20170825T093029_N9999_R136_T34TEQ_00_76",
+      "labels": [
+        "Arable land",
+        "Broad-leaved forest",
+        "Complex cultivation patterns",
+        "Land principally occupied by agriculture, with significant areas of natural vegetation",
+        "Urban fabric"
+      ],
+      "split": "train",
+      "country": "Serbia",
+      "s1_name": "S1A_IW_GRDH_1SDV_20170826T163327_34TEQ_0_76",
+      "s2v1_name": "S2B_MSIL2A_20170825T093029_0_76",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20170826T163327_34TEQ_0_76.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20170825T093029_0_76.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20170717T113321_N9999_R080_T29UPA_37_80",
+      "labels": [
+        "Pastures"
+      ],
+      "split": "train",
+      "country": "Ireland",
+      "s1_name": "S1B_IW_GRDH_1SDV_20170717T064605_29UPA_37_80",
+      "s2v1_name": "S2A_MSIL2A_20170717T113321_37_80",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20170717T064605_29UPA_37_80.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20170717T113321_37_80.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20170613T101031_N9999_R022_T34VER_86_53",
+      "labels": [
+        "Coniferous forest",
+        "Mixed forest",
+        "Transitional woodland, shrub"
+      ],
+      "split": "train",
+      "country": "Finland",
+      "s1_name": "S1B_IW_GRDH_1SDV_20170613T044822_34VER_86_53",
+      "s2v1_name": "S2A_MSIL2A_20170613T101032_86_53",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20170613T044822_34VER_86_53.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20170613T101032_86_53.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20180506T100031_N9999_R122_T33UWP_19_04",
+      "labels": [
+        "Arable land",
+        "Complex cultivation patterns",
+        "Land principally occupied by agriculture, with significant areas of natural vegetation",
+        "Urban fabric"
+      ],
+      "split": "train",
+      "country": "Austria",
+      "s1_name": "S1A_IW_GRDH_1SDV_20180507T050948_33UWP_19_4",
+      "s2v1_name": "S2A_MSIL2A_20180506T100031_19_4",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20180507T050948_33UWP_19_4.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20180506T100031_19_4.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20180525T094029_N9999_R036_T35VNL_19_09",
+      "labels": [
+        "Arable land",
+        "Coniferous forest",
+        "Mixed forest",
+        "Transitional woodland, shrub"
+      ],
+      "split": "train",
+      "country": "Finland",
+      "s1_name": "S1B_IW_GRDH_1SDV_20180524T154041_35VNL_19_9",
+      "s2v1_name": "S2B_MSIL2A_20180525T094029_19_9",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20180524T154041_35VNL_19_9.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20180525T094029_19_9.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20180419T101031_N9999_R022_T34VDN_85_57",
+      "labels": [
+        "Marine waters"
+      ],
+      "split": "train",
+      "country": "Finland",
+      "s1_name": "S1A_IW_GRDH_1SDV_20180420T161303_34VDN_85_57",
+      "s2v1_name": "S2A_MSIL2A_20180419T101031_85_57",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20180420T161303_34VDN_85_57.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20180419T101031_85_57.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20180510T094031_N9999_R036_T35VLC_01_87",
+      "labels": [
+        "Arable land",
+        "Broad-leaved forest"
+      ],
+      "split": "train",
+      "country": "Lithuania",
+      "s1_name": "S1B_IW_GRDH_1SDV_20180510T044232_35VLC_1_87",
+      "s2v1_name": "S2A_MSIL2A_20180510T094031_1_87",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20180510T044232_35VLC_1_87.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20180510T094031_1_87.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20180419T101031_N9999_R022_T34VDN_43_84",
+      "labels": [
+        "Marine waters"
+      ],
+      "split": "train",
+      "country": "Finland",
+      "s1_name": "S1A_IW_GRDH_1SDV_20180420T161303_34VDN_43_84",
+      "s2v1_name": "S2A_MSIL2A_20180419T101031_43_84",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20180420T161303_34VDN_43_84.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20180419T101031_43_84.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20170927T094019_N9999_R036_T35ULB_46_84",
+      "labels": [
+        "Arable land",
+        "Broad-leaved forest"
+      ],
+      "split": "train",
+      "country": "Lithuania",
+      "s1_name": "S1A_IW_GRDH_1SDV_20170928T161125_35ULB_46_84",
+      "s2v1_name": "S2B_MSIL2A_20170927T94020_46_84",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20170928T161125_35ULB_46_84.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20170927T94020_46_84.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20170613T101031_N9999_R022_T34VER_72_87",
+      "labels": [
+        "Arable land",
+        "Coniferous forest",
+        "Land principally occupied by agriculture, with significant areas of natural vegetation",
+        "Mixed forest",
+        "Transitional woodland, shrub"
+      ],
+      "split": "train",
+      "country": "Finland",
+      "s1_name": "S1B_IW_GRDH_1SDV_20170613T044822_34VER_72_87",
+      "s2v1_name": "S2A_MSIL2A_20170613T101032_72_87",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20170613T044822_34VER_72_87.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20170613T101032_72_87.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20180509T092029_N9999_R093_T34TFN_16_05",
+      "labels": [
+        "Broad-leaved forest",
+        "Land principally occupied by agriculture, with significant areas of natural vegetation",
+        "Natural grassland and sparsely vegetated areas",
+        "Transitional woodland, shrub"
+      ],
+      "split": "train",
+      "country": "Serbia",
+      "s1_name": "S1A_IW_GRDH_1SDV_20180511T043832_34TFN_16_5",
+      "s2v1_name": "S2B_MSIL2A_20180509T092029_16_5",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20180511T043832_34TFN_16_5.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20180509T092029_16_5.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20170817T101019_N9999_R022_T34WFS_80_90",
+      "labels": [
+        "Arable land",
+        "Coniferous forest",
+        "Urban fabric"
+      ],
+      "split": "train",
+      "country": "Finland",
+      "s1_name": "S1B_IW_GRDH_1SDV_20170817T045637_34WFS_80_90",
+      "s2v1_name": "S2B_MSIL2A_20170817T101019_80_90",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20170817T045637_34WFS_80_90.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20170817T101019_80_90.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20171002T112111_N9999_R037_T29SNC_58_00",
+      "labels": [
+        "Agro-forestry areas",
+        "Arable land",
+        "Permanent crops"
+      ],
+      "split": "train",
+      "country": "Portugal",
+      "s1_name": "S1A_IW_GRDH_1SDV_20171004T183515_29SNC_58_0",
+      "s2v1_name": "S2A_MSIL2A_20171002T112111_58_0",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20171004T183515_29SNC_58_0.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20171002T112111_58_0.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20171002T112111_N9999_R037_T29SNB_31_05",
+      "labels": [
+        "Arable land",
+        "Broad-leaved forest",
+        "Transitional woodland, shrub"
+      ],
+      "split": "train",
+      "country": "Portugal",
+      "s1_name": "S1B_IW_GRDH_1SDV_20171004T064231_29SNB_31_5",
+      "s2v1_name": "S2A_MSIL2A_20171002T112112_31_5",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20171004T064231_29SNB_31_5.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20171002T112112_31_5.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20170704T112111_N9999_R037_T29SND_45_90",
+      "labels": [
+        "Agro-forestry areas",
+        "Broad-leaved forest",
+        "Pastures",
+        "Permanent crops",
+        "Urban fabric"
+      ],
+      "split": "train",
+      "country": "Portugal",
+      "s1_name": "S1A_IW_GRDH_1SDV_20170706T064300_29SND_45_90",
+      "s2v1_name": "S2A_MSIL2A_20170704T112111_45_90",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20170706T064300_29SND_45_90.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20170704T112111_45_90.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20170914T093029_N9999_R136_T34TEQ_38_84",
+      "labels": [
+        "Complex cultivation patterns",
+        "Land principally occupied by agriculture, with significant areas of natural vegetation",
+        "Transitional woodland, shrub"
+      ],
+      "split": "train",
+      "country": "Serbia",
+      "s1_name": "S1A_IW_GRDH_1SDV_20170914T162516_34TEQ_38_84",
+      "s2v1_name": "S2B_MSIL2A_20170914T093029_38_84",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20170914T162516_34TEQ_38_84.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20170914T093029_38_84.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20170813T112121_N9999_R037_T29SNC_56_08",
+      "labels": [
+        "Agro-forestry areas",
+        "Inland waters",
+        "Pastures"
+      ],
+      "split": "train",
+      "country": "Portugal",
+      "s1_name": "S1A_IW_GRDH_1SDV_20170812T182712_29SNC_56_8",
+      "s2v1_name": "S2A_MSIL2A_20170813T112121_56_8",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20170812T182712_29SNC_56_8.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20170813T112121_56_8.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20180506T100031_N9999_R122_T33UWP_34_85",
+      "labels": [
+        "Coniferous forest",
+        "Pastures"
+      ],
+      "split": "train",
+      "country": "Austria",
+      "s1_name": "S1A_IW_GRDH_1SDV_20180507T050948_33UWP_34_85",
+      "s2v1_name": "S2A_MSIL2A_20180506T100031_34_85",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20180507T050948_33UWP_34_85.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20180506T100031_34_85.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20180515T112109_N9999_R037_T29SND_60_84",
+      "labels": [
+        "Agro-forestry areas",
+        "Broad-leaved forest"
+      ],
+      "split": "train",
+      "country": "Portugal",
+      "s1_name": "S1B_IW_GRDH_1SDV_20180515T063356_29SND_60_84",
+      "s2v1_name": "S2B_MSIL2A_20180515T112110_60_84",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20180515T063356_29SND_60_84.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20180515T112110_60_84.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20170905T095031_N9999_R079_T35VNL_87_01",
+      "labels": [
+        "Coniferous forest",
+        "Mixed forest",
+        "Transitional woodland, shrub"
+      ],
+      "split": "train",
+      "country": "Finland",
+      "s1_name": "S1A_IW_GRDH_1SDV_20170903T153258_35VNL_87_1",
+      "s2v1_name": "S2A_MSIL2A_20170905T095031_87_1",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20170903T153258_35VNL_87_1.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20170905T095031_87_1.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20180525T094029_N9999_R036_T35VNL_69_88",
+      "labels": [
+        "Coniferous forest",
+        "Mixed forest"
+      ],
+      "split": "train",
+      "country": "Finland",
+      "s1_name": "S1A_IW_GRDH_1SDV_20180525T153259_35VNL_69_88",
+      "s2v1_name": "S2B_MSIL2A_20180525T094029_69_88",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20180525T153259_35VNL_69_88.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20180525T094029_69_88.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20170906T101019_N9999_R022_T34WFS_86_53",
+      "labels": [
+        "Coniferous forest",
+        "Inland wetlands",
+        "Mixed forest",
+        "Transitional woodland, shrub"
+      ],
+      "split": "train",
+      "country": "Finland",
+      "s1_name": "S1A_IW_GRDH_1SDV_20170906T155749_34WFS_86_53",
+      "s2v1_name": "S2B_MSIL2A_20170906T101020_86_53",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20170906T155749_34WFS_86_53.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20170906T101020_86_53.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20170930T095019_N9999_R079_T34UEG_41_05",
+      "labels": [
+        "Arable land",
+        "Complex cultivation patterns",
+        "Industrial or commercial units",
+        "Land principally occupied by agriculture, with significant areas of natural vegetation",
+        "Urban fabric"
+      ],
+      "split": "train",
+      "country": "Lithuania",
+      "s1_name": "S1B_IW_GRDH_1SDV_20170929T045032_34UEG_41_5",
+      "s2v1_name": "S2B_MSIL2A_20170930T095019_41_5",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20170929T045032_34UEG_41_5.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20170930T095019_41_5.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20180515T112109_N9999_R037_T29SND_56_01",
+      "labels": [
+        "Inland waters",
+        "Transitional woodland, shrub"
+      ],
+      "split": "train",
+      "country": "Portugal",
+      "s1_name": "S1B_IW_GRDH_1SDV_20180515T063356_29SND_56_1",
+      "s2v1_name": "S2B_MSIL2A_20180515T112110_56_1",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20180515T063356_29SND_56_1.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20180515T112110_56_1.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20170613T101031_N9999_R022_T34VER_01_65",
+      "labels": [
+        "Marine waters"
+      ],
+      "split": "train",
+      "country": "Finland",
+      "s1_name": "S1B_IW_GRDH_1SDV_20170613T160455_34VER_1_65",
+      "s2v1_name": "S2A_MSIL2A_20170613T101031_1_65",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20170613T160455_34VER_1_65.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20170613T101031_1_65.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20170924T093019_N9999_R136_T36VVQ_00_18",
+      "labels": [
+        "Coniferous forest",
+        "Transitional woodland, shrub"
+      ],
+      "split": "train",
+      "country": "Finland",
+      "s1_name": "S1A_IW_GRDH_1SDV_20170922T152425_36VVQ_0_18",
+      "s2v1_name": "S2B_MSIL2A_20170924T093019_0_18",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20170922T152425_36VVQ_0_18.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20170924T093019_0_18.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20180515T112109_N9999_R037_T29SND_72_07",
+      "labels": [
+        "Coniferous forest",
+        "Land principally occupied by agriculture, with significant areas of natural vegetation",
+        "Transitional woodland, shrub"
+      ],
+      "split": "train",
+      "country": "Portugal",
+      "s1_name": "S1B_IW_GRDH_1SDV_20180515T063356_29SND_72_7",
+      "s2v1_name": "S2B_MSIL2A_20180515T112110_72_7",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20180515T063356_29SND_72_7.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20180515T112110_72_7.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20171208T093351_N9999_R136_T34TEN_68_87",
+      "labels": [
+        "Broad-leaved forest",
+        "Land principally occupied by agriculture, with significant areas of natural vegetation",
+        "Pastures",
+        "Transitional woodland, shrub"
+      ],
+      "split": "train",
+      "country": "Serbia",
+      "s1_name": "S1A_IW_GRDH_1SDV_20171207T162425_34TEN_68_87",
+      "s2v1_name": "S2A_MSIL2A_20171208T093351_68_87",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20171207T162425_34TEN_68_87.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20171208T093351_68_87.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20170808T094029_N9999_R036_T35ULA_03_82",
+      "labels": [
+        "Arable land",
+        "Complex cultivation patterns",
+        "Coniferous forest",
+        "Mixed forest"
+      ],
+      "split": "train",
+      "country": "Lithuania",
+      "s1_name": "S1A_IW_GRDH_1SDV_20170808T043524_35ULA_3_82",
+      "s2v1_name": "S2B_MSIL2A_20170808T094029_3_82",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20170808T043524_35ULA_3_82.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20170808T094029_3_82.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20180515T112109_N9999_R037_T29SND_05_78",
+      "labels": [
+        "Arable land"
+      ],
+      "split": "train",
+      "country": "Portugal",
+      "s1_name": "S1B_IW_GRDH_1SDV_20180515T063356_29SND_5_78",
+      "s2v1_name": "S2B_MSIL2A_20180515T112110_5_78",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20180515T063356_29SND_5_78.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20180515T112110_5_78.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20170924T093019_N9999_R136_T35VPK_34_81",
+      "labels": [
+        "Coniferous forest",
+        "Mixed forest",
+        "Transitional woodland, shrub"
+      ],
+      "split": "train",
+      "country": "Finland",
+      "s1_name": "S1A_IW_GRDH_1SDV_20170925T043256_35VPK_34_81",
+      "s2v1_name": "S2B_MSIL2A_20170924T93021_34_81",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20170925T043256_35VPK_34_81.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20170924T93021_34_81.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20170801T095029_N9999_R079_T33TXN_21_05",
+      "labels": [
+        "Complex cultivation patterns",
+        "Inland wetlands",
+        "Permanent crops"
+      ],
+      "split": "train",
+      "country": "Austria",
+      "s1_name": "S1B_IW_GRDH_1SDV_20170801T164200_33TXN_21_5",
+      "s2v1_name": "S2B_MSIL2A_20170801T095029_21_5",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20170801T164200_33TXN_21_5.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20170801T095029_21_5.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20171221T112501_N9999_R037_T29SND_01_47",
+      "labels": [
+        "Arable land",
+        "Broad-leaved forest",
+        "Complex cultivation patterns",
+        "Land principally occupied by agriculture, with significant areas of natural vegetation",
+        "Permanent crops",
+        "Transitional woodland, shrub",
+        "Urban fabric"
+      ],
+      "split": "train",
+      "country": "Portugal",
+      "s1_name": "S1A_IW_GRDH_1SDV_20171221T064303_29SND_1_47",
+      "s2v1_name": "S2A_MSIL2A_20171221T112501_1_47",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20171221T064303_29SND_1_47.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20171221T112501_1_47.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20180326T112109_N9999_R037_T29SNB_07_54",
+      "labels": [
+        "Marine waters"
+      ],
+      "split": "train",
+      "country": "Portugal",
+      "s1_name": "S1A_IW_GRDH_1SDV_20180327T064326_29SNB_7_54",
+      "s2v1_name": "S2B_MSIL2A_20180326T112109_7_54",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20180327T064326_29SNB_7_54.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20180326T112109_7_54.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20170704T112111_N9999_R037_T29SND_55_09",
+      "labels": [
+        "Broad-leaved forest",
+        "Coniferous forest",
+        "Inland waters",
+        "Transitional woodland, shrub"
+      ],
+      "split": "train",
+      "country": "Portugal",
+      "s1_name": "S1A_IW_GRDH_1SDV_20170706T064235_29SND_55_9",
+      "s2v1_name": "S2A_MSIL2A_20170704T112111_55_9",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20170706T064235_29SND_55_9.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20170704T112111_55_9.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20180428T095029_N9999_R079_T33TXN_05_33",
+      "labels": [
+        "Broad-leaved forest",
+        "Mixed forest"
+      ],
+      "split": "train",
+      "country": "Austria",
+      "s1_name": "S1A_IW_GRDH_1SDV_20180428T164218_33TXN_5_33",
+      "s2v1_name": "S2B_MSIL2A_20180428T095029_5_33",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20180428T164218_33TXN_5_33.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20180428T095029_5_33.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20171016T101009_N9999_R022_T34VDM_85_48",
+      "labels": [
+        "Marine waters"
+      ],
+      "split": "train",
+      "country": "Finland",
+      "s1_name": "S1B_IW_GRDH_1SDV_20171016T045754_34VDM_85_48",
+      "s2v1_name": "S2B_MSIL2A_20171016T101009_85_48",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20171016T045754_34VDM_85_48.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20171016T101009_85_48.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20180511T100029_N9999_R122_T34VDM_47_09",
+      "labels": [
+        "Marine waters",
+        "Mixed forest"
+      ],
+      "split": "train",
+      "country": "Finland",
+      "s1_name": "S1A_IW_GRDH_1SDV_20180514T161304_34VDM_47_9",
+      "s2v1_name": "S2B_MSIL2A_20180511T100029_47_9",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20180514T161304_34VDM_47_9.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20180511T100029_47_9.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20170830T102019_N9999_R065_T34VDR_59_81",
+      "labels": [
+        "Marine waters"
+      ],
+      "split": "train",
+      "country": "Finland",
+      "s1_name": "S1A_IW_GRDH_1SDV_20170830T160543_34VDR_59_81",
+      "s2v1_name": "S2B_MSIL2A_20170830T102019_59_81",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20170830T160543_34VDR_59_81.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20170830T102019_59_81.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20180511T100029_N9999_R122_T34VDM_79_73",
+      "labels": [
+        "Marine waters"
+      ],
+      "split": "train",
+      "country": "Finland",
+      "s1_name": "S1A_IW_GRDH_1SDV_20180509T045023_34VDM_79_73",
+      "s2v1_name": "S2B_MSIL2A_20180511T100029_79_73",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20180509T045023_34VDM_79_73.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20180511T100029_79_73.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20170719T094029_N9999_R036_T34TCS_78_82",
+      "labels": [
+        "Arable land"
+      ],
+      "split": "train",
+      "country": "Serbia",
+      "s1_name": "S1B_IW_GRDH_1SDV_20170719T045324_34TCS_78_82",
+      "s2v1_name": "S2B_MSIL2A_20170719T094029_78_82",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20170719T045324_34TCS_78_82.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20170719T094029_78_82.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20180525T094029_N9999_R036_T35VNL_54_04",
+      "labels": [
+        "Coniferous forest",
+        "Transitional woodland, shrub"
+      ],
+      "split": "train",
+      "country": "Finland",
+      "s1_name": "S1A_IW_GRDH_1SDV_20180525T153259_35VNL_54_4",
+      "s2v1_name": "S2B_MSIL2A_20180525T094029_54_4",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20180525T153259_35VNL_54_4.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20180525T094029_54_4.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20171101T094131_N9999_R036_T35VNJ_85_29",
+      "labels": [
+        "Broad-leaved forest",
+        "Coniferous forest",
+        "Land principally occupied by agriculture, with significant areas of natural vegetation",
+        "Mixed forest",
+        "Transitional woodland, shrub"
+      ],
+      "split": "train",
+      "country": "Finland",
+      "s1_name": "S1B_IW_GRDH_1SDV_20171101T153951_35VNJ_85_29",
+      "s2v1_name": "S2A_MSIL2A_20171101T94132_85_29",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20171101T153951_35VNJ_85_29.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20171101T94132_85_29.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20180422T093029_N9999_R136_T34TEQ_18_02",
+      "labels": [
+        "Arable land",
+        "Complex cultivation patterns",
+        "Industrial or commercial units",
+        "Urban fabric"
+      ],
+      "split": "train",
+      "country": "Serbia",
+      "s1_name": "S1A_IW_GRDH_1SDV_20180422T044556_34TEQ_18_2",
+      "s2v1_name": "S2B_MSIL2A_20180422T093029_18_2",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20180422T044556_34TEQ_18_2.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20180422T093029_18_2.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20180419T101031_N9999_R022_T34VDN_85_30",
+      "labels": [
+        "Marine waters"
+      ],
+      "split": "train",
+      "country": "Finland",
+      "s1_name": "S1A_IW_GRDH_1SDV_20180420T161328_34VDN_85_30",
+      "s2v1_name": "S2A_MSIL2A_20180419T101031_85_30",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20180420T161328_34VDN_85_30.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20180419T101031_85_30.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20171002T112111_N9999_R037_T29SNB_84_82",
+      "labels": [
+        "Complex cultivation patterns",
+        "Pastures",
+        "Permanent crops"
+      ],
+      "split": "train",
+      "country": "Portugal",
+      "s1_name": "S1A_IW_GRDH_1SDV_20171004T183450_29SNB_84_82",
+      "s2v1_name": "S2A_MSIL2A_20171002T112112_84_82",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20171004T183450_29SNB_84_82.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20171002T112112_84_82.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20180224T112109_N9999_R037_T29SNC_86_05",
+      "labels": [
+        "Agro-forestry areas",
+        "Arable land"
+      ],
+      "split": "train",
+      "country": "Portugal",
+      "s1_name": "S1A_IW_GRDH_1SDV_20180226T063447_29SNC_86_5",
+      "s2v1_name": "S2B_MSIL2A_20180224T112109_86_5",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20180226T063447_29SNC_86_5.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20180224T112109_86_5.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20170701T093031_N9999_R136_T35VPK_66_03",
+      "labels": [
+        "Coniferous forest"
+      ],
+      "split": "train",
+      "country": "Finland",
+      "s1_name": "S1A_IW_GRDH_1SDV_20170630T152421_35VPK_66_3",
+      "s2v1_name": "S2A_MSIL2A_20170701T093031_66_3",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20170630T152421_35VPK_66_3.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20170701T093031_66_3.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20171015T095031_N9999_R079_T33UXP_06_83",
+      "labels": [
+        "Arable land",
+        "Permanent crops"
+      ],
+      "split": "train",
+      "country": "Austria",
+      "s1_name": "S1A_IW_GRDH_1SDV_20171015T050950_33UXP_6_83",
+      "s2v1_name": "S2A_MSIL2A_20171015T095031_6_83",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20171015T050950_33UXP_6_83.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20171015T095031_6_83.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20180220T114339_N9999_R123_T29UPV_64_09",
+      "labels": [
+        "Complex cultivation patterns",
+        "Coniferous forest",
+        "Pastures",
+        "Transitional woodland, shrub",
+        "Urban fabric"
+      ],
+      "split": "train",
+      "country": "Ireland",
+      "s1_name": "S1A_IW_GRDH_1SDV_20180219T063851_29UPV_64_9",
+      "s2v1_name": "S2B_MSIL2A_20180220T114339_64_9",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20180219T063851_29UPV_64_9.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20180220T114339_64_9.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20180515T112109_N9999_R037_T29SNC_89_68",
+      "labels": [
+        "Arable land",
+        "Permanent crops"
+      ],
+      "split": "train",
+      "country": "Portugal",
+      "s1_name": "S1B_IW_GRDH_1SDV_20180515T063421_29SNC_89_68",
+      "s2v1_name": "S2B_MSIL2A_20180515T112109_89_68",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20180515T063421_29SNC_89_68.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20180515T112109_89_68.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20171208T093351_N9999_R136_T34TEN_33_04",
+      "labels": [
+        "Arable land",
+        "Broad-leaved forest",
+        "Complex cultivation patterns",
+        "Land principally occupied by agriculture, with significant areas of natural vegetation",
+        "Permanent crops"
+      ],
+      "split": "train",
+      "country": "Serbia",
+      "s1_name": "S1A_IW_GRDH_1SDV_20171207T162450_34TEN_33_4",
+      "s2v1_name": "S2A_MSIL2A_20171208T093351_33_4",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20171207T162450_34TEN_33_4.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20171208T093351_33_4.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20171002T112111_N9999_R037_T29SNB_44_82",
+      "labels": [
+        "Marine waters"
+      ],
+      "split": "train",
+      "country": "Portugal",
+      "s1_name": "S1A_IW_GRDH_1SDV_20171004T183450_29SNB_44_82",
+      "s2v1_name": "S2A_MSIL2A_20171002T112112_44_82",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20171004T183450_29SNB_44_82.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20171002T112112_44_82.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20180506T105029_N9999_R051_T31UER_30_02",
+      "labels": [
+        "Arable land",
+        "Broad-leaved forest",
+        "Complex cultivation patterns",
+        "Land principally occupied by agriculture, with significant areas of natural vegetation",
+        "Pastures",
+        "Urban fabric"
+      ],
+      "split": "train",
+      "country": "Belgium",
+      "s1_name": "S1A_IW_GRDH_1SDV_20180509T174044_31UER_30_2",
+      "s2v1_name": "S2B_MSIL2A_20180506T105029_30_2",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20180509T174044_31UER_30_2.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20180506T105029_30_2.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20170905T095031_N9999_R079_T35WPN_07_61",
+      "labels": [
+        "Coniferous forest",
+        "Inland waters"
+      ],
+      "split": "train",
+      "country": "Finland",
+      "s1_name": "S1B_IW_GRDH_1SDV_20170904T152418_35WPN_7_61",
+      "s2v1_name": "S2A_MSIL2A_20170905T95032_7_61",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20170904T152418_35WPN_7_61.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20170905T95032_7_61.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20170923T100019_N9999_R122_T33TWM_49_00",
+      "labels": [
+        "Arable land",
+        "Broad-leaved forest",
+        "Complex cultivation patterns",
+        "Urban fabric"
+      ],
+      "split": "train",
+      "country": "Austria",
+      "s1_name": "S1B_IW_GRDH_1SDV_20170923T164942_33TWM_49_0",
+      "s2v1_name": "S2B_MSIL2A_20170923T100019_49_0",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20170923T164942_33TWM_49_0.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20170923T100019_49_0.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20171221T112501_N9999_R037_T29SND_24_86",
+      "labels": [
+        "Arable land",
+        "Broad-leaved forest"
+      ],
+      "split": "train",
+      "country": "Portugal",
+      "s1_name": "S1A_IW_GRDH_1SDV_20171221T064303_29SND_24_86",
+      "s2v1_name": "S2A_MSIL2A_20171221T112501_24_86",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20171221T064303_29SND_24_86.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20171221T112501_24_86.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20170717T113321_N9999_R080_T29UPV_58_86",
+      "labels": [
+        "Coniferous forest",
+        "Land principally occupied by agriculture, with significant areas of natural vegetation",
+        "Pastures"
+      ],
+      "split": "train",
+      "country": "Ireland",
+      "s1_name": "S1B_IW_GRDH_1SDV_20170717T064630_29UPV_58_86",
+      "s2v1_name": "S2A_MSIL2A_20170717T113321_58_86",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20170717T064630_29UPV_58_86.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20170717T113321_58_86.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20171208T093351_N9999_R136_T34TEN_10_72",
+      "labels": [
+        "Arable land",
+        "Urban fabric"
+      ],
+      "split": "train",
+      "country": "Kosovo",
+      "s1_name": "S1A_IW_GRDH_1SDV_20171207T162450_34TEN_10_72",
+      "s2v1_name": "S2A_MSIL2A_20171208T093351_10_72",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20171207T162450_34TEN_10_72.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20171208T093351_10_72.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20180220T114339_N9999_R123_T29UPV_16_83",
+      "labels": [
+        "Complex cultivation patterns",
+        "Inland wetlands",
+        "Mixed forest",
+        "Pastures"
+      ],
+      "split": "train",
+      "country": "Ireland",
+      "s1_name": "S1A_IW_GRDH_1SDV_20180219T063851_29UPV_16_83",
+      "s2v1_name": "S2B_MSIL2A_20180220T114339_16_83",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20180219T063851_29UPV_16_83.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20180220T114339_16_83.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20170924T093019_N9999_R136_T35VPK_30_80",
+      "labels": [
+        "Coniferous forest",
+        "Mixed forest",
+        "Transitional woodland, shrub"
+      ],
+      "split": "train",
+      "country": "Finland",
+      "s1_name": "S1A_IW_GRDH_1SDV_20170925T043256_35VPK_30_80",
+      "s2v1_name": "S2B_MSIL2A_20170924T93021_30_80",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20170925T043256_35VPK_30_80.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20170924T93021_30_80.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20170924T093019_N9999_R136_T35VPK_42_87",
+      "labels": [
+        "Broad-leaved forest",
+        "Inland waters",
+        "Mixed forest",
+        "Transitional woodland, shrub"
+      ],
+      "split": "train",
+      "country": "Finland",
+      "s1_name": "S1A_IW_GRDH_1SDV_20170925T043256_35VPK_42_87",
+      "s2v1_name": "S2B_MSIL2A_20170924T093019_42_87",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20170925T043256_35VPK_42_87.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20170924T093019_42_87.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20180220T114339_N9999_R123_T29UPV_03_81",
+      "labels": [
+        "Pastures"
+      ],
+      "split": "train",
+      "country": "Ireland",
+      "s1_name": "S1A_IW_GRDH_1SDV_20180219T063851_29UPV_3_81",
+      "s2v1_name": "S2B_MSIL2A_20180220T114339_3_81",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20180219T063851_29UPV_3_81.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20180220T114339_3_81.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20180318T093031_N9999_R136_T35UMB_27_04",
+      "labels": [
+        "Broad-leaved forest",
+        "Complex cultivation patterns",
+        "Land principally occupied by agriculture, with significant areas of natural vegetation",
+        "Pastures",
+        "Urban fabric"
+      ],
+      "split": "train",
+      "country": "Lithuania",
+      "s1_name": "S1A_IW_GRDH_1SDV_20180317T155512_35UMB_27_4",
+      "s2v1_name": "S2A_MSIL2A_20180318T093031_27_4",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20180317T155512_35UMB_27_4.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20180318T093031_27_4.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20170817T101019_N9999_R022_T34WFS_10_55",
+      "labels": [
+        "Marine waters"
+      ],
+      "split": "train",
+      "country": "Finland",
+      "s1_name": "S1B_IW_GRDH_1SDV_20170817T045637_34WFS_10_55",
+      "s2v1_name": "S2B_MSIL2A_20170817T101019_10_55",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20170817T045637_34WFS_10_55.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20170817T101019_10_55.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20180413T095031_N9999_R079_T34UEG_51_09",
+      "labels": [
+        "Arable land",
+        "Coniferous forest",
+        "Pastures"
+      ],
+      "split": "train",
+      "country": "Lithuania",
+      "s1_name": "S1A_IW_GRDH_1SDV_20180413T161957_34UEG_51_9",
+      "s2v1_name": "S2A_MSIL2A_20180413T095031_51_9",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20180413T161957_34UEG_51_9.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20180413T095031_51_9.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20170924T093019_N9999_R136_T35VNH_88_07",
+      "labels": [
+        "Coniferous forest",
+        "Inland waters",
+        "Mixed forest"
+      ],
+      "split": "train",
+      "country": "Finland",
+      "s1_name": "S1A_IW_GRDH_1SDV_20170925T043321_35VNH_88_7",
+      "s2v1_name": "S2B_MSIL2A_20170924T093019_88_7",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20170925T043321_35VNH_88_7.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20170924T093019_88_7.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20180515T112109_N9999_R037_T29SND_63_79",
+      "labels": [
+        "Agro-forestry areas",
+        "Broad-leaved forest"
+      ],
+      "split": "train",
+      "country": "Portugal",
+      "s1_name": "S1B_IW_GRDH_1SDV_20180515T063356_29SND_63_79",
+      "s2v1_name": "S2B_MSIL2A_20180515T112110_63_79",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20180515T063356_29SND_63_79.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20180515T112110_63_79.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20170914T093029_N9999_R136_T34TEQ_75_85",
+      "labels": [
+        "Broad-leaved forest",
+        "Complex cultivation patterns"
+      ],
+      "split": "train",
+      "country": "Serbia",
+      "s1_name": "S1A_IW_GRDH_1SDV_20170914T162516_34TEQ_75_85",
+      "s2v1_name": "S2B_MSIL2A_20170914T093029_75_85",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20170914T162516_34TEQ_75_85.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20170914T093029_75_85.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20170914T093029_N9999_R136_T34TEQ_01_37",
+      "labels": [
+        "Arable land"
+      ],
+      "split": "train",
+      "country": "Serbia",
+      "s1_name": "S1A_IW_GRDH_1SDV_20170914T162516_34TEQ_1_37",
+      "s2v1_name": "S2B_MSIL2A_20170914T093029_1_37",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20170914T162516_34TEQ_1_37.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20170914T093029_1_37.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20180220T114339_N9999_R123_T29UPV_06_69",
+      "labels": [
+        "Inland wetlands",
+        "Pastures",
+        "Urban fabric"
+      ],
+      "split": "train",
+      "country": "Ireland",
+      "s1_name": "S1A_IW_GRDH_1SDV_20180219T063851_29UPV_6_69",
+      "s2v1_name": "S2B_MSIL2A_20180220T114339_6_69",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20180219T063851_29UPV_6_69.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20180220T114339_6_69.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20180225T114351_N9999_R123_T29UPU_84_89",
+      "labels": [
+        "Marine waters"
+      ],
+      "split": "train",
+      "country": "Ireland",
+      "s1_name": "S1B_IW_GRDH_1SDV_20180225T063842_29UPU_84_89",
+      "s2v1_name": "S2A_MSIL2A_20180225T114351_84_89",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20180225T063842_29UPU_84_89.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20180225T114351_84_89.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20180422T093029_N9999_R136_T34TEQ_80_56",
+      "labels": [
+        "Broad-leaved forest",
+        "Inland waters",
+        "Land principally occupied by agriculture, with significant areas of natural vegetation"
+      ],
+      "split": "train",
+      "country": "Serbia",
+      "s1_name": "S1B_IW_GRDH_1SDV_20180423T043716_34TEQ_80_56",
+      "s2v1_name": "S2B_MSIL2A_20180422T093029_80_56",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20180423T043716_34TEQ_80_56.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20180422T093029_80_56.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20180511T100029_N9999_R122_T34VDM_08_23",
+      "labels": [
+        "Marine waters"
+      ],
+      "split": "train",
+      "country": "Finland",
+      "s1_name": "S1A_IW_GRDH_1SDV_20180512T162925_34VDM_8_23",
+      "s2v1_name": "S2B_MSIL2A_20180511T100029_8_23",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20180512T162925_34VDM_8_23.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20180511T100029_8_23.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20180515T112109_N9999_R037_T29SNC_10_87",
+      "labels": [
+        "Marine waters"
+      ],
+      "split": "train",
+      "country": "Portugal",
+      "s1_name": "S1B_IW_GRDH_1SDV_20180515T063421_29SNC_10_87",
+      "s2v1_name": "S2B_MSIL2A_20180515T112109_10_87",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20180515T063421_29SNC_10_87.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20180515T112109_10_87.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20180326T112109_N9999_R037_T29SNB_52_79",
+      "labels": [
+        "Complex cultivation patterns",
+        "Land principally occupied by agriculture, with significant areas of natural vegetation",
+        "Permanent crops",
+        "Urban fabric"
+      ],
+      "split": "train",
+      "country": "Portugal",
+      "s1_name": "S1B_IW_GRDH_1SDV_20180327T183408_29SNB_52_79",
+      "s2v1_name": "S2B_MSIL2A_20180326T112109_52_79",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1B_IW_GRDH_1SDV_20180327T183408_29SNB_52_79.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20180326T112109_52_79.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20170914T093029_N9999_R136_T34TEP_08_27",
+      "labels": [
+        "Broad-leaved forest",
+        "Complex cultivation patterns",
+        "Land principally occupied by agriculture, with significant areas of natural vegetation"
+      ],
+      "split": "train",
+      "country": "Serbia",
+      "s1_name": "S1A_IW_GRDH_1SDV_20170914T162451_34TEP_8_27",
+      "s2v1_name": "S2B_MSIL2A_20170914T93030_8_27",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20170914T162451_34TEP_8_27.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20170914T93030_8_27.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20180413T095031_N9999_R079_T35VLG_03_15",
+      "labels": [
+        "Coniferous forest",
+        "Land principally occupied by agriculture, with significant areas of natural vegetation",
+        "Mixed forest"
+      ],
+      "split": "train",
+      "country": "Finland",
+      "s1_name": "S1A_IW_GRDH_1SDV_20180415T160451_35VLG_3_15",
+      "s2v1_name": "S2A_MSIL2A_20180413T95032_3_15",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20180415T160451_35VLG_3_15.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20180413T95032_3_15.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20180428T095029_N9999_R079_T33TXN_02_44",
+      "labels": [
+        "Broad-leaved forest",
+        "Mixed forest"
+      ],
+      "split": "train",
+      "country": "Austria",
+      "s1_name": "S1A_IW_GRDH_1SDV_20180428T164218_33TXN_2_44",
+      "s2v1_name": "S2B_MSIL2A_20180428T095029_2_44",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20180428T164218_33TXN_2_44.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20180428T095029_2_44.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20170808T094029_N9999_R036_T35ULA_87_02",
+      "labels": [
+        "Complex cultivation patterns",
+        "Land principally occupied by agriculture, with significant areas of natural vegetation"
+      ],
+      "split": "train",
+      "country": "Lithuania",
+      "s1_name": "S1A_IW_GRDH_1SDV_20170808T043459_35ULA_87_2",
+      "s2v1_name": "S2B_MSIL2A_20170808T094029_87_2",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20170808T043459_35ULA_87_2.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20170808T094029_87_2.tif"
+    },
+    {
+      "patch_id": "S2B_MSIL2A_20170906T101019_N9999_R022_T34WFS_53_00",
+      "labels": [
+        "Marine waters"
+      ],
+      "split": "train",
+      "country": "Finland",
+      "s1_name": "S1A_IW_GRDH_1SDV_20170906T155749_34WFS_53_0",
+      "s2v1_name": "S2B_MSIL2A_20170906T101019_53_0",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20170906T155749_34WFS_53_0.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2B_MSIL2A_20170906T101019_53_0.tif"
+    },
+    {
+      "patch_id": "S2A_MSIL2A_20170803T094031_N9999_R036_T34TCR_80_51",
+      "labels": [
+        "Arable land",
+        "Complex cultivation patterns",
+        "Urban fabric"
+      ],
+      "split": "train",
+      "country": "Serbia",
+      "s1_name": "S1A_IW_GRDH_1SDV_20170802T163325_34TCR_80_51",
+      "s2v1_name": "S2A_MSIL2A_20170803T094031_80_51",
+      "contains_seasonal_snow": false,
+      "contains_cloud_or_shadow": false,
+      "expected_s1_path": "BigEarthNet-S1/S1A_IW_GRDH_1SDV_20170802T163325_34TCR_80_51.tif",
+      "expected_s2_path": "BigEarthNet-S2/S2A_MSIL2A_20170803T094031_80_51.tif"
+    }
+  ]
+}

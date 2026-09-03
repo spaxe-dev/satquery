@@ -1,0 +1,32 @@
+{
+  "dataset": "BigEarthNet v2.0 / reBEN",
+  "version": "v2.0 (reBEN, 549,488 pairs, Zenodo 10891137, CDLA-Permissive-1.0)",
+  "num_samples": 100,
+  "paired_samples": 100,
+  "s1_channels": [
+    "VV",
+    "VH"
+  ],
+  "s2_channels": [
+    "B02",
+    "B03",
+    "B04",
+    "B05",
+    "B06",
+    "B07",
+    "B08",
+    "B8A",
+    "B11",
+    "B12"
+  ],
+  "s1_found_on_disk": 0,
+  "s2_found_on_disk": 0,
+  "invalid_samples": [],
+  "duplicates": [],
+  "status": "passed",
+  "manifest_path": "datasets\\processed\\reben_v2_subset_manifest.json",
+  "hub_root": "datasets\\raw\\bigearthnet",
+  "note": "Stage 1: 100 paired S1+S2 reBEN samples defined via metadata.parquet (480k train). S1/S2 image patches not yet downloaded (requires 59GB+51GB tar extraction, ~21MB for 100 pairs). Manifest is reproducible via seed 42. Validation checks pairing, labels, and that no synthetic/old-BEN data is present. For this audit stage, S1/S2 file existence check is expected to be 0 (images not yet materialized) \u2014 manifest integrity is the primary check.",
+  "license": "CDLA-Permissive-1.0",
+  "source": "https://bigearth.net + https://zenodo.org/records/10891137/files/metadata.parquet?download=1"
+}
