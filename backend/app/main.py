@@ -23,6 +23,12 @@ app.add_middleware(
 
 app.include_router(router, prefix="/api")
 
+# Expose demo assets as static files (must be before SPA catch-all)
+# Frontend DEMO 1-5 fetches /data/demo/... and expects image/png, not text/html
+DATA_DEMO_DIR = Path(__file__).resolve().parents[2] / "data" / "demo"
+if DATA_DEMO_DIR.exists():
+    app.mount("/data/demo", StaticFiles(directory=str(DATA_DEMO_DIR)), name="demo-data")
+
 # Serve frontend static if built
 FRONTEND_DIST = Path(__file__).resolve().parents[2] / "frontend" / "dist"
 if FRONTEND_DIST.exists():
@@ -32,6 +38,9 @@ if FRONTEND_DIST.exists():
     @app.get("/{full_path:path}")
     async def serve_frontend(full_path: str):
         if full_path.startswith("api/"):
+            return {"detail": "Not found"}
+        # Don't intercept demo-data or assets — they are already mounted
+        if full_path.startswith("data/demo/") or full_path.startswith("assets/"):
             return {"detail": "Not found"}
         idx = FRONTEND_DIST / "index.html"
         if idx.exists():
