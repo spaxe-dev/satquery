@@ -24,19 +24,22 @@ All P0 + most P1: image upload, query, agent/router, VQA, captioning, grounding 
 
 ## What Was Trained / Best Model
 
-- **Training scaffold verified** on synthetic 200 samples (`datasets/processed/synthetic_demo.json`, manifest at `models/checkpoints/satquery-lora/training_manifest.json`).
-- **Best model for demo:** heuristic RS vision (always works) + classical change/SAR/optical pipelines (real CV). For RS-adapted ceiling, use `Qwen/Qwen2-VL-2B-Instruct` QLoRA r=8 on cloud GPU — see `docs/MODEL_CARD.md`.
-- **Failed:** None — no training attempted on 4GB (honest). QLoRA on larger data is the next experiment.
+- **Real RS data now present (verified 2026-09-04)**: EuroSAT RGB 1500 images (150/class, 64x64, MIT) at `datasets/raw/eurosat/EuroSAT/` + instruction JSON `datasets/processed/eurosat_instruct_1500.json` (3000 entries: 2500 train / 500 val) verified via `training/dataset_loader.py` and `training/train_lora_real.py --dry_run` (manifest `models/checkpoints/satquery-eurosat-blip-lora/training_manifest.json` status `dry_run_verified_real_loader`). Training not yet executed (requires RTX 4090).
+- **Previous synthetic scaffold**: `datasets/processed/synthetic_demo.json` (100 entries) remains for fallback.
+- **Best model for demo:** heuristic RS vision (always works) + classical change/SAR/optical pipelines (real CV). For RS-adapted ceiling, use `Salesforce/blip-image-captioning-base` LoRA r=8 on EuroSAT (6-8GB, 15-20min on 4090) or `Qwen/Qwen2-VL-2B-Instruct` QLoRA 4-bit (12-14GB, 25-35min) — see `docs/MODEL_CARD.md` and `docs/REAL_ADAPTATION_PLAN.md`.
+- **Failed:** None — no training attempted on 4GB (honest). Real pipeline verified, ready for cloud.
 
 ## Datasets Used
 
-- Synthetic landscapes + simulated SAR (`data/demo/`).
-- Synthetic QA templates (`datasets/processed/synthetic_demo.json`).
-- Real manifests scaffolded for BigEarthNet/VRSBench/RSVQA/CDVQA/SEN1-2 via `scripts/download_datasets.py`.
+- **Real RS**: EuroSAT RGB 1500 (64x64, 10 classes, Sentinel-2, MIT, HF `blanchon/EuroSAT_RGB` / Zenodo 7711810, verified 150/class) — satisfies PS "any open source RS data" (BigEarthNet primary documented as 590k, 110GB, CDLA-Permissive, alternative via `jerpint/bigearthnet`).
+- Synthetic landscapes + simulated SAR (`data/demo/`) for demo.
+- Synthetic QA templates (`datasets/processed/synthetic_demo.json`) for fallback.
+- Real manifests scaffolded for BigEarthNet/VRSBench/RSVQA/CDVQA/SEN1-2 via `scripts/download_datasets.py`; only EuroSAT is physically downloaded and verified.
 
 ## Where Checkpoints Are
 
-- `models/checkpoints/satquery-lora/` (dry-run manifest; real `adapter_model.bin` after cloud training).
+- `models/checkpoints/satquery-eurosat-blip-lora/` (dry-run manifest, status `dry_run_verified_real_loader`; real `adapter_model.safetensors` ~15MB after RTX 4090 training).
+- Legacy `models/checkpoints/satquery-lora/` (synthetic dry-run manifest).
 
 ## How the Agent Works
 
@@ -58,9 +61,21 @@ python -m uvicorn backend.app.main:app --host 0.0.0.0 --port 8000
 ```bash
 bash scripts/cloud_setup.sh
 bash scripts/cloud_verify.sh
-python training/train_lora.py --dry_run --subset 500
-python training/train_lora.py --dataset synthetic --subset 2000 --epochs 2 --use_4bit
-# Wire checkpoint into tools/vqa_tool.py::_try_load_vlm (load PEFT adapter)
+
+# 1. Verify real RS data (EuroSAT 1500, 90MB, already downloaded)
+python scripts/download_eurosat.py --subset 1500
+python training/dataset_loader.py  # or: python -c "from training.dataset_loader import verify_real_dataset; verify_real_dataset('datasets/processed/eurosat_instruct_1500.json','datasets/raw/eurosat')"
+
+# 2. Dry-run with real loader (no GPU, verifies LoRA config)
+python training/train_lora_real.py --dataset eurosat --subset 1500 --dry_run
+python training/train_lora.py --dataset eurosat --subset 1500 --dry_run  # delegates
+
+# 3. Real training on RTX 4090 24GB (BLIP minimal, 6-8GB, 15-20min):
+python training/train_lora_real.py --dataset eurosat --subset 1500 --model Salesforce/blip-image-captioning-base --epochs 2 --batch_size 4 --gradient_accumulation 4 --lr 2e-4 --output models/checkpoints/satquery-eurosat-blip-lora
+# Alternative Qwen2-VL QLoRA (12-14GB, 25-35min):
+python training/train_lora_real.py --dataset eurosat --subset 1500 --model Qwen/Qwen2-VL-2B-Instruct --use_4bit --epochs 1 --batch_size 1 --gradient_accumulation 8 --lr 1e-4 --output models/checkpoints/satquery-eurosat-qwen-lora
+
+# Checkpoint auto-loads in tools/vqa_tool.py::_try_load_vlm (searches models/checkpoints/satquery-eurosat-*); heuristic fallback preserved if no checkpoint.
 ```
 
 ## How to Add a Model

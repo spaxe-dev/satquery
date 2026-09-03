@@ -51,7 +51,15 @@ huggingface-cli login  # for Qwen2-VL downloads
 ```bash
 python scripts/prepare_demo_data.py
 python scripts/download_datasets.py --list
-python scripts/download_datasets.py --dataset bigearthnet --subset 2000 --out datasets/raw
+
+# REAL RS data — EuroSAT RGB (recommended minimal, 90MB, verified 2026-09-04)
+python scripts/download_eurosat.py --subset 1500 --out datasets/raw/eurosat
+# Verify real loader
+python -c "from training.dataset_loader import verify_real_dataset; verify_real_dataset('datasets/processed/eurosat_instruct_1500.json','datasets/raw/eurosat')"
+python training/train_lora_real.py --dataset eurosat --subset 1500 --dry_run
+
+# Alternative: BigEarthNet subset (110GB full, use mini/medium via jerpint/bigearthnet)
+python scripts/download_datasets.py --dataset bigearthnet --subset 1000 --out datasets/raw
 python scripts/prepare_datasets.py --dataset synthetic --subset 2000
 python scripts/verify_datasets.py
 ```
@@ -59,14 +67,18 @@ python scripts/verify_datasets.py
 ## 7. Train
 
 ```bash
-# Dry-run (no GPU):
-python training/train_lora.py --dry_run --subset 500
+# Dry-run with REAL EuroSAT loader (no GPU, verifies pipeline):
+python training/train_lora_real.py --dataset eurosat --subset 1500 --dry_run
+python training/train_lora.py --dataset eurosat --subset 1500 --dry_run  # delegates to real trainer
 
-# Real (QLoRA 4-bit, fits 24GB):
-python training/train_lora.py --dataset synthetic --subset 2000 --epochs 2 --model Salesforce/blip-image-captioning-base --use_4bit --batch_size 1 --lr 2e-4
+# Real EuroSAT on RTX 4090 24GB — BLIP minimal (6-8GB, 15-20min, checkpoint ~15MB):
+python training/train_lora_real.py --dataset eurosat --subset 1500 --model Salesforce/blip-image-captioning-base --epochs 2 --batch_size 4 --gradient_accumulation 4 --lr 2e-4 --output models/checkpoints/satquery-eurosat-blip-lora
 
-# For Qwen2-VL-2B:
-python training/train_lora.py --dataset synthetic --subset 1000 --epochs 1 --model Qwen/Qwen2-VL-2B-Instruct --use_4bit
+# Real EuroSAT Qwen2-VL QLoRA (12-14GB, 25-35min):
+python training/train_lora_real.py --dataset eurosat --subset 1500 --model Qwen/Qwen2-VL-2B-Instruct --use_4bit --epochs 1 --batch_size 1 --gradient_accumulation 8 --lr 1e-4 --output models/checkpoints/satquery-eurosat-qwen-lora
+
+# Legacy synthetic (for testing only, not real RS data):
+python training/train_lora.py --dataset synthetic --subset 2000 --epochs 2 --model Salesforce/blip-image-captioning-base --batch_size 1 --lr 2e-4
 ```
 
 Checkpoints → `models/checkpoints/satquery-lora/`.

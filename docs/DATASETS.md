@@ -60,7 +60,8 @@ datasets/
 
 ## What We Actually Used for This Prototype
 
-- For adaptation experiment: synthetic template dataset (200-500 samples) to verify LoRA scaffolding end-to-end (honest; no fabricated SOTA).
-- For demo/evaluation: synthetic RS landscapes + simulated SAR (programmatically generated) — deterministic, offline, covers all 5 SIH scenarios.
-- Real BigEarthNet/RSVQA/CDVQA manifests are scaffolded and ready to swap when bandwidth/GPU allow.
+- **For adaptation experiment (REAL, verified 2026-09-04)**: EuroSAT RGB — 1500 images (150/class stratified, 64x64 RGB Sentinel-2, JPEG, MIT, source HF `blanchon/EuroSAT_RGB` / Zenodo 7711810, ~90MB ZIP) at `datasets/raw/eurosat/EuroSAT/` + instruction JSON `datasets/processed/eurosat_instruct_1500.json` (3000 entries: 2500 train / 500 val, 2 templates per image: "Describe the land-cover" and "What class is visible?" derived explicitly from real EuroSAT labels). Verified via `training/dataset_loader.py:verify_real_dataset` (all 64x64 images open, labels in 10 classes) and `training/train_lora_real.py --dry_run` (loader OK, LoRA r=8, FP16, manifest `models/checkpoints/satquery-eurosat-blip-lora/training_manifest.json` with status `dry_run_verified_real_loader`). Training not yet executed (requires RTX 4090).
+- **Previous synthetic**: `datasets/processed/synthetic_demo.json` (100 entries, 4 templates) remains for fallback and pipeline testing — clearly marked synthetic.
+- **For demo/evaluation**: synthetic RS landscapes + simulated SAR (`data/demo/`) — deterministic, offline, covers all 5 SIH scenarios.
+- Real BigEarthNet (reBEN v2, 590k, 110GB, CDLA-Permissive, https://bigearth.net) documented as primary per PS; EuroSAT chosen as minimal defensible subset due to 90MB vs 110GB and direct RGB usability. BigEarthNet-mini/medium via `jerpint/bigearthnet` (9MB/2.5GB) remains alternative. VRSBench/RSVQA/CDVQA/SEN1-2 remain scaffolded (not downloaded) — see `scripts/download_datasets.py --list`.
 
