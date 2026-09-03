@@ -100,9 +100,12 @@ def try_hf_download(out_dir: Path, subset: int):
                 img = ex["image"]
                 # HF gives PIL Image already
                 filename = ex.get("filename", f"{cls_name}_{idx}.jpg")
-                # Ensure filename is just basename
+                # Ensure filename is just basename, normalize .tif to .jpg
                 filename = Path(filename).name
-                if not filename.lower().endswith((".jpg",".jpeg",".png")):
+                # If filename is like AnnualCrop_123.tif, convert to .jpg
+                if filename.lower().endswith(".tif"):
+                    filename = Path(filename).stem + ".jpg"
+                elif not filename.lower().endswith((".jpg",".jpeg",".png")):
                     filename += ".jpg"
                 save_path = raw_root / cls_name / filename
                 if img.mode != "RGB":

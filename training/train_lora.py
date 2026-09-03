@@ -19,7 +19,7 @@ from pathlib import Path
 
 def main():
     parser = argparse.ArgumentParser(description="SatQuery LoRA training")
-    parser.add_argument("--dataset", choices=["bigearthnet","rsvqa","rsvqa_hr","synthetic"], default="synthetic")
+    parser.add_argument("--dataset", choices=["bigearthnet","rsvqa","rsvqa_hr","synthetic","eurosat"], default="synthetic")
     parser.add_argument("--subset", type=int, default=500, help="Number of samples to use")
     parser.add_argument("--model", type=str, default="Salesforce/blip-image-captioning-base", help="Base model id")
     parser.add_argument("--epochs", type=int, default=1)
@@ -31,6 +31,19 @@ def main():
     parser.add_argument("--use_4bit", action="store_true", help="QLoRA 4-bit")
     parser.add_argument("--dry_run", action="store_true", help="Don't actually train; just verify pipeline")
     args = parser.parse_args()
+
+    # Delegate to real trainer for eurosat (real RS data)
+    if args.dataset == "eurosat":
+        print("Delegating to real EuroSAT trainer (train_lora_real.py)...")
+        # Reconstruct argv for real trainer
+        sys.argv = ["train_lora_real.py"] + sys.argv[1:]
+        # Import and run real trainer
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("train_lora_real", str(Path(__file__).parent / "train_lora_real.py"))
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        mod.main()
+        return
 
     print("="*70)
     print("SatQuery LoRA Training")

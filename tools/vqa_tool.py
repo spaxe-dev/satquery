@@ -208,44 +208,238 @@ def _heuristic_vqa(arr: np.ndarray, query: str) -> str:
 
 
 # Try to load a real VLM if available — optional, never required
+# Real adapter loading: checks for checkpoints produced by training/train_lora_real.py
+# Preserves heuristic fallback if no checkpoint or no GPU.
 _VLM_AVAILABLE = False
 _VLM_MODEL = None
 _VLM_PROCESSOR = None
+_VLM_MODEL_NAME = None
+_ADAPTER_LOADED = False
+
+# Checkpoint search order — first found is used
+CHECKPOINT_CANDIDATES = [
+    "models/checkpoints/satquery-eurosat-blip-lora",
+    "models/checkpoints/satquery-eurosat-qwen-lora",
+    "models/checkpoints/satquery-lora",
+    "models/checkpoints/satquery-eurosat-blip-lora-qlora",
+]
+
+def _find_checkpoint():
+    from pathlib import Path
+    for cand in CHECKPOINT_CANDIDATES:
+        p = Path(cand)
+        # Check for adapter_config.json (PEFT) or pytorch_model.bin / adapter_model.safetensors
+        if (p / "adapter_config.json").exists() or (p / "adapter_model.safetensors").exists() or (p / "adapter_model.bin").exists():
+            # Also need to verify it's not just a placeholder manifest
+            # Check if adapter file is non-empty and not just manifest
+            try:
+                if (p / "adapter_config.json").exists():
+                    import json
+                    cfg = json.load(open(p / "adapter_config.json"))
+                    # Real PEFT config has r value
+                    if "r" in cfg or "lora_alpha" in cfg:
+                        return str(p)
+                # If only manifest exists, it's placeholder — skip
+                if (p / "training_manifest.json").exists() and not (p / "adapter_config.json").exists():
+                    continue
+            except Exception:
+                continue
+            return str(p)
+        # Also check if checkpoint has training_manifest with status trained
+        manifest = p / "training_manifest.json"
+        if manifest.exists():
+            try:
+                import json
+                m = json.load(open(manifest))
+                if m.get("status") == "trained":
+                    return str(p)
+            except:
+                pass
+    return None
 
 def _try_load_vlm():
-    global _VLM_AVAILABLE, _VLM_MODEL, _VLM_PROCESSOR
-    if _VLM_AVAILABLE:
+    global _VLM_AVAILABLE, _VLM_MODEL, _VLM_PROCESSOR, _VLM_MODEL_NAME, _ADAPTER_LOADED
+    if _VLM_AVAILABLE and _VLM_MODEL is not None:
         return True
+    # Check for real checkpoint first
+    ckpt = _find_checkpoint()
+    if ckpt is None:
+        # No real checkpoint — heuristic only
+        return False
     try:
-        from transformers import BlipProcessor, BlipForConditionalGeneration
         import torch
-        # Only attempt if we have at least some memory
-        model_name = "Salesforce/blip-image-captioning-base"
-        # Check if cached locally to avoid download on offline demo
         from transformers.utils import is_torch_available
         if not is_torch_available():
             return False
-        # Lazy load — only if needed; keep lightweight
-        # We avoid auto-downloading in offline mode; check cache
-        from huggingface_hub import try_to_load_from_cache
-        # Just verify we can import; actual load is on demand
-        return False  # defer heavy load; heuristic is sufficient for prototype
-    except Exception:
+        # Determine base model from checkpoint manifest or fallback
+        base_model = "Salesforce/blip-image-captioning-base"
+        import json, pathlib
+        manifest_path = pathlib.Path(ckpt) / "training_manifest.json"
+        if manifest_path.exists():
+            try:
+                m = json.load(open(manifest_path))
+                base_model = m.get("base_model", base_model)
+            except:
+                pass
+        # Also check adapter_config base
+        adapter_cfg = pathlib.Path(ckpt) / "adapter_config.json"
+        if adapter_cfg.exists():
+            try:
+                cfg = json.load(open(adapter_cfg))
+                base_model = cfg.get("base_model_name_or_path", base_model)
+            except:
+                pass
+
+        _VLM_MODEL_NAME = base_model
+        print(f"[VQA] Found checkpoint at {ckpt}, base {base_model}, attempting load...")
+
+        # Load based on model type
+        if "blip" in base_model.lower():
+            from transformers import BlipProcessor, BlipForConditionalGeneration
+            from peft import PeftModel
+            processor = BlipProcessor.from_pretrained(base_model, local_files_only=True) if pathlib.Path(base_model).exists() else BlipProcessor.from_pretrained(base_model)
+            # Try local_files_only first to avoid network
+            try:
+                base = BlipForConditionalGeneration.from_pretrained(base_model, torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32, local_files_only=True)
+            except:
+                base = BlipForConditionalGeneration.from_pretrained(base_model, torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32)
+            # Load adapter
+            model = PeftModel.from_pretrained(base, ckpt)
+            model.eval()
+            if torch.cuda.is_available():
+                model = model.cuda()
+            _VLM_MODEL = model
+            _VLM_PROCESSOR = processor
+            _VLM_AVAILABLE = True
+            _ADAPTER_LOADED = True
+            print(f"[VQA] Loaded BLIP LoRA adapter from {ckpt}")
+            return True
+        elif "qwen" in base_model.lower():
+            from transformers import AutoProcessor, Qwen2VLForConditionalGeneration
+            from peft import PeftModel
+            processor = AutoProcessor.from_pretrained(base_model, trust_remote_code=True, local_files_only=True) if pathlib.Path(base_model).exists() else AutoProcessor.from_pretrained(base_model, trust_remote_code=True)
+            try:
+                base = Qwen2VLForConditionalGeneration.from_pretrained(base_model, torch_dtype=torch.float16, device_map="auto", local_files_only=True, trust_remote_code=True)
+            except:
+                base = Qwen2VLForConditionalGeneration.from_pretrained(base_model, torch_dtype=torch.float16, device_map="auto", trust_remote_code=True)
+            model = PeftModel.from_pretrained(base, ckpt)
+            model.eval()
+            _VLM_MODEL = model
+            _VLM_PROCESSOR = processor
+            _VLM_AVAILABLE = True
+            _ADAPTER_LOADED = True
+            print(f"[VQA] Loaded Qwen2-VL LoRA adapter from {ckpt}")
+            return True
+        else:
+            print(f"[VQA] Unknown base model type for {base_model}, skipping adapter load")
+            return False
+    except Exception as e:
+        print(f"[VQA] Adapter load failed, falling back to heuristic: {e}")
+        import traceback
+        traceback.print_exc()
+        _VLM_AVAILABLE = False
         return False
     return False
+
+def _vqa_with_model(image_array: np.ndarray, query: str) -> str:
+    """Run real VLM inference if available, else raise."""
+    if not _VLM_AVAILABLE or _VLM_MODEL is None:
+        raise RuntimeError("No VLM available")
+    import torch
+    from PIL import Image
+    # Convert numpy to PIL
+    if image_array.dtype != np.uint8:
+        image_array = (image_array * 255).astype(np.uint8) if image_array.max() <= 1 else image_array.astype(np.uint8)
+    if image_array.ndim == 2:
+        pil = Image.fromarray(image_array, mode="L").convert("RGB")
+    else:
+        if image_array.shape[2] >= 3:
+            pil = Image.fromarray(image_array[:,:,:3].astype(np.uint8))
+        else:
+            pil = Image.fromarray(image_array[:,:,0].astype(np.uint8), mode="L").convert("RGB")
+
+    # BLIP path
+    if "blip" in (_VLM_MODEL_NAME or "").lower():
+        # For BLIP, we generate caption conditioned on query
+        # Use processor with text query as prompt
+        inputs = _VLM_PROCESSOR(images=pil, text=query, return_tensors="pt")
+        if torch.cuda.is_available():
+            inputs = {k: v.cuda() if isinstance(v, torch.Tensor) else v for k, v in inputs.items()}
+        with torch.no_grad():
+            generated = _VLM_MODEL.generate(**inputs, max_new_tokens=64, num_beams=3)
+        text = _VLM_PROCESSOR.decode(generated[0], skip_special_tokens=True)
+        return text
+    else:
+        # Qwen2-VL path: chat template
+        messages = [
+            {"role": "user", "content": [{"type": "image", "image": pil}, {"type": "text", "text": query}]}
+        ]
+        text = _VLM_PROCESSOR.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+        inputs = _VLM_PROCESSOR(text=[text], images=[pil], return_tensors="pt", padding=True)
+        if torch.cuda.is_available():
+            inputs = inputs.to("cuda")
+        with torch.no_grad():
+            generated = _VLM_MODEL.generate(**inputs, max_new_tokens=128)
+        # Decode only new tokens
+        input_len = inputs.input_ids.shape[1]
+        decoded = _VLM_PROCESSOR.batch_decode(generated[:, input_len:], skip_special_tokens=True)[0]
+        return decoded
 
 
 def analyze(query: str, image_array: np.ndarray, task: str = "vqa") -> Dict[str, Any]:
     """
     Unified entry for VQA / captioning / grounding.
-    Always succeeds with heuristic fallback.
+    Tries real LoRA-adapted VLM first; falls back to heuristic (always succeeds).
+    Architecture: REAL ADAPTED MODEL + HEURISTIC FALLBACK
     """
     import time
     t0 = time.time()
-    # Attempt VLM path (currently heuristic-primary for 4GB VRAM portability)
-    # Real LoRA-adapted path would be swapped here when checkpoint is available
-    _try_load_vlm()
+    # Attempt to load real adapter (lazy, cached)
+    loaded = _try_load_vlm()
+    use_real = loaded and _VLM_AVAILABLE and _VLM_MODEL is not None
 
+    # Try real inference if available
+    if use_real:
+        try:
+            real_answer = _vqa_with_model(image_array, query)
+            # Real caption: for captioning task, use real answer; for VQA, also use it
+            # Keep heuristic grounding boxes (model doesn't produce precise boxes)
+            boxes = []
+            if task in ("grounding", "vqa") and any(k in query.lower() for k in ["where", "highlight", "locate", "show", "box", "water", "built", "forest", "vegetation", "building"]):
+                boxes = _heuristic_grounding(image_array, query)
+            # Real model caption is the generated text
+            # For captioning task, answer == caption
+            if task == "captioning" or "describe" in query.lower():
+                real_caption = real_answer
+            else:
+                real_caption = _heuristic_caption(image_array)  # keep heuristic caption as fallback
+
+            h, w = image_array.shape[0], image_array.shape[1]
+            input_q = 0.92 if min(h, w) >= 256 else 0.78
+            model_conf = 0.88  # higher for adapted model
+            elapsed_ms = int((time.time() - t0) * 1000)
+            ckpt = _find_checkpoint()
+            return {
+                "answer": real_answer,
+                "caption": real_caption,
+                "boxes": boxes,
+                "confidence": {
+                    "input_quality": round(input_q, 2),
+                    "model_confidence": round(model_conf, 2),
+                    "evidence_agreement": 0.0,
+                    "overall": round(0.5 * input_q + 0.5 * model_conf, 2),
+                    "is_heuristic": False,
+                },
+                "model_used": f"SatQuery-RS-VLM ({_VLM_MODEL_NAME} + LoRA {ckpt})",
+                "elapsed_ms": elapsed_ms,
+            }
+        except Exception as e:
+            print(f"[VQA] Real model inference failed, falling back to heuristic: {e}")
+            import traceback
+            traceback.print_exc()
+            # fall through to heuristic
+
+    # Heuristic fallback (always works, CPU-only)
     answer = _heuristic_vqa(image_array, query)
     caption = _heuristic_caption(image_array)
     boxes = []
@@ -254,9 +448,7 @@ def analyze(query: str, image_array: np.ndarray, task: str = "vqa") -> Dict[str,
 
     # confidence heuristic
     h, w = image_array.shape[0], image_array.shape[1]
-    # larger images give more reliable stats
     size_score = min(1.0, (h*w) / (512*512))
-    # heuristic confidence is modest — we label it as such
     model_conf = 0.62 + 0.15 * size_score  # 0.62-0.77
     input_q = 0.88 if min(h,w) >= 256 else 0.72
 
@@ -268,7 +460,7 @@ def analyze(query: str, image_array: np.ndarray, task: str = "vqa") -> Dict[str,
         "confidence": {
             "input_quality": round(input_q, 2),
             "model_confidence": round(model_conf, 2),
-            "evidence_agreement": 0.0,  # single image
+            "evidence_agreement": 0.0,
             "overall": round(0.5*input_q + 0.5*model_conf, 2),
             "is_heuristic": True,
         },
