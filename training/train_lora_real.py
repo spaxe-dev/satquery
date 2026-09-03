@@ -350,27 +350,45 @@ def main():
         raise ValueError(f"Unsupported model {args.model}")
 
     # Apply LoRA — verify trainable params >0 later
+    # For BLIP, wrap only text_decoder to avoid vision encoder bug (BlipEncoder inputs_embeds duplicate)
+    # Verified: wrapping whole BlipForConditionalGeneration with query/value causes BlipEncoder failure,
+    # but wrapping only text_decoder works (see test_blip_lora_fix.py: text_decoder only PASS)
     target_modules = get_lora_target_modules(args.model)
-    print(f"Applying LoRA: r={args.lora_r} alpha={args.lora_alpha} target_modules={target_modules}")
-    # Validate target modules against model
-    # For BLIP, we use SEQ_2_SEQ_LM
-    peft_config = LoraConfig(
-        r=args.lora_r,
-        lora_alpha=args.lora_alpha,
-        lora_dropout=args.lora_dropout,
-        bias="none",
-        task_type="CAUSAL_LM" if processor_type == "qwen2_vl" else "FEATURE_EXTRACTION",
-        target_modules=target_modules,
-    )
+    print(f"Applying LoRA: r={args.lora_r} alpha={args.lora_alpha} target_modules={target_modules} processor={processor_type}")
     if processor_type == "blip":
-        peft_config.task_type = "SEQ_2_SEQ_LM"
-
-    model = get_peft_model(model, peft_config)
-    # Verify trainable params >0 and base frozen
-    trainable, total = model.get_nb_trainable_parameters()
-    print(f"LoRA trainable params: {trainable} / {total} ({100*trainable/total:.2f}%)")
-    assert trainable > 0, "LoRA trainable params is 0 — check target_modules!"
-    assert trainable < total, "All params trainable — base not frozen!"
+        # BLIP: text_decoder is BERT with query/key/value — wrap only it
+        peft_config = LoraConfig(
+            r=args.lora_r,
+            lora_alpha=args.lora_alpha,
+            lora_dropout=args.lora_dropout,
+            bias="none",
+            task_type="SEQ_2_SEQ_LM",
+            target_modules=target_modules,  # ["query", "value"] for text decoder
+        )
+        print("BLIP: wrapping only text_decoder (vision encoder remains frozen, avoids BlipEncoder bug)")
+        model.text_decoder = get_peft_model(model.text_decoder, peft_config)
+        # Verify
+        trainable, total = model.text_decoder.get_nb_trainable_parameters()
+        # Total should include vision + text, but trainable is only text decoder LoRA
+        total_params = sum(p.numel() for p in model.parameters())
+        print(f"LoRA trainable (text_decoder): {trainable} / {total_params} ({100*trainable/total_params:.2f}%)")
+        assert trainable > 0, "LoRA trainable is 0 — check target_modules!"
+        # For BLIP, we keep trainable/total check but total is full model
+        trainable, total = trainable, total_params
+    else:
+        peft_config = LoraConfig(
+            r=args.lora_r,
+            lora_alpha=args.lora_alpha,
+            lora_dropout=args.lora_dropout,
+            bias="none",
+            task_type="CAUSAL_LM",
+            target_modules=target_modules,
+        )
+        model = get_peft_model(model, peft_config)
+        trainable, total = model.get_nb_trainable_parameters()
+        print(f"LoRA trainable params: {trainable} / {total} ({100*trainable/total:.2f}%)")
+        assert trainable > 0, "LoRA trainable params is 0 — check target_modules!"
+        assert trainable < total, "All params trainable — base not frozen!"
 
     # Prepare datasets — use appropriate class
     if args.dataset == "bigearthnet":
@@ -443,10 +461,20 @@ def main():
     print("Starting training...")
     trainer.train()
 
-    # Save checkpoint
+    # Save checkpoint — for BLIP, we wrapped only text_decoder, so save accordingly
     print(f"Saving checkpoint to {output_dir}")
-    model.save_pretrained(output_dir)
-    processor.save_pretrained(output_dir)
+    if processor_type == "blip":
+        # Save text_decoder adapter (the LoRA we trained)
+        model.text_decoder.save_pretrained(output_dir)
+        # Also save processor and a marker for full model
+        processor.save_pretrained(output_dir)
+        # Save a small file to indicate this is a text_decoder adapter
+        with open(Path(output_dir) / "adapter_type.txt", "w") as f:
+            f.write("blip_text_decoder_lora\n")
+        print(f"Saved BLIP text_decoder LoRA to {output_dir} (adapter for text_decoder only)")
+    else:
+        model.save_pretrained(output_dir)
+        processor.save_pretrained(output_dir)
     # Save manifest
     manifest = {
         "base_model": args.model,

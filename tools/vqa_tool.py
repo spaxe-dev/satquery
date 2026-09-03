@@ -217,7 +217,11 @@ _VLM_MODEL_NAME = None
 _ADAPTER_LOADED = False
 
 # Checkpoint search order — first found is used
+# BigEarthNet is now PRIMARY per SIH, EuroSAT is secondary, smoke paths for verification
 CHECKPOINT_CANDIDATES = [
+    "models/checkpoints/satquery-bigearthnet-blip-lora",
+    "models/checkpoints/satquery-bigearthnet-blip",
+    "models/checkpoints/smoke-bigearthnet-blip",
     "models/checkpoints/satquery-eurosat-blip-lora",
     "models/checkpoints/satquery-eurosat-qwen-lora",
     "models/checkpoints/satquery-lora",
@@ -274,19 +278,26 @@ def _try_load_vlm():
         # Determine base model from checkpoint manifest or fallback
         base_model = "Salesforce/blip-image-captioning-base"
         import json, pathlib
-        manifest_path = pathlib.Path(ckpt) / "training_manifest.json"
-        if manifest_path.exists():
-            try:
-                m = json.load(open(manifest_path))
-                base_model = m.get("base_model", base_model)
-            except:
-                pass
-        # Also check adapter_config base
+        # Check both training_manifest.json and smoke_manifest.json
+        for manifest_name in ["training_manifest.json", "smoke_manifest.json"]:
+            manifest_path = pathlib.Path(ckpt) / manifest_name
+            if manifest_path.exists():
+                try:
+                    m = json.load(open(manifest_path))
+                    # Only overwrite if non-empty
+                    if m.get("base_model"):
+                        base_model = m.get("base_model")
+                        break
+                except:
+                    pass
+        # Also check adapter_config base (but only if non-empty)
         adapter_cfg = pathlib.Path(ckpt) / "adapter_config.json"
         if adapter_cfg.exists():
             try:
                 cfg = json.load(open(adapter_cfg))
-                base_model = cfg.get("base_model_name_or_path", base_model)
+                candidate = cfg.get("base_model_name_or_path")
+                if candidate and candidate.strip():
+                    base_model = candidate
             except:
                 pass
 
@@ -303,8 +314,35 @@ def _try_load_vlm():
                 base = BlipForConditionalGeneration.from_pretrained(base_model, torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32, local_files_only=True)
             except:
                 base = BlipForConditionalGeneration.from_pretrained(base_model, torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32)
-            # Load adapter
-            model = PeftModel.from_pretrained(base, ckpt)
+            # Check if checkpoint is text_decoder-only (from smoke test) vs full model
+            ckpt_path = pathlib.Path(ckpt)
+            is_text_decoder_adapter = (ckpt_path / "adapter_type.txt").exists()
+            # Also check adapter_config: if it was saved from text_decoder, it will have task_type SEQ_2_SEQ_LM and target query/value but base is text decoder
+            # We can detect by trying to load onto text_decoder first
+            try:
+                if is_text_decoder_adapter or (ckpt_path / "adapter_config.json").exists():
+                    # Try to detect by reading adapter_config
+                    import json as _json
+                    cfg = _json.load(open(ckpt_path / "adapter_config.json"))
+                    # If the adapter was trained on text_decoder only, it will have been saved from text_decoder, so we should load onto text_decoder
+                    # We can check by trying to load onto base.text_decoder
+                    if is_text_decoder_adapter:
+                        print(f"[VQA] Detected text_decoder adapter at {ckpt}, loading onto base.text_decoder...")
+                        base.text_decoder = PeftModel.from_pretrained(base.text_decoder, ckpt)
+                        model = base
+                    else:
+                        # Try full model first, fallback to text_decoder
+                        try:
+                            model = PeftModel.from_pretrained(base, ckpt)
+                        except Exception as e_full:
+                            print(f"[VQA] Full model adapter load failed ({e_full}), trying text_decoder...")
+                            base.text_decoder = PeftModel.from_pretrained(base.text_decoder, ckpt)
+                            model = base
+                else:
+                    model = PeftModel.from_pretrained(base, ckpt)
+            except Exception as e:
+                print(f"[VQA] BLIP adapter load failed: {e}, trying fallback...")
+                raise
             model.eval()
             if torch.cuda.is_available():
                 model = model.cuda()
@@ -312,7 +350,7 @@ def _try_load_vlm():
             _VLM_PROCESSOR = processor
             _VLM_AVAILABLE = True
             _ADAPTER_LOADED = True
-            print(f"[VQA] Loaded BLIP LoRA adapter from {ckpt}")
+            print(f"[VQA] Loaded BLIP LoRA adapter from {ckpt} (text_decoder={is_text_decoder_adapter})")
             return True
         elif "qwen" in base_model.lower():
             from transformers import AutoProcessor, Qwen2VLForConditionalGeneration
