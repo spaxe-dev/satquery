@@ -107,7 +107,7 @@ async def analyze(
             return [clean(x) for x in obj]
         return obj
 
-    # Build serializable response
+    # Build serializable response — includes explicit VLM lifecycle metadata for UI
     resp = {
         "task": result["task"],
         "query": result["query"],
@@ -129,6 +129,12 @@ async def analyze(
         "timestamp": result["timestamp"],
         "report_id": result["report_id"],
         "refused": result.get("refused", False),
+        # Explicit VLM lifecycle metadata (safe, no stack traces)
+        "vlm_attempted": result.get("vlm_attempted"),
+        "vlm_loaded": result.get("vlm_loaded"),
+        "vlm_generation_valid": result.get("vlm_generation_valid"),
+        "is_heuristic": result.get("is_heuristic", result.get("confidence", {}).get("is_heuristic")),
+        "fallback_reason": result.get("fallback_reason"),
         "previews": previews,
         "optical_evidence": {
             "water_pct": result.get("optical_evidence",{}).get("water_pct") if result.get("optical_evidence") else None,

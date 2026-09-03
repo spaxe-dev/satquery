@@ -611,56 +611,97 @@ def analyze(query: str, image_array: np.ndarray, task: str = "vqa") -> Dict[str,
     Architecture: REAL ADAPTED MODEL + HEURISTIC FALLBACK + OUTPUT GUARD
     Guard: garbage BLIP smoke generations (prompt-echo, underscores, degenerate)
     are rejected and routed to deterministic heuristic fallback.
+
+    Exposes explicit runtime metadata for every execution so the caller can
+    definitively tell whether the VLM was invoked:
+      vlm_attempted: bool  — did we attempt to find/load a checkpoint?
+      vlm_loaded: bool     — was a checkpoint found and model loaded?
+      vlm_generation_valid: bool|None — was generation attempted and accepted? None if no generation attempted
+      is_heuristic: bool   — mirror of confidence.is_heuristic
+      fallback_reason: str|None — safe reason code (no stack trace)
     """
     import time
     t0 = time.time()
-    # Attempt to load real adapter (lazy, cached)
-    loaded = _try_load_vlm()
-    use_real = loaded and _VLM_AVAILABLE and _VLM_MODEL is not None
 
-    # Try real inference if available
-    if use_real:
-        try:
-            real_answer = _vqa_with_model(image_array, query)
-            # Guard: reject obvious garbage before exposing to user
-            is_invalid, reason = _is_invalid_generation(query, real_answer)
-            if is_invalid:
-                print(f"[VQA] Guard rejected invalid VLM output ({reason}): '{real_answer[:80]}...' -> falling back to heuristic")
-            else:
-                # Keep heuristic grounding boxes (model doesn't produce precise boxes)
-                boxes = []
-                if task in ("grounding", "vqa") and any(k in query.lower() for k in ["where", "highlight", "locate", "show", "box", "water", "built", "forest", "vegetation", "building"]):
-                    boxes = _heuristic_grounding(image_array, query)
-                # For captioning task, answer == caption
-                if task == "captioning" or "describe" in query.lower():
-                    real_caption = real_answer
+    # Explicit runtime metadata — always populated, safe for UI
+    vlm_attempted: bool = False
+    vlm_loaded: bool = False
+    vlm_generation_valid: bool | None = None
+    fallback_reason: str | None = None
+
+    # Attempt to find checkpoint and load model (lazy, cached)
+    vlm_attempted = True
+    ckpt = _find_checkpoint()
+    if ckpt is None:
+        fallback_reason = "checkpoint_not_found"
+        vlm_loaded = False
+        vlm_generation_valid = None
+        # fall through to heuristic
+    else:
+        # _try_load_vlm uses the same _find_checkpoint internally; call it
+        loaded = _try_load_vlm()
+        vlm_loaded = bool(loaded and _VLM_AVAILABLE and _VLM_MODEL is not None)
+        if not vlm_loaded:
+            fallback_reason = "model_load_error"
+            vlm_generation_valid = None
+            # fall through
+        else:
+            # Try real inference
+            try:
+                real_answer = _vqa_with_model(image_array, query)
+                # Guard: reject obvious garbage before exposing to user (not weakened)
+                is_invalid, reason = _is_invalid_generation(query, real_answer)
+                if is_invalid:
+                    vlm_generation_valid = False
+                    # safe reason: guard reason is from allow-list, not user input
+                    fallback_reason = f"generation_rejected: {reason}"
+                    print(f"[VQA] Guard rejected invalid VLM output ({reason}): '{real_answer[:80]}...' -> falling back to heuristic")
                 else:
-                    real_caption = _heuristic_caption(image_array)
+                    vlm_generation_valid = True
+                    fallback_reason = None
+                    # Keep heuristic grounding boxes (model doesn't produce precise boxes)
+                    boxes = []
+                    if task in ("grounding", "vqa") and any(k in query.lower() for k in ["where", "highlight", "locate", "show", "box", "water", "built", "forest", "vegetation", "building"]):
+                        boxes = _heuristic_grounding(image_array, query)
+                    # For captioning task, answer == caption
+                    if task == "captioning" or "describe" in query.lower():
+                        real_caption = real_answer
+                    else:
+                        real_caption = _heuristic_caption(image_array)
 
-                h, w = image_array.shape[0], image_array.shape[1]
-                input_q = 0.92 if min(h, w) >= 256 else 0.78
-                model_conf = 0.88  # higher for adapted model
-                elapsed_ms = int((time.time() - t0) * 1000)
-                ckpt = _find_checkpoint()
-                return {
-                    "answer": real_answer,
-                    "caption": real_caption,
-                    "boxes": boxes,
-                    "confidence": {
-                        "input_quality": round(input_q, 2),
-                        "model_confidence": round(model_conf, 2),
-                        "evidence_agreement": 0.0,
-                        "overall": round(0.5 * input_q + 0.5 * model_conf, 2),
+                    h, w = image_array.shape[0], image_array.shape[1]
+                    input_q = 0.92 if min(h, w) >= 256 else 0.78
+                    model_conf = 0.88  # higher for adapted model
+                    elapsed_ms = int((time.time() - t0) * 1000)
+                    ckpt_now = _find_checkpoint()
+                    return {
+                        "answer": real_answer,
+                        "caption": real_caption,
+                        "boxes": boxes,
+                        "confidence": {
+                            "input_quality": round(input_q, 2),
+                            "model_confidence": round(model_conf, 2),
+                            "evidence_agreement": 0.0,
+                            "overall": round(0.5 * input_q + 0.5 * model_conf, 2),
+                            "is_heuristic": False,
+                        },
+                        "model_used": f"SatQuery-RS-VLM ({_VLM_MODEL_NAME} + LoRA {ckpt_now})",
+                        "elapsed_ms": elapsed_ms,
+                        # explicit VLM lifecycle metadata
+                        "vlm_attempted": True,
+                        "vlm_loaded": True,
+                        "vlm_generation_valid": True,
                         "is_heuristic": False,
-                    },
-                    "model_used": f"SatQuery-RS-VLM ({_VLM_MODEL_NAME} + LoRA {ckpt})",
-                    "elapsed_ms": elapsed_ms,
-                }
-        except Exception as e:
-            print(f"[VQA] Real model inference failed, falling back to heuristic: {e}")
-            import traceback
-            traceback.print_exc()
-            # fall through to heuristic
+                        "fallback_reason": None,
+                    }
+            except Exception as e:
+                vlm_generation_valid = False
+                # safe reason: exception type only, no stack trace or paths
+                fallback_reason = f"generation_error: {type(e).__name__}"
+                print(f"[VQA] Real model inference failed, falling back to heuristic: {type(e).__name__}")
+                import traceback
+                traceback.print_exc()
+                # fall through to heuristic
 
     # Heuristic fallback (always works, CPU-only)
     answer = _heuristic_vqa(image_array, query)
@@ -676,6 +717,12 @@ def analyze(query: str, image_array: np.ndarray, task: str = "vqa") -> Dict[str,
     input_q = 0.88 if min(h,w) >= 256 else 0.72
 
     elapsed_ms = int((time.time() - t0)*1000)
+    # fallback_reason already set to checkpoint_not_found / model_load_error / generation_* if applicable,
+    # otherwise it was a heuristic-only path (e.g., no ckpt); ensure safe default
+    if fallback_reason is None:
+        # This happens only when vlm_attempted was True but we fell through without setting reason;
+        # treat as generic heuristic fallback
+        fallback_reason = "heuristic_fallback"
     return {
         "answer": answer,
         "caption": caption,
@@ -689,4 +736,10 @@ def analyze(query: str, image_array: np.ndarray, task: str = "vqa") -> Dict[str,
         },
         "model_used": "SatQuery-RS-VLM (heuristic RS vision + template; LoRA checkpoint swappable)",
         "elapsed_ms": elapsed_ms,
+        # explicit VLM lifecycle metadata — always present
+        "vlm_attempted": vlm_attempted,
+        "vlm_loaded": vlm_loaded,
+        "vlm_generation_valid": vlm_generation_valid,
+        "is_heuristic": True,
+        "fallback_reason": fallback_reason,
     }

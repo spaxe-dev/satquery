@@ -86,6 +86,11 @@ def run_analysis(query: str, image_datas: List[Dict[str, Any]]) -> Dict[str, Any
             "timestamp": _now_iso(),
             "report_id": report_id,
             "refused": True,
+            "vlm_attempted": None,
+            "vlm_loaded": None,
+            "vlm_generation_valid": None,
+            "fallback_reason": None,
+            "is_heuristic": True,
         }
     else:
         detail = "All inputs compatible"
@@ -143,7 +148,31 @@ def run_analysis(query: str, image_datas: List[Dict[str, Any]]) -> Dict[str, Any
                     caption = res["caption"]
                 grounding_boxes = res["boxes"]
                 confidences.append(res["confidence"])
+                # Explicit VLM lifecycle metadata for UI: attempted -> loaded -> generation_valid -> heuristic/fallback
+                vlm_attempted = res.get("vlm_attempted", False)
+                vlm_loaded = res.get("vlm_loaded", False)
+                vlm_valid = res.get("vlm_generation_valid")
+                fallback_reason = res.get("fallback_reason")
+                is_heu = res.get("is_heuristic", res["confidence"].get("is_heuristic", True))
+                # Build human-readable VLM status line for trace
+                if vlm_valid is True:
+                    vlm_detail = f"VLM: attempted -> loaded -> generated -> accepted (heuristic={is_heu}, fallback={fallback_reason})"
+                    vlm_status = "ok"
+                elif vlm_valid is False:
+                    vlm_detail = f"VLM: attempted -> {'loaded' if vlm_loaded else 'not loaded'} -> rejected -> heuristic fallback (reason={fallback_reason})"
+                    vlm_status = "warn"
+                elif vlm_loaded:
+                    vlm_detail = f"VLM: attempted -> loaded -> no valid generation (reason={fallback_reason}) -> heuristic fallback"
+                    vlm_status = "warn"
+                elif vlm_attempted:
+                    vlm_detail = f"VLM: attempted -> not loaded (reason={fallback_reason}) -> heuristic fallback"
+                    vlm_status = "warn"
+                else:
+                    vlm_detail = f"VLM: not attempted (reason={fallback_reason})"
+                    vlm_status = "ok"
                 step(base_step, "Executed", f"SatQuery-RS-VLM ({task_param}): {res['answer'][:100]}...", "ok", tool=tid, dur=res["elapsed_ms"])
+                base_step += 1
+                step(base_step, "VLM status", vlm_detail, vlm_status, tool=tid)
             elif tid == "change-detector":
                 if len(arrays)>=2:
                     res = change_tool.analyze(arrays[0], arrays[1], query)
@@ -297,6 +326,20 @@ def run_analysis(query: str, image_datas: List[Dict[str, Any]]) -> Dict[str, Any
     # Visual evidence selection
     # For temporal, change_map is primary; for fusion, fused overlay; for single, grounding boxes overlay is generated frontend
 
+    # Explicit VLM lifecycle metadata for UI (every VQA/captioning execution)
+    if vqa_res is not None:
+        vlm_attempted_out = vqa_res.get("vlm_attempted", False)
+        vlm_loaded_out = vqa_res.get("vlm_loaded", False)
+        vlm_generation_valid_out = vqa_res.get("vlm_generation_valid")
+        fallback_reason_out = vqa_res.get("fallback_reason")
+        vlm_is_heuristic_out = vqa_res.get("is_heuristic", conf.get("is_heuristic", True))
+    else:
+        vlm_attempted_out = None
+        vlm_loaded_out = None
+        vlm_generation_valid_out = None
+        fallback_reason_out = None
+        vlm_is_heuristic_out = conf.get("is_heuristic", True)
+
     return {
         "task": task,
         "query": query,
@@ -322,4 +365,10 @@ def run_analysis(query: str, image_datas: List[Dict[str, Any]]) -> Dict[str, Any
         "timestamp": _now_iso(),
         "report_id": report_id,
         "refused": False,
+        # Explicit VLM lifecycle metadata (safe, no stack traces)
+        "vlm_attempted": vlm_attempted_out,
+        "vlm_loaded": vlm_loaded_out,
+        "vlm_generation_valid": vlm_generation_valid_out,
+        "fallback_reason": fallback_reason_out,
+        "is_heuristic": vlm_is_heuristic_out,
     }
