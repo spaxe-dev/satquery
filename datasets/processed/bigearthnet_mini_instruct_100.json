@@ -1,0 +1,3778 @@
+[
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-73",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Pastures, Agro-forestry areas.",
+    "labels": [
+      "Pastures",
+      "Agro-forestry areas"
+    ],
+    "label_ids": [
+      27,
+      0
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 73,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-9",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Pastures, Complex cultivation patterns, Land principally occupied by agriculture, with significant areas of natural vegetation, Broad-leaved forest.",
+    "labels": [
+      "Pastures",
+      "Complex cultivation patterns",
+      "Land principally occupied by agriculture, with significant areas of natural vegetation",
+      "Broad-leaved forest"
+    ],
+    "label_ids": [
+      27,
+      8,
+      20,
+      5
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 9,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-2",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Continuous urban fabric",
+    "labels": [
+      "Continuous urban fabric"
+    ],
+    "label_ids": [
+      11
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 2,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-54",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Olive groves, Land principally occupied by agriculture, with significant areas of natural vegetation, Coniferous forest",
+    "labels": [
+      "Olive groves",
+      "Land principally occupied by agriculture, with significant areas of natural vegetation",
+      "Coniferous forest"
+    ],
+    "label_ids": [
+      26,
+      20,
+      9
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 54,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-18",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Water bodies.",
+    "labels": [
+      "Water bodies"
+    ],
+    "label_ids": [
+      41
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 18,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-43",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Coniferous forest, Peatbogs.",
+    "labels": [
+      "Coniferous forest",
+      "Peatbogs"
+    ],
+    "label_ids": [
+      9,
+      28
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 43,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-45",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Discontinuous urban fabric, Non-irrigated arable land, Pastures, Complex cultivation patterns, Broad-leaved forest, Mixed forest.",
+    "labels": [
+      "Discontinuous urban fabric",
+      "Non-irrigated arable land",
+      "Pastures",
+      "Complex cultivation patterns",
+      "Broad-leaved forest",
+      "Mixed forest"
+    ],
+    "label_ids": [
+      12,
+      25,
+      27,
+      8,
+      5,
+      22
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 45,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-68",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Coastal lagoons.",
+    "labels": [
+      "Coastal lagoons"
+    ],
+    "label_ids": [
+      7
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 68,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-26",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Coniferous forest, Transitional woodland/shrub, Peatbogs.",
+    "labels": [
+      "Coniferous forest",
+      "Transitional woodland/shrub",
+      "Peatbogs"
+    ],
+    "label_ids": [
+      9,
+      39,
+      28
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 26,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-8",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Non-irrigated arable land, Complex cultivation patterns, Mixed forest",
+    "labels": [
+      "Non-irrigated arable land",
+      "Complex cultivation patterns",
+      "Mixed forest"
+    ],
+    "label_ids": [
+      25,
+      8,
+      22
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 8,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-46",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Land principally occupied by agriculture, with significant areas of natural vegetation, Coniferous forest, Mixed forest.",
+    "labels": [
+      "Land principally occupied by agriculture, with significant areas of natural vegetation",
+      "Coniferous forest",
+      "Mixed forest"
+    ],
+    "label_ids": [
+      20,
+      9,
+      22
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 46,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-55",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Coniferous forest, Mixed forest.",
+    "labels": [
+      "Coniferous forest",
+      "Mixed forest"
+    ],
+    "label_ids": [
+      9,
+      22
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 55,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-0",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Coniferous forest, Transitional woodland/shrub.",
+    "labels": [
+      "Coniferous forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      9,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 0,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-1",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Non-irrigated arable land, Pastures, Coniferous forest, Mixed forest.",
+    "labels": [
+      "Non-irrigated arable land",
+      "Pastures",
+      "Coniferous forest",
+      "Mixed forest"
+    ],
+    "label_ids": [
+      25,
+      27,
+      9,
+      22
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 1,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-54",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Olive groves, Land principally occupied by agriculture, with significant areas of natural vegetation, Coniferous forest.",
+    "labels": [
+      "Olive groves",
+      "Land principally occupied by agriculture, with significant areas of natural vegetation",
+      "Coniferous forest"
+    ],
+    "label_ids": [
+      26,
+      20,
+      9
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 54,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-34",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Broad-leaved forest.",
+    "labels": [
+      "Broad-leaved forest"
+    ],
+    "label_ids": [
+      5
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 34,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-34",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Non-irrigated arable land, Land principally occupied by agriculture, with significant areas of natural vegetation, Coniferous forest, Mixed forest",
+    "labels": [
+      "Non-irrigated arable land",
+      "Land principally occupied by agriculture, with significant areas of natural vegetation",
+      "Coniferous forest",
+      "Mixed forest"
+    ],
+    "label_ids": [
+      25,
+      20,
+      9,
+      22
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 34,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-67",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Non-irrigated arable land, Pastures, Agro-forestry areas, Broad-leaved forest.",
+    "labels": [
+      "Non-irrigated arable land",
+      "Pastures",
+      "Agro-forestry areas",
+      "Broad-leaved forest"
+    ],
+    "label_ids": [
+      25,
+      27,
+      0,
+      5
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 67,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-13",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Broad-leaved forest, Coniferous forest, Mixed forest, Transitional woodland/shrub",
+    "labels": [
+      "Broad-leaved forest",
+      "Coniferous forest",
+      "Mixed forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      5,
+      9,
+      22,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 13,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-35",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Pastures, Complex cultivation patterns, Broad-leaved forest",
+    "labels": [
+      "Pastures",
+      "Complex cultivation patterns",
+      "Broad-leaved forest"
+    ],
+    "label_ids": [
+      27,
+      8,
+      5
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 35,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-6",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Sea and ocean",
+    "labels": [
+      "Sea and ocean"
+    ],
+    "label_ids": [
+      36
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 6,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-76",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Sport and leisure facilities, Coniferous forest, Water bodies",
+    "labels": [
+      "Sport and leisure facilities",
+      "Coniferous forest",
+      "Water bodies"
+    ],
+    "label_ids": [
+      38,
+      9,
+      41
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 76,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-72",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Coniferous forest, Mixed forest, Transitional woodland/shrub, Water bodies.",
+    "labels": [
+      "Coniferous forest",
+      "Mixed forest",
+      "Transitional woodland/shrub",
+      "Water bodies"
+    ],
+    "label_ids": [
+      9,
+      22,
+      39,
+      41
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 72,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-29",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Broad-leaved forest.",
+    "labels": [
+      "Broad-leaved forest"
+    ],
+    "label_ids": [
+      5
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 29,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-23",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Coniferous forest, Mixed forest.",
+    "labels": [
+      "Coniferous forest",
+      "Mixed forest"
+    ],
+    "label_ids": [
+      9,
+      22
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 23,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-14",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Industrial or commercial units, Non-irrigated arable land, Land principally occupied by agriculture, with significant areas of natural vegetation, Broad-leaved forest, Coniferous forest, Mixed forest",
+    "labels": [
+      "Industrial or commercial units",
+      "Non-irrigated arable land",
+      "Land principally occupied by agriculture, with significant areas of natural vegetation",
+      "Broad-leaved forest",
+      "Coniferous forest",
+      "Mixed forest"
+    ],
+    "label_ids": [
+      17,
+      25,
+      20,
+      5,
+      9,
+      22
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 14,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-79",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Complex cultivation patterns, Broad-leaved forest.",
+    "labels": [
+      "Complex cultivation patterns",
+      "Broad-leaved forest"
+    ],
+    "label_ids": [
+      8,
+      5
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 79,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-52",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Broad-leaved forest, Mixed forest",
+    "labels": [
+      "Broad-leaved forest",
+      "Mixed forest"
+    ],
+    "label_ids": [
+      5,
+      22
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 52,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-50",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Non-irrigated arable land, Pastures",
+    "labels": [
+      "Non-irrigated arable land",
+      "Pastures"
+    ],
+    "label_ids": [
+      25,
+      27
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 50,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-12",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Sea and ocean",
+    "labels": [
+      "Sea and ocean"
+    ],
+    "label_ids": [
+      36
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 12,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-1",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Non-irrigated arable land, Pastures, Coniferous forest, Mixed forest",
+    "labels": [
+      "Non-irrigated arable land",
+      "Pastures",
+      "Coniferous forest",
+      "Mixed forest"
+    ],
+    "label_ids": [
+      25,
+      27,
+      9,
+      22
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 1,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-27",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Discontinuous urban fabric, Complex cultivation patterns, Land principally occupied by agriculture, with significant areas of natural vegetation, Broad-leaved forest",
+    "labels": [
+      "Discontinuous urban fabric",
+      "Complex cultivation patterns",
+      "Land principally occupied by agriculture, with significant areas of natural vegetation",
+      "Broad-leaved forest"
+    ],
+    "label_ids": [
+      12,
+      8,
+      20,
+      5
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 27,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-46",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Land principally occupied by agriculture, with significant areas of natural vegetation, Coniferous forest, Mixed forest",
+    "labels": [
+      "Land principally occupied by agriculture, with significant areas of natural vegetation",
+      "Coniferous forest",
+      "Mixed forest"
+    ],
+    "label_ids": [
+      20,
+      9,
+      22
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 46,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-29",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Broad-leaved forest",
+    "labels": [
+      "Broad-leaved forest"
+    ],
+    "label_ids": [
+      5
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 29,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-74",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Non-irrigated arable land",
+    "labels": [
+      "Non-irrigated arable land"
+    ],
+    "label_ids": [
+      25
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 74,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-11",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Land principally occupied by agriculture, with significant areas of natural vegetation, Broad-leaved forest, Coniferous forest, Natural grassland, Transitional woodland/shrub",
+    "labels": [
+      "Land principally occupied by agriculture, with significant areas of natural vegetation",
+      "Broad-leaved forest",
+      "Coniferous forest",
+      "Natural grassland",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      20,
+      5,
+      9,
+      24,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 11,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-17",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Broad-leaved forest, Coniferous forest, Mixed forest, Water bodies",
+    "labels": [
+      "Broad-leaved forest",
+      "Coniferous forest",
+      "Mixed forest",
+      "Water bodies"
+    ],
+    "label_ids": [
+      5,
+      9,
+      22,
+      41
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 17,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-65",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Land principally occupied by agriculture, with significant areas of natural vegetation, Broad-leaved forest, Inland marshes, Water bodies.",
+    "labels": [
+      "Land principally occupied by agriculture, with significant areas of natural vegetation",
+      "Broad-leaved forest",
+      "Inland marshes",
+      "Water bodies"
+    ],
+    "label_ids": [
+      20,
+      5,
+      18,
+      41
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 65,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-19",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Non-irrigated arable land, Land principally occupied by agriculture, with significant areas of natural vegetation, Mixed forest.",
+    "labels": [
+      "Non-irrigated arable land",
+      "Land principally occupied by agriculture, with significant areas of natural vegetation",
+      "Mixed forest"
+    ],
+    "label_ids": [
+      25,
+      20,
+      22
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 19,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-24",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Continuous urban fabric",
+    "labels": [
+      "Continuous urban fabric"
+    ],
+    "label_ids": [
+      11
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 24,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-77",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Pastures, Coniferous forest, Transitional woodland/shrub.",
+    "labels": [
+      "Pastures",
+      "Coniferous forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      27,
+      9,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 77,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-9",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Pastures, Complex cultivation patterns, Land principally occupied by agriculture, with significant areas of natural vegetation, Broad-leaved forest",
+    "labels": [
+      "Pastures",
+      "Complex cultivation patterns",
+      "Land principally occupied by agriculture, with significant areas of natural vegetation",
+      "Broad-leaved forest"
+    ],
+    "label_ids": [
+      27,
+      8,
+      20,
+      5
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 9,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-34",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Non-irrigated arable land, Land principally occupied by agriculture, with significant areas of natural vegetation, Coniferous forest, Mixed forest.",
+    "labels": [
+      "Non-irrigated arable land",
+      "Land principally occupied by agriculture, with significant areas of natural vegetation",
+      "Coniferous forest",
+      "Mixed forest"
+    ],
+    "label_ids": [
+      25,
+      20,
+      9,
+      22
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 34,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-47",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Coniferous forest, Mixed forest, Water bodies",
+    "labels": [
+      "Coniferous forest",
+      "Mixed forest",
+      "Water bodies"
+    ],
+    "label_ids": [
+      9,
+      22,
+      41
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 47,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-79",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Complex cultivation patterns, Broad-leaved forest",
+    "labels": [
+      "Complex cultivation patterns",
+      "Broad-leaved forest"
+    ],
+    "label_ids": [
+      8,
+      5
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 79,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-67",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Non-irrigated arable land, Pastures, Agro-forestry areas, Broad-leaved forest",
+    "labels": [
+      "Non-irrigated arable land",
+      "Pastures",
+      "Agro-forestry areas",
+      "Broad-leaved forest"
+    ],
+    "label_ids": [
+      25,
+      27,
+      0,
+      5
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 67,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-39",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Non-irrigated arable land, Coniferous forest, Mixed forest, Transitional woodland/shrub",
+    "labels": [
+      "Non-irrigated arable land",
+      "Coniferous forest",
+      "Mixed forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      25,
+      9,
+      22,
+      39
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 39,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-33",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Discontinuous urban fabric, Non-irrigated arable land, Pastures, Complex cultivation patterns",
+    "labels": [
+      "Discontinuous urban fabric",
+      "Non-irrigated arable land",
+      "Pastures",
+      "Complex cultivation patterns"
+    ],
+    "label_ids": [
+      12,
+      25,
+      27,
+      8
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 33,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-37",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Agro-forestry areas, Broad-leaved forest, Transitional woodland/shrub",
+    "labels": [
+      "Agro-forestry areas",
+      "Broad-leaved forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      0,
+      5,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 37,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-39",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Non-irrigated arable land, Coniferous forest, Mixed forest, Transitional woodland/shrub.",
+    "labels": [
+      "Non-irrigated arable land",
+      "Coniferous forest",
+      "Mixed forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      25,
+      9,
+      22,
+      39
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 39,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-61",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Coniferous forest, Mixed forest, Transitional woodland/shrub, Water bodies.",
+    "labels": [
+      "Coniferous forest",
+      "Mixed forest",
+      "Transitional woodland/shrub",
+      "Water bodies"
+    ],
+    "label_ids": [
+      9,
+      22,
+      39,
+      41
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 61,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-39",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Non-irrigated arable land, Agro-forestry areas, Broad-leaved forest, Transitional woodland/shrub.",
+    "labels": [
+      "Non-irrigated arable land",
+      "Agro-forestry areas",
+      "Broad-leaved forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      25,
+      0,
+      5,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 39,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-36",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Coniferous forest, Mixed forest",
+    "labels": [
+      "Coniferous forest",
+      "Mixed forest"
+    ],
+    "label_ids": [
+      9,
+      22
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 36,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-3",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Non-irrigated arable land, Coniferous forest, Mixed forest, Water bodies",
+    "labels": [
+      "Non-irrigated arable land",
+      "Coniferous forest",
+      "Mixed forest",
+      "Water bodies"
+    ],
+    "label_ids": [
+      25,
+      9,
+      22,
+      41
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 3,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-26",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Permanently irrigated land, Fruit trees and berry plantations, Broad-leaved forest, Coniferous forest, Mixed forest, Transitional woodland/shrub.",
+    "labels": [
+      "Permanently irrigated land",
+      "Fruit trees and berry plantations",
+      "Broad-leaved forest",
+      "Coniferous forest",
+      "Mixed forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      29,
+      15,
+      5,
+      9,
+      22,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 26,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-42",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Complex cultivation patterns, Land principally occupied by agriculture, with significant areas of natural vegetation, Broad-leaved forest, Transitional woodland/shrub",
+    "labels": [
+      "Complex cultivation patterns",
+      "Land principally occupied by agriculture, with significant areas of natural vegetation",
+      "Broad-leaved forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      8,
+      20,
+      5,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 42,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-27",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Non-irrigated arable land, Vineyards, Complex cultivation patterns, Land principally occupied by agriculture, with significant areas of natural vegetation.",
+    "labels": [
+      "Non-irrigated arable land",
+      "Vineyards",
+      "Complex cultivation patterns",
+      "Land principally occupied by agriculture, with significant areas of natural vegetation"
+    ],
+    "label_ids": [
+      25,
+      40,
+      8,
+      20
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 27,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-0",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Coniferous forest, Transitional woodland/shrub",
+    "labels": [
+      "Coniferous forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      9,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 0,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-78",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Discontinuous urban fabric, Land principally occupied by agriculture, with significant areas of natural vegetation, Mixed forest, Transitional woodland/shrub.",
+    "labels": [
+      "Discontinuous urban fabric",
+      "Land principally occupied by agriculture, with significant areas of natural vegetation",
+      "Mixed forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      12,
+      20,
+      22,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 78,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-43",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Coniferous forest, Peatbogs",
+    "labels": [
+      "Coniferous forest",
+      "Peatbogs"
+    ],
+    "label_ids": [
+      9,
+      28
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 43,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-17",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Non-irrigated arable land, Coniferous forest, Mixed forest.",
+    "labels": [
+      "Non-irrigated arable land",
+      "Coniferous forest",
+      "Mixed forest"
+    ],
+    "label_ids": [
+      25,
+      9,
+      22
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 17,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-22",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Non-irrigated arable land, Pastures.",
+    "labels": [
+      "Non-irrigated arable land",
+      "Pastures"
+    ],
+    "label_ids": [
+      25,
+      27
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 22,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-31",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Coniferous forest, Mixed forest, Transitional woodland/shrub, Water bodies.",
+    "labels": [
+      "Coniferous forest",
+      "Mixed forest",
+      "Transitional woodland/shrub",
+      "Water bodies"
+    ],
+    "label_ids": [
+      9,
+      22,
+      39,
+      41
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 31,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-71",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Complex cultivation patterns, Land principally occupied by agriculture, with significant areas of natural vegetation, Broad-leaved forest, Transitional woodland/shrub.",
+    "labels": [
+      "Complex cultivation patterns",
+      "Land principally occupied by agriculture, with significant areas of natural vegetation",
+      "Broad-leaved forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      8,
+      20,
+      5,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 71,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-37",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Agro-forestry areas, Broad-leaved forest, Transitional woodland/shrub.",
+    "labels": [
+      "Agro-forestry areas",
+      "Broad-leaved forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      0,
+      5,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 37,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-23",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Broad-leaved forest, Bare rock, Sea and ocean.",
+    "labels": [
+      "Broad-leaved forest",
+      "Bare rock",
+      "Sea and ocean"
+    ],
+    "label_ids": [
+      5,
+      3,
+      36
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 23,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-38",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Discontinuous urban fabric, Non-irrigated arable land, Broad-leaved forest.",
+    "labels": [
+      "Discontinuous urban fabric",
+      "Non-irrigated arable land",
+      "Broad-leaved forest"
+    ],
+    "label_ids": [
+      12,
+      25,
+      5
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 38,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-18",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Non-irrigated arable land, Pastures",
+    "labels": [
+      "Non-irrigated arable land",
+      "Pastures"
+    ],
+    "label_ids": [
+      25,
+      27
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 18,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-18",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Water bodies",
+    "labels": [
+      "Water bodies"
+    ],
+    "label_ids": [
+      41
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 18,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-14",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Non-irrigated arable land",
+    "labels": [
+      "Non-irrigated arable land"
+    ],
+    "label_ids": [
+      25
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 14,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-56",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Non-irrigated arable land, Land principally occupied by agriculture, with significant areas of natural vegetation.",
+    "labels": [
+      "Non-irrigated arable land",
+      "Land principally occupied by agriculture, with significant areas of natural vegetation"
+    ],
+    "label_ids": [
+      25,
+      20
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 56,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-1",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Coniferous forest, Mixed forest, Transitional woodland/shrub, Peatbogs.",
+    "labels": [
+      "Coniferous forest",
+      "Mixed forest",
+      "Transitional woodland/shrub",
+      "Peatbogs"
+    ],
+    "label_ids": [
+      9,
+      22,
+      39,
+      28
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 1,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-64",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Coniferous forest, Mixed forest.",
+    "labels": [
+      "Coniferous forest",
+      "Mixed forest"
+    ],
+    "label_ids": [
+      9,
+      22
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 64,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-58",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Sport and leisure facilities, Inland marshes, Water bodies",
+    "labels": [
+      "Sport and leisure facilities",
+      "Inland marshes",
+      "Water bodies"
+    ],
+    "label_ids": [
+      38,
+      18,
+      41
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 58,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-5",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Mixed forest, Transitional woodland/shrub, Sea and ocean",
+    "labels": [
+      "Mixed forest",
+      "Transitional woodland/shrub",
+      "Sea and ocean"
+    ],
+    "label_ids": [
+      22,
+      39,
+      36
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 5,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-44",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Non-irrigated arable land, Broad-leaved forest, Mixed forest.",
+    "labels": [
+      "Non-irrigated arable land",
+      "Broad-leaved forest",
+      "Mixed forest"
+    ],
+    "label_ids": [
+      25,
+      5,
+      22
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 44,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-59",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Discontinuous urban fabric, Mineral extraction sites, Non-irrigated arable land, Land principally occupied by agriculture, with significant areas of natural vegetation, Coniferous forest, Transitional woodland/shrub.",
+    "labels": [
+      "Discontinuous urban fabric",
+      "Mineral extraction sites",
+      "Non-irrigated arable land",
+      "Land principally occupied by agriculture, with significant areas of natural vegetation",
+      "Coniferous forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      12,
+      21,
+      25,
+      20,
+      9,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 59,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-16",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Coniferous forest, Transitional woodland/shrub.",
+    "labels": [
+      "Coniferous forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      9,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 16,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-32",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Pastures, Broad-leaved forest, Transitional woodland/shrub",
+    "labels": [
+      "Pastures",
+      "Broad-leaved forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      27,
+      5,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 32,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-31",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Coniferous forest, Mixed forest, Transitional woodland/shrub, Water bodies",
+    "labels": [
+      "Coniferous forest",
+      "Mixed forest",
+      "Transitional woodland/shrub",
+      "Water bodies"
+    ],
+    "label_ids": [
+      9,
+      22,
+      39,
+      41
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 31,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-5",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Mixed forest, Transitional woodland/shrub, Sea and ocean.",
+    "labels": [
+      "Mixed forest",
+      "Transitional woodland/shrub",
+      "Sea and ocean"
+    ],
+    "label_ids": [
+      22,
+      39,
+      36
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 5,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-28",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Discontinuous urban fabric, Non-irrigated arable land",
+    "labels": [
+      "Discontinuous urban fabric",
+      "Non-irrigated arable land"
+    ],
+    "label_ids": [
+      12,
+      25
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 28,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-49",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Non-irrigated arable land, Transitional woodland/shrub, Inland marshes",
+    "labels": [
+      "Non-irrigated arable land",
+      "Transitional woodland/shrub",
+      "Inland marshes"
+    ],
+    "label_ids": [
+      25,
+      39,
+      18
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 49,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-25",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Continuous urban fabric, Discontinuous urban fabric, Sea and ocean",
+    "labels": [
+      "Continuous urban fabric",
+      "Discontinuous urban fabric",
+      "Sea and ocean"
+    ],
+    "label_ids": [
+      11,
+      12,
+      36
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 25,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-63",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Discontinuous urban fabric, Industrial or commercial units, Non-irrigated arable land, Land principally occupied by agriculture, with significant areas of natural vegetation",
+    "labels": [
+      "Discontinuous urban fabric",
+      "Industrial or commercial units",
+      "Non-irrigated arable land",
+      "Land principally occupied by agriculture, with significant areas of natural vegetation"
+    ],
+    "label_ids": [
+      12,
+      17,
+      25,
+      20
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 63,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-20",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Continuous urban fabric",
+    "labels": [
+      "Continuous urban fabric"
+    ],
+    "label_ids": [
+      11
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 20,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-18",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Non-irrigated arable land, Pastures.",
+    "labels": [
+      "Non-irrigated arable land",
+      "Pastures"
+    ],
+    "label_ids": [
+      25,
+      27
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 18,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-23",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Broad-leaved forest, Bare rock, Sea and ocean",
+    "labels": [
+      "Broad-leaved forest",
+      "Bare rock",
+      "Sea and ocean"
+    ],
+    "label_ids": [
+      5,
+      3,
+      36
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 23,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-10",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Non-irrigated arable land, Vineyards",
+    "labels": [
+      "Non-irrigated arable land",
+      "Vineyards"
+    ],
+    "label_ids": [
+      25,
+      40
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 10,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-44",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Non-irrigated arable land, Broad-leaved forest, Mixed forest",
+    "labels": [
+      "Non-irrigated arable land",
+      "Broad-leaved forest",
+      "Mixed forest"
+    ],
+    "label_ids": [
+      25,
+      5,
+      22
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 44,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-76",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Sport and leisure facilities, Coniferous forest, Water bodies.",
+    "labels": [
+      "Sport and leisure facilities",
+      "Coniferous forest",
+      "Water bodies"
+    ],
+    "label_ids": [
+      38,
+      9,
+      41
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 76,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-38",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Discontinuous urban fabric, Non-irrigated arable land, Broad-leaved forest",
+    "labels": [
+      "Discontinuous urban fabric",
+      "Non-irrigated arable land",
+      "Broad-leaved forest"
+    ],
+    "label_ids": [
+      12,
+      25,
+      5
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 38,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-64",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Coniferous forest, Mixed forest",
+    "labels": [
+      "Coniferous forest",
+      "Mixed forest"
+    ],
+    "label_ids": [
+      9,
+      22
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 64,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-69",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Sea and ocean",
+    "labels": [
+      "Sea and ocean"
+    ],
+    "label_ids": [
+      36
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 69,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-51",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Sea and ocean",
+    "labels": [
+      "Sea and ocean"
+    ],
+    "label_ids": [
+      36
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 51,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-66",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Coniferous forest, Water bodies.",
+    "labels": [
+      "Coniferous forest",
+      "Water bodies"
+    ],
+    "label_ids": [
+      9,
+      41
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 66,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-1",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Coniferous forest, Mixed forest, Transitional woodland/shrub, Peatbogs",
+    "labels": [
+      "Coniferous forest",
+      "Mixed forest",
+      "Transitional woodland/shrub",
+      "Peatbogs"
+    ],
+    "label_ids": [
+      9,
+      22,
+      39,
+      28
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 1,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-26",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Permanently irrigated land, Fruit trees and berry plantations, Broad-leaved forest, Coniferous forest, Mixed forest, Transitional woodland/shrub",
+    "labels": [
+      "Permanently irrigated land",
+      "Fruit trees and berry plantations",
+      "Broad-leaved forest",
+      "Coniferous forest",
+      "Mixed forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      29,
+      15,
+      5,
+      9,
+      22,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 26,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-24",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Land principally occupied by agriculture, with significant areas of natural vegetation, Broad-leaved forest",
+    "labels": [
+      "Land principally occupied by agriculture, with significant areas of natural vegetation",
+      "Broad-leaved forest"
+    ],
+    "label_ids": [
+      20,
+      5
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 24,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-40",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Sea and ocean",
+    "labels": [
+      "Sea and ocean"
+    ],
+    "label_ids": [
+      36
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 40,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-75",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Broad-leaved forest, Transitional woodland/shrub",
+    "labels": [
+      "Broad-leaved forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      5,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 75,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-57",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Non-irrigated arable land, Land principally occupied by agriculture, with significant areas of natural vegetation, Agro-forestry areas, Natural grassland, Sclerophyllous vegetation, Transitional woodland/shrub.",
+    "labels": [
+      "Non-irrigated arable land",
+      "Land principally occupied by agriculture, with significant areas of natural vegetation",
+      "Agro-forestry areas",
+      "Natural grassland",
+      "Sclerophyllous vegetation",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      25,
+      20,
+      0,
+      24,
+      35,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 57,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-16",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Coniferous forest, Transitional woodland/shrub",
+    "labels": [
+      "Coniferous forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      9,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 16,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-71",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Complex cultivation patterns, Land principally occupied by agriculture, with significant areas of natural vegetation, Broad-leaved forest, Transitional woodland/shrub",
+    "labels": [
+      "Complex cultivation patterns",
+      "Land principally occupied by agriculture, with significant areas of natural vegetation",
+      "Broad-leaved forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      8,
+      20,
+      5,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 71,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-36",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Coniferous forest, Mixed forest.",
+    "labels": [
+      "Coniferous forest",
+      "Mixed forest"
+    ],
+    "label_ids": [
+      9,
+      22
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 36,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-15",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Discontinuous urban fabric, Non-irrigated arable land, Pastures, Complex cultivation patterns",
+    "labels": [
+      "Discontinuous urban fabric",
+      "Non-irrigated arable land",
+      "Pastures",
+      "Complex cultivation patterns"
+    ],
+    "label_ids": [
+      12,
+      25,
+      27,
+      8
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 15,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-7",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Land principally occupied by agriculture, with significant areas of natural vegetation, Coniferous forest, Mixed forest, Transitional woodland/shrub.",
+    "labels": [
+      "Land principally occupied by agriculture, with significant areas of natural vegetation",
+      "Coniferous forest",
+      "Mixed forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      20,
+      9,
+      22,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 7,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-21",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Non-irrigated arable land, Pastures, Complex cultivation patterns",
+    "labels": [
+      "Non-irrigated arable land",
+      "Pastures",
+      "Complex cultivation patterns"
+    ],
+    "label_ids": [
+      25,
+      27,
+      8
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 21,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-8",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Complex cultivation patterns, Coniferous forest, Mixed forest, Transitional woodland/shrub.",
+    "labels": [
+      "Complex cultivation patterns",
+      "Coniferous forest",
+      "Mixed forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      8,
+      9,
+      22,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 8,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-74",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Non-irrigated arable land.",
+    "labels": [
+      "Non-irrigated arable land"
+    ],
+    "label_ids": [
+      25
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 74,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-60",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Broad-leaved forest, Coniferous forest, Mixed forest, Transitional woodland/shrub, Water bodies",
+    "labels": [
+      "Broad-leaved forest",
+      "Coniferous forest",
+      "Mixed forest",
+      "Transitional woodland/shrub",
+      "Water bodies"
+    ],
+    "label_ids": [
+      5,
+      9,
+      22,
+      39,
+      41
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 60,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-30",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Broad-leaved forest, Transitional woodland/shrub, Water bodies.",
+    "labels": [
+      "Broad-leaved forest",
+      "Transitional woodland/shrub",
+      "Water bodies"
+    ],
+    "label_ids": [
+      5,
+      39,
+      41
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 30,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-68",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Coastal lagoons",
+    "labels": [
+      "Coastal lagoons"
+    ],
+    "label_ids": [
+      7
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 68,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-4",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Non-irrigated arable land, Agro-forestry areas",
+    "labels": [
+      "Non-irrigated arable land",
+      "Agro-forestry areas"
+    ],
+    "label_ids": [
+      25,
+      0
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 4,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-52",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Broad-leaved forest, Mixed forest.",
+    "labels": [
+      "Broad-leaved forest",
+      "Mixed forest"
+    ],
+    "label_ids": [
+      5,
+      22
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 52,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-48",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Vineyards, Fruit trees and berry plantations, Broad-leaved forest, Mixed forest, Transitional woodland/shrub.",
+    "labels": [
+      "Vineyards",
+      "Fruit trees and berry plantations",
+      "Broad-leaved forest",
+      "Mixed forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      40,
+      15,
+      5,
+      22,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 48,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-40",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Sea and ocean.",
+    "labels": [
+      "Sea and ocean"
+    ],
+    "label_ids": [
+      36
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 40,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-70",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Broad-leaved forest, Coniferous forest, Mixed forest.",
+    "labels": [
+      "Broad-leaved forest",
+      "Coniferous forest",
+      "Mixed forest"
+    ],
+    "label_ids": [
+      5,
+      9,
+      22
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 70,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-35",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Discontinuous urban fabric, Sport and leisure facilities, Fruit trees and berry plantations, Complex cultivation patterns, Land principally occupied by agriculture, with significant areas of natural vegetation",
+    "labels": [
+      "Discontinuous urban fabric",
+      "Sport and leisure facilities",
+      "Fruit trees and berry plantations",
+      "Complex cultivation patterns",
+      "Land principally occupied by agriculture, with significant areas of natural vegetation"
+    ],
+    "label_ids": [
+      12,
+      38,
+      15,
+      8,
+      20
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 35,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-35",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Discontinuous urban fabric, Sport and leisure facilities, Fruit trees and berry plantations, Complex cultivation patterns, Land principally occupied by agriculture, with significant areas of natural vegetation.",
+    "labels": [
+      "Discontinuous urban fabric",
+      "Sport and leisure facilities",
+      "Fruit trees and berry plantations",
+      "Complex cultivation patterns",
+      "Land principally occupied by agriculture, with significant areas of natural vegetation"
+    ],
+    "label_ids": [
+      12,
+      38,
+      15,
+      8,
+      20
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 35,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-49",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Non-irrigated arable land, Transitional woodland/shrub, Inland marshes.",
+    "labels": [
+      "Non-irrigated arable land",
+      "Transitional woodland/shrub",
+      "Inland marshes"
+    ],
+    "label_ids": [
+      25,
+      39,
+      18
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 49,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-23",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Coniferous forest, Mixed forest",
+    "labels": [
+      "Coniferous forest",
+      "Mixed forest"
+    ],
+    "label_ids": [
+      9,
+      22
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 23,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-28",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Discontinuous urban fabric, Non-irrigated arable land.",
+    "labels": [
+      "Discontinuous urban fabric",
+      "Non-irrigated arable land"
+    ],
+    "label_ids": [
+      12,
+      25
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 28,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-47",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Coniferous forest, Mixed forest, Water bodies.",
+    "labels": [
+      "Coniferous forest",
+      "Mixed forest",
+      "Water bodies"
+    ],
+    "label_ids": [
+      9,
+      22,
+      41
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 47,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-10",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Discontinuous urban fabric, Rice fields, Complex cultivation patterns, Coniferous forest, Transitional woodland/shrub.",
+    "labels": [
+      "Discontinuous urban fabric",
+      "Rice fields",
+      "Complex cultivation patterns",
+      "Coniferous forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      12,
+      31,
+      8,
+      9,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 10,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-2",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Sea and ocean",
+    "labels": [
+      "Sea and ocean"
+    ],
+    "label_ids": [
+      36
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 2,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-17",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Broad-leaved forest, Coniferous forest, Mixed forest, Water bodies.",
+    "labels": [
+      "Broad-leaved forest",
+      "Coniferous forest",
+      "Mixed forest",
+      "Water bodies"
+    ],
+    "label_ids": [
+      5,
+      9,
+      22,
+      41
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 17,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-4",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Non-irrigated arable land, Agro-forestry areas.",
+    "labels": [
+      "Non-irrigated arable land",
+      "Agro-forestry areas"
+    ],
+    "label_ids": [
+      25,
+      0
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 4,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-26",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Coniferous forest, Transitional woodland/shrub, Peatbogs",
+    "labels": [
+      "Coniferous forest",
+      "Transitional woodland/shrub",
+      "Peatbogs"
+    ],
+    "label_ids": [
+      9,
+      39,
+      28
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 26,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-69",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Sea and ocean.",
+    "labels": [
+      "Sea and ocean"
+    ],
+    "label_ids": [
+      36
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 69,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-48",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Vineyards, Fruit trees and berry plantations, Broad-leaved forest, Mixed forest, Transitional woodland/shrub",
+    "labels": [
+      "Vineyards",
+      "Fruit trees and berry plantations",
+      "Broad-leaved forest",
+      "Mixed forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      40,
+      15,
+      5,
+      22,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 48,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-6",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Sea and ocean.",
+    "labels": [
+      "Sea and ocean"
+    ],
+    "label_ids": [
+      36
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 6,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-25",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Continuous urban fabric, Discontinuous urban fabric, Sea and ocean.",
+    "labels": [
+      "Continuous urban fabric",
+      "Discontinuous urban fabric",
+      "Sea and ocean"
+    ],
+    "label_ids": [
+      11,
+      12,
+      36
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 25,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-63",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Discontinuous urban fabric, Industrial or commercial units, Non-irrigated arable land, Land principally occupied by agriculture, with significant areas of natural vegetation.",
+    "labels": [
+      "Discontinuous urban fabric",
+      "Industrial or commercial units",
+      "Non-irrigated arable land",
+      "Land principally occupied by agriculture, with significant areas of natural vegetation"
+    ],
+    "label_ids": [
+      12,
+      17,
+      25,
+      20
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 63,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-35",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Pastures, Complex cultivation patterns, Broad-leaved forest.",
+    "labels": [
+      "Pastures",
+      "Complex cultivation patterns",
+      "Broad-leaved forest"
+    ],
+    "label_ids": [
+      27,
+      8,
+      5
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 35,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-56",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Non-irrigated arable land, Land principally occupied by agriculture, with significant areas of natural vegetation",
+    "labels": [
+      "Non-irrigated arable land",
+      "Land principally occupied by agriculture, with significant areas of natural vegetation"
+    ],
+    "label_ids": [
+      25,
+      20
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 56,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-24",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Land principally occupied by agriculture, with significant areas of natural vegetation, Broad-leaved forest.",
+    "labels": [
+      "Land principally occupied by agriculture, with significant areas of natural vegetation",
+      "Broad-leaved forest"
+    ],
+    "label_ids": [
+      20,
+      5
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 24,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-30",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Broad-leaved forest, Transitional woodland/shrub, Water bodies",
+    "labels": [
+      "Broad-leaved forest",
+      "Transitional woodland/shrub",
+      "Water bodies"
+    ],
+    "label_ids": [
+      5,
+      39,
+      41
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 30,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-27",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Discontinuous urban fabric, Complex cultivation patterns, Land principally occupied by agriculture, with significant areas of natural vegetation, Broad-leaved forest.",
+    "labels": [
+      "Discontinuous urban fabric",
+      "Complex cultivation patterns",
+      "Land principally occupied by agriculture, with significant areas of natural vegetation",
+      "Broad-leaved forest"
+    ],
+    "label_ids": [
+      12,
+      8,
+      20,
+      5
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 27,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-15",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Discontinuous urban fabric, Non-irrigated arable land, Pastures, Complex cultivation patterns.",
+    "labels": [
+      "Discontinuous urban fabric",
+      "Non-irrigated arable land",
+      "Pastures",
+      "Complex cultivation patterns"
+    ],
+    "label_ids": [
+      12,
+      25,
+      27,
+      8
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 15,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-41",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Sea and ocean",
+    "labels": [
+      "Sea and ocean"
+    ],
+    "label_ids": [
+      36
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 41,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-65",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Land principally occupied by agriculture, with significant areas of natural vegetation, Broad-leaved forest, Inland marshes, Water bodies",
+    "labels": [
+      "Land principally occupied by agriculture, with significant areas of natural vegetation",
+      "Broad-leaved forest",
+      "Inland marshes",
+      "Water bodies"
+    ],
+    "label_ids": [
+      20,
+      5,
+      18,
+      41
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 65,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-3",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Continuous urban fabric.",
+    "labels": [
+      "Continuous urban fabric"
+    ],
+    "label_ids": [
+      11
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 3,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-75",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Broad-leaved forest, Transitional woodland/shrub.",
+    "labels": [
+      "Broad-leaved forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      5,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 75,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-8",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Complex cultivation patterns, Coniferous forest, Mixed forest, Transitional woodland/shrub",
+    "labels": [
+      "Complex cultivation patterns",
+      "Coniferous forest",
+      "Mixed forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      8,
+      9,
+      22,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 8,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-60",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Broad-leaved forest, Coniferous forest, Mixed forest, Transitional woodland/shrub, Water bodies.",
+    "labels": [
+      "Broad-leaved forest",
+      "Coniferous forest",
+      "Mixed forest",
+      "Transitional woodland/shrub",
+      "Water bodies"
+    ],
+    "label_ids": [
+      5,
+      9,
+      22,
+      39,
+      41
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 60,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-27",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Non-irrigated arable land, Vineyards, Complex cultivation patterns, Land principally occupied by agriculture, with significant areas of natural vegetation",
+    "labels": [
+      "Non-irrigated arable land",
+      "Vineyards",
+      "Complex cultivation patterns",
+      "Land principally occupied by agriculture, with significant areas of natural vegetation"
+    ],
+    "label_ids": [
+      25,
+      40,
+      8,
+      20
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 27,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-62",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Non-irrigated arable land, Permanently irrigated land, Olive groves, Annual crops associated with permanent crops",
+    "labels": [
+      "Non-irrigated arable land",
+      "Permanently irrigated land",
+      "Olive groves",
+      "Annual crops associated with permanent crops"
+    ],
+    "label_ids": [
+      25,
+      29,
+      26,
+      2
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 62,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-34",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Broad-leaved forest",
+    "labels": [
+      "Broad-leaved forest"
+    ],
+    "label_ids": [
+      5
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 34,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-62",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Non-irrigated arable land, Permanently irrigated land, Olive groves, Annual crops associated with permanent crops.",
+    "labels": [
+      "Non-irrigated arable land",
+      "Permanently irrigated land",
+      "Olive groves",
+      "Annual crops associated with permanent crops"
+    ],
+    "label_ids": [
+      25,
+      29,
+      26,
+      2
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 62,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-12",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Discontinuous urban fabric, Vineyards",
+    "labels": [
+      "Discontinuous urban fabric",
+      "Vineyards"
+    ],
+    "label_ids": [
+      12,
+      40
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 12,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-14",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Industrial or commercial units, Non-irrigated arable land, Land principally occupied by agriculture, with significant areas of natural vegetation, Broad-leaved forest, Coniferous forest, Mixed forest.",
+    "labels": [
+      "Industrial or commercial units",
+      "Non-irrigated arable land",
+      "Land principally occupied by agriculture, with significant areas of natural vegetation",
+      "Broad-leaved forest",
+      "Coniferous forest",
+      "Mixed forest"
+    ],
+    "label_ids": [
+      17,
+      25,
+      20,
+      5,
+      9,
+      22
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 14,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-53",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Non-irrigated arable land, Complex cultivation patterns, Agro-forestry areas, Transitional woodland/shrub.",
+    "labels": [
+      "Non-irrigated arable land",
+      "Complex cultivation patterns",
+      "Agro-forestry areas",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      25,
+      8,
+      0,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 53,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-20",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Continuous urban fabric.",
+    "labels": [
+      "Continuous urban fabric"
+    ],
+    "label_ids": [
+      11
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 20,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-19",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Non-irrigated arable land, Land principally occupied by agriculture, with significant areas of natural vegetation, Mixed forest",
+    "labels": [
+      "Non-irrigated arable land",
+      "Land principally occupied by agriculture, with significant areas of natural vegetation",
+      "Mixed forest"
+    ],
+    "label_ids": [
+      25,
+      20,
+      22
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 19,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-73",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Pastures, Agro-forestry areas",
+    "labels": [
+      "Pastures",
+      "Agro-forestry areas"
+    ],
+    "label_ids": [
+      27,
+      0
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 73,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-3",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Continuous urban fabric",
+    "labels": [
+      "Continuous urban fabric"
+    ],
+    "label_ids": [
+      11
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 3,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-22",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Non-irrigated arable land, Pastures",
+    "labels": [
+      "Non-irrigated arable land",
+      "Pastures"
+    ],
+    "label_ids": [
+      25,
+      27
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 22,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-21",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Non-irrigated arable land, Pastures, Complex cultivation patterns.",
+    "labels": [
+      "Non-irrigated arable land",
+      "Pastures",
+      "Complex cultivation patterns"
+    ],
+    "label_ids": [
+      25,
+      27,
+      8
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 21,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-8",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Non-irrigated arable land, Complex cultivation patterns, Mixed forest.",
+    "labels": [
+      "Non-irrigated arable land",
+      "Complex cultivation patterns",
+      "Mixed forest"
+    ],
+    "label_ids": [
+      25,
+      8,
+      22
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 8,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-29",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Complex cultivation patterns, Coniferous forest, Mixed forest, Transitional woodland/shrub",
+    "labels": [
+      "Complex cultivation patterns",
+      "Coniferous forest",
+      "Mixed forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      8,
+      9,
+      22,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 29,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-3",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Non-irrigated arable land, Coniferous forest, Mixed forest, Water bodies.",
+    "labels": [
+      "Non-irrigated arable land",
+      "Coniferous forest",
+      "Mixed forest",
+      "Water bodies"
+    ],
+    "label_ids": [
+      25,
+      9,
+      22,
+      41
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 3,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-39",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Non-irrigated arable land, Agro-forestry areas, Broad-leaved forest, Transitional woodland/shrub",
+    "labels": [
+      "Non-irrigated arable land",
+      "Agro-forestry areas",
+      "Broad-leaved forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      25,
+      0,
+      5,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 39,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-58",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Sport and leisure facilities, Inland marshes, Water bodies.",
+    "labels": [
+      "Sport and leisure facilities",
+      "Inland marshes",
+      "Water bodies"
+    ],
+    "label_ids": [
+      38,
+      18,
+      41
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 58,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-59",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Discontinuous urban fabric, Mineral extraction sites, Non-irrigated arable land, Land principally occupied by agriculture, with significant areas of natural vegetation, Coniferous forest, Transitional woodland/shrub",
+    "labels": [
+      "Discontinuous urban fabric",
+      "Mineral extraction sites",
+      "Non-irrigated arable land",
+      "Land principally occupied by agriculture, with significant areas of natural vegetation",
+      "Coniferous forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      12,
+      21,
+      25,
+      20,
+      9,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 59,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-70",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Broad-leaved forest, Coniferous forest, Mixed forest",
+    "labels": [
+      "Broad-leaved forest",
+      "Coniferous forest",
+      "Mixed forest"
+    ],
+    "label_ids": [
+      5,
+      9,
+      22
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 70,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-14",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Non-irrigated arable land.",
+    "labels": [
+      "Non-irrigated arable land"
+    ],
+    "label_ids": [
+      25
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 14,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-7",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Land principally occupied by agriculture, with significant areas of natural vegetation, Coniferous forest, Mixed forest, Transitional woodland/shrub",
+    "labels": [
+      "Land principally occupied by agriculture, with significant areas of natural vegetation",
+      "Coniferous forest",
+      "Mixed forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      20,
+      9,
+      22,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 7,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-32",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Pastures, Broad-leaved forest, Transitional woodland/shrub.",
+    "labels": [
+      "Pastures",
+      "Broad-leaved forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      27,
+      5,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 32,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-11",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Land principally occupied by agriculture, with significant areas of natural vegetation, Broad-leaved forest, Coniferous forest, Natural grassland, Transitional woodland/shrub.",
+    "labels": [
+      "Land principally occupied by agriculture, with significant areas of natural vegetation",
+      "Broad-leaved forest",
+      "Coniferous forest",
+      "Natural grassland",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      20,
+      5,
+      9,
+      24,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 11,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-50",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Non-irrigated arable land, Pastures.",
+    "labels": [
+      "Non-irrigated arable land",
+      "Pastures"
+    ],
+    "label_ids": [
+      25,
+      27
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 50,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-20",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Broad-leaved forest, Coniferous forest, Mixed forest, Transitional woodland/shrub.",
+    "labels": [
+      "Broad-leaved forest",
+      "Coniferous forest",
+      "Mixed forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      5,
+      9,
+      22,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 20,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-41",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Sea and ocean.",
+    "labels": [
+      "Sea and ocean"
+    ],
+    "label_ids": [
+      36
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 41,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-10",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Non-irrigated arable land, Vineyards.",
+    "labels": [
+      "Non-irrigated arable land",
+      "Vineyards"
+    ],
+    "label_ids": [
+      25,
+      40
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 10,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-45",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Discontinuous urban fabric, Non-irrigated arable land, Pastures, Complex cultivation patterns, Broad-leaved forest, Mixed forest",
+    "labels": [
+      "Discontinuous urban fabric",
+      "Non-irrigated arable land",
+      "Pastures",
+      "Complex cultivation patterns",
+      "Broad-leaved forest",
+      "Mixed forest"
+    ],
+    "label_ids": [
+      12,
+      25,
+      27,
+      8,
+      5,
+      22
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 45,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-29",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Complex cultivation patterns, Coniferous forest, Mixed forest, Transitional woodland/shrub.",
+    "labels": [
+      "Complex cultivation patterns",
+      "Coniferous forest",
+      "Mixed forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      8,
+      9,
+      22,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 29,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-13",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Broad-leaved forest, Coniferous forest, Mixed forest, Transitional woodland/shrub.",
+    "labels": [
+      "Broad-leaved forest",
+      "Coniferous forest",
+      "Mixed forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      5,
+      9,
+      22,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 13,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-78",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Discontinuous urban fabric, Land principally occupied by agriculture, with significant areas of natural vegetation, Mixed forest, Transitional woodland/shrub",
+    "labels": [
+      "Discontinuous urban fabric",
+      "Land principally occupied by agriculture, with significant areas of natural vegetation",
+      "Mixed forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      12,
+      20,
+      22,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 78,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-25",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Sea and ocean.",
+    "labels": [
+      "Sea and ocean"
+    ],
+    "label_ids": [
+      36
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 25,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-42",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Complex cultivation patterns, Land principally occupied by agriculture, with significant areas of natural vegetation, Broad-leaved forest, Transitional woodland/shrub.",
+    "labels": [
+      "Complex cultivation patterns",
+      "Land principally occupied by agriculture, with significant areas of natural vegetation",
+      "Broad-leaved forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      8,
+      20,
+      5,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 42,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-6",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Sea and ocean.",
+    "labels": [
+      "Sea and ocean"
+    ],
+    "label_ids": [
+      36
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 6,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-51",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Sea and ocean.",
+    "labels": [
+      "Sea and ocean"
+    ],
+    "label_ids": [
+      36
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 51,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-2",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Sea and ocean.",
+    "labels": [
+      "Sea and ocean"
+    ],
+    "label_ids": [
+      36
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 2,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-33",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Discontinuous urban fabric, Non-irrigated arable land, Pastures, Complex cultivation patterns.",
+    "labels": [
+      "Discontinuous urban fabric",
+      "Non-irrigated arable land",
+      "Pastures",
+      "Complex cultivation patterns"
+    ],
+    "label_ids": [
+      12,
+      25,
+      27,
+      8
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 33,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-12",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Discontinuous urban fabric, Vineyards.",
+    "labels": [
+      "Discontinuous urban fabric",
+      "Vineyards"
+    ],
+    "label_ids": [
+      12,
+      40
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 12,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-20",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Broad-leaved forest, Coniferous forest, Mixed forest, Transitional woodland/shrub",
+    "labels": [
+      "Broad-leaved forest",
+      "Coniferous forest",
+      "Mixed forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      5,
+      9,
+      22,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 20,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-55",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Coniferous forest, Mixed forest",
+    "labels": [
+      "Coniferous forest",
+      "Mixed forest"
+    ],
+    "label_ids": [
+      9,
+      22
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 55,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-6",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Sea and ocean",
+    "labels": [
+      "Sea and ocean"
+    ],
+    "label_ids": [
+      36
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 6,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-72",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Coniferous forest, Mixed forest, Transitional woodland/shrub, Water bodies",
+    "labels": [
+      "Coniferous forest",
+      "Mixed forest",
+      "Transitional woodland/shrub",
+      "Water bodies"
+    ],
+    "label_ids": [
+      9,
+      22,
+      39,
+      41
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 72,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-57",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Non-irrigated arable land, Land principally occupied by agriculture, with significant areas of natural vegetation, Agro-forestry areas, Natural grassland, Sclerophyllous vegetation, Transitional woodland/shrub",
+    "labels": [
+      "Non-irrigated arable land",
+      "Land principally occupied by agriculture, with significant areas of natural vegetation",
+      "Agro-forestry areas",
+      "Natural grassland",
+      "Sclerophyllous vegetation",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      25,
+      20,
+      0,
+      24,
+      35,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 57,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-2",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Continuous urban fabric.",
+    "labels": [
+      "Continuous urban fabric"
+    ],
+    "label_ids": [
+      11
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 2,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-10",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Discontinuous urban fabric, Rice fields, Complex cultivation patterns, Coniferous forest, Transitional woodland/shrub",
+    "labels": [
+      "Discontinuous urban fabric",
+      "Rice fields",
+      "Complex cultivation patterns",
+      "Coniferous forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      12,
+      31,
+      8,
+      9,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 10,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-77",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Pastures, Coniferous forest, Transitional woodland/shrub",
+    "labels": [
+      "Pastures",
+      "Coniferous forest",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      27,
+      9,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 77,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-66",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Coniferous forest, Water bodies",
+    "labels": [
+      "Coniferous forest",
+      "Water bodies"
+    ],
+    "label_ids": [
+      9,
+      41
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 66,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-12",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Sea and ocean.",
+    "labels": [
+      "Sea and ocean"
+    ],
+    "label_ids": [
+      36
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 12,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-53",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Non-irrigated arable land, Complex cultivation patterns, Agro-forestry areas, Transitional woodland/shrub",
+    "labels": [
+      "Non-irrigated arable land",
+      "Complex cultivation patterns",
+      "Agro-forestry areas",
+      "Transitional woodland/shrub"
+    ],
+    "label_ids": [
+      25,
+      8,
+      0,
+      39
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 53,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-24",
+    "query": "Describe the land-cover in this Sentinel-2 image.",
+    "answer": "This Sentinel-2 image (BigEarthNet, mini) contains: Continuous urban fabric.",
+    "labels": [
+      "Continuous urban fabric"
+    ],
+    "label_ids": [
+      11
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 24,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-61",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Coniferous forest, Mixed forest, Transitional woodland/shrub, Water bodies",
+    "labels": [
+      "Coniferous forest",
+      "Mixed forest",
+      "Transitional woodland/shrub",
+      "Water bodies"
+    ],
+    "label_ids": [
+      9,
+      22,
+      39,
+      41
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 61,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/train/bigearthnet-mini-train-25",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Sea and ocean",
+    "labels": [
+      "Sea and ocean"
+    ],
+    "label_ids": [
+      36
+    ],
+    "split": "train",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 25,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  },
+  {
+    "image": "bigearthnet-mini/val/bigearthnet-mini-val-17",
+    "query": "What land-cover classes are visible in this Sentinel-2 image?",
+    "answer": "Non-irrigated arable land, Coniferous forest, Mixed forest",
+    "labels": [
+      "Non-irrigated arable land",
+      "Coniferous forest",
+      "Mixed forest"
+    ],
+    "label_ids": [
+      25,
+      9,
+      22
+    ],
+    "split": "val",
+    "source": "BigEarthNet-mini",
+    "patch_idx": 17,
+    "dataset_path": "datasets\\raw\\bigearthnet\\bigearthnet-mini"
+  }
+]
