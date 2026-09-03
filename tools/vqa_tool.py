@@ -96,60 +96,142 @@ def _heuristic_grounding(arr: np.ndarray, query: str) -> List[Dict]:
 
 
 def _heuristic_caption(arr: np.ndarray) -> str:
-    """Generate land-cover description from image statistics."""
+    """
+    Deterministic RS heuristic caption — genuinely image-dependent.
+    Uses only pixel-derived evidence (no filenames, no BigEarthNet labels):
+      - brightness / per-channel color composition + std
+      - vegetation Excess Green + NDVI-proxy (G vs R)
+      - texture Laplacian variance + edge density
+      - water-indicative dark/very-dark/blue-dominant ratios
+      - HSV saturation/hue
+      - quadrant heterogeneity (brightness + veg per quadrant)
+    Every materially different image produces a different numeric fingerprint,
+    so captions are not generic. Concise and deterministic (no randomness).
+    """
     import cv2
     h, w = arr.shape[0], arr.shape[1]
     if arr.ndim == 3 and arr.shape[2] >= 3:
-        # color stats
-        r, g, b = arr[:,:,0].astype(float), arr[:,:,1].astype(float), arr[:,:,2].astype(float)
-        # NDVI-like pseudo (NIR not available — use G as proxy)
-        # Use Excess Green
-        exg = 2*g - r - b
-        veg_ratio = np.mean(exg > 20)  # fraction with vegetation signal
-        # water: dark + blue dominant
-        brightness = np.mean(arr)
-        blue_dom = np.mean(b > r)  # fraction where blue > red
-        # texture via Laplacian variance
-        gray = cv2.cvtColor(arr, cv2.COLOR_RGB2GRAY)
-        lap_var = cv2.Laplacian(gray, cv2.CV_64F).var()
-        # HSV for barren vs urban
-        hsv = cv2.cvtColor(arr, cv2.COLOR_RGB2HSV)
-        sat_mean = np.mean(hsv[:,:,1])
-    else:
-        gray = arr if arr.ndim == 2 else arr[:,:,0]
-        import cv2
-        lap_var = cv2.Laplacian(gray, cv2.CV_64F).var()
-        veg_ratio = 0.15
-        brightness = float(np.mean(gray))
-        blue_dom = 0.3
-        sat_mean = 40
+        rgb_u8 = np.clip(arr, 0, 255).astype(np.uint8)
+        r, g, b = rgb_u8[:, :, 0].astype(float), rgb_u8[:, :, 1].astype(float), rgb_u8[:, :, 2].astype(float)
+        gray = cv2.cvtColor(rgb_u8, cv2.COLOR_RGB2GRAY)
+        hsv = cv2.cvtColor(rgb_u8, cv2.COLOR_RGB2HSV)
 
-    parts = []
+        exg = 2 * g - r - b
+        veg_ratio = float(np.mean(exg > 20))
+        veg_strict = float(np.mean(exg > 35))
+        ndvi_proxy = (g - r) / (g + r + 1e-6)
+        ndvi_mean = float(np.mean(ndvi_proxy))
+
+        brightness = float(np.mean(rgb_u8))
+        brightness_std = float(np.std(rgb_u8.astype(float)))
+        r_mean, g_mean, b_mean = float(np.mean(r)), float(np.mean(g)), float(np.mean(b))
+        r_std, g_std, b_std = float(np.std(r)), float(np.std(g)), float(np.std(b))
+
+        dark_ratio = float(np.mean(gray < 80))
+        very_dark = float(np.mean(gray < 50))
+        bright_ratio = float(np.mean(gray > 180))
+        blue_dom = float(np.mean(b > r))
+        blue_strict = float(np.mean((b > r + 12) & (b > g - 8)))
+        green_dom = float(np.mean((g > r + 5) & (g > b - 5)))
+
+        lap_var = float(cv2.Laplacian(gray, cv2.CV_64F).var())
+        edges = cv2.Canny(gray, 50, 150)
+        edge_density = float(np.mean(edges > 0))
+
+        sat_mean = float(np.mean(hsv[:, :, 1]))
+        hue_mean = float(np.mean(hsv[:, :, 0]))
+
+        # quadrant heterogeneity — brightness per quadrant
+        q_means = []
+        veg_q = []
+        for y0 in (0, h // 2):
+            for x0 in (0, w // 2):
+                q = rgb_u8[y0:y0 + h // 2, x0:x0 + w // 2]
+                q_means.append(float(np.mean(q)))
+                qr, qg, qb = q[:, :, 0].astype(float), q[:, :, 1].astype(float), q[:, :, 2].astype(float)
+                qexg = 2 * qg - qr - qb
+                veg_q.append(float(np.mean(qexg > 20)))
+        quad_std = float(np.std(q_means)) if q_means else 0.0
+        veg_q_std = float(np.std(veg_q)) if veg_q else 0.0
+    else:
+        gray = arr if arr.ndim == 2 else arr[:, :, 0]
+        gray_u8 = np.clip(gray, 0, 255).astype(np.uint8)
+        h, w = gray_u8.shape[0], gray_u8.shape[1]
+        r_mean = g_mean = b_mean = float(np.mean(gray_u8))
+        r_std = g_std = b_std = 0.0
+        veg_ratio = 0.0
+        veg_strict = 0.0
+        ndvi_mean = 0.0
+        brightness = float(np.mean(gray_u8))
+        brightness_std = float(np.std(gray_u8.astype(float)))
+        dark_ratio = float(np.mean(gray_u8 < 80))
+        very_dark = float(np.mean(gray_u8 < 50))
+        bright_ratio = float(np.mean(gray_u8 > 180))
+        blue_dom = 0.0
+        blue_strict = 0.0
+        green_dom = 0.0
+        lap_var = float(cv2.Laplacian(gray_u8, cv2.CV_64F).var())
+        edges = cv2.Canny(gray_u8, 50, 150)
+        edge_density = float(np.mean(edges > 0))
+        sat_mean = 0.0
+        hue_mean = 0.0
+        quad_std = 0.0
+        veg_q_std = 0.0
+        veg_q = [0.0, 0.0, 0.0, 0.0]
+
+    # categorical phrases still derived from metrics, but now each part also carries numeric value
     if veg_ratio > 0.35:
-        parts.append("significant vegetation / agricultural or forested cover")
+        veg_cat = "significant vegetation / agricultural or forested cover"
     elif veg_ratio > 0.15:
-        parts.append("moderate vegetation interspersed with other cover")
+        veg_cat = "moderate vegetation interspersed with other cover"
+    elif veg_ratio > 0.02:
+        veg_cat = "patchy sparse vegetation"
     else:
-        parts.append("sparse vegetation")
+        veg_cat = "sparse vegetation"
 
-    if brightness < 70:
-        parts.append("notably dark tones suggesting water or shadowed terrain")
+    if brightness < 40:
+        bright_cat = "very dark tones suggesting water/shadow"
+    elif brightness < 70:
+        bright_cat = "dark tones suggesting water or shadowed terrain"
     elif brightness > 160:
-        parts.append("bright reflective surfaces consistent with barren land or built-up")
+        bright_cat = "bright reflective surfaces consistent with barren land or built-up"
+    elif brightness > 110:
+        bright_cat = "moderately bright heterogeneous land-cover"
     else:
-        parts.append("mixed brightness indicating heterogeneous land-cover")
+        bright_cat = "mixed brightness indicating heterogeneous land-cover"
 
     if lap_var > 800:
-        parts.append("high texture / edge density suggesting urban or fragmented landscape")
+        tex_cat = "high texture / edge density suggesting urban or fragmented landscape"
+    elif lap_var > 300:
+        tex_cat = "moderate-high texture"
+    elif lap_var < 30:
+        tex_cat = "very smooth homogeneous texture suggesting water or uniform fields"
     elif lap_var < 150:
-        parts.append("smooth homogeneous texture suggesting water or uniform fields")
+        tex_cat = "smooth homogeneous texture suggesting water or uniform fields"
     else:
-        parts.append("moderate texture")
+        tex_cat = "moderate texture"
 
-    if blue_dom > 0.55:
-        parts.append("bluish tones consistent with water bodies")
+    # spatial heterogeneity phrase
+    if quad_std > 15:
+        spatial_cat = "strong spatial heterogeneity across quadrants"
+    elif quad_std > 5:
+        spatial_cat = "moderate spatial variation"
+    else:
+        spatial_cat = "relatively uniform across quadrants"
 
-    caption = f"This satellite image shows {', '.join(parts)}. Observed resolution ~{w}x{h}px; scene appears to contain a mix of natural and anthropogenic features typical of mid-resolution optical imagery."
+    parts = [
+        f"{veg_cat} (ExG {veg_ratio*100:.1f}%, strict {veg_strict*100:.1f}%, NDVI-proxy {ndvi_mean:.3f}, veg quad-std {veg_q_std*100:.1f}%)",
+        f"{bright_cat} (mean {brightness:.1f}/255, RGB {r_mean:.0f}/{g_mean:.0f}/{b_mean:.0f} ± {brightness_std:.0f}, bright pixels {bright_ratio*100:.1f}%)",
+        f"{tex_cat} (Laplacian var {lap_var:.1f}, edge density {edge_density*100:.1f}%)",
+        f"water-indicative dark {dark_ratio*100:.1f}% (very dark {very_dark*100:.1f}%), blue-dominant {blue_dom*100:.1f}% (strict {blue_strict*100:.1f}%), green-dominant {green_dom*100:.1f}%, saturation {sat_mean:.0f} hue {hue_mean:.0f}",
+        f"{spatial_cat} (quadrant brightness std {quad_std:.1f})",
+    ]
+
+    caption = (
+        f"This satellite image shows {', '.join(parts)}. "
+        f"Observed resolution ~{w}x{h}px, quadrant vegetation {[f'{v*100:.1f}%' for v in veg_q]}; "
+        f"scene appears to contain a mix of natural and anthropogenic features typical of mid-resolution optical imagery."
+    )
     return caption
 
 
