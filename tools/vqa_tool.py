@@ -207,6 +207,104 @@ def _heuristic_vqa(arr: np.ndarray, query: str) -> str:
     return f"Query: '{query}'. Analysis: {caption} For this specific question, the heuristic RS vision pipeline provides the above scene description; a fine-tuned RS-VLM (SatQuery-RS-VLM) would refine this with learned land-cover vocabulary."
 
 
+def _is_invalid_generation(query: str, answer: str) -> tuple[bool, str]:
+    """
+    Conservative guard for BLIP smoke-LoRA garbage.
+    Returns (is_invalid, reason). Only flags OBVIOUS failures:
+    - echo of prompt, underscore/artifacts, degenerate short, low alnum ratio.
+    Valid land-cover sentences like "This Sentinel-2 image contains: Pastures..."
+    must NOT be flagged.
+    """
+    import re
+    import difflib
+    if not answer or not answer.strip():
+        return True, "empty_or_whitespace"
+    stripped = answer.strip()
+    q_stripped = query.strip()
+    words = stripped.split()
+
+    # 1. underscore / token artifact (observed: "_ _ _ _", "__")
+    if "_ _" in stripped or "__" in stripped or stripped.count("_") >= 3:
+        return True, "underscore_artifact"
+    # bare underscores as tokens
+    if stripped.count("_") >= 2:
+        # also check spaced underscores
+        if re.search(r"(?:_\s*){3,}", stripped):
+            return True, "repeated_underscore"
+
+    # 2. extremely short degenerate (but allow legitimate short like "Yes")
+    if len(stripped) < 8:
+        return True, f"too_short len={len(stripped)}"
+    if len(words) < 2 and len(stripped) < 15:
+        # single word/token answer is garbage for captioning/VQA
+        return True, f"too_few_words {len(words)}"
+
+    # 3. low alphanumeric ratio (lots of punctuation/underscores) — but allow normal captions
+    alnum = sum(c.isalnum() for c in stripped)
+    alnum_ratio = alnum / max(len(stripped), 1)
+    if alnum_ratio < 0.45:
+        return True, f"low_alnum_ratio {alnum_ratio:.2f}"
+
+    # 4. echo detection — conservative, only when answer is essentially query
+    def _norm(s: str) -> str:
+        s = s.lower()
+        s = re.sub(r"[^a-z0-9\s]", " ", s)
+        s = re.sub(r"\s+", " ", s).strip()
+        return s
+
+    def _alphanum(s: str) -> str:
+        return re.sub(r"[^a-z0-9]", "", s.lower())
+
+    q_norm = _norm(q_stripped)
+    a_norm = _norm(stripped)
+    q_an = _alphanum(q_stripped)
+    a_an = _alphanum(stripped)
+
+    # exact echo after normalization (handles hyphen spacing "built - up" vs "built-up")
+    if a_norm == q_norm and len(q_norm) >= 10:
+        return True, "exact_echo"
+    if a_an == q_an and len(q_an) >= 20:
+        return True, "alphanum_exact_echo"
+    # echo plus tiny suffix like "s" or "." (observed: query + "s")
+    if len(q_an) >= 20 and a_an.startswith(q_an) and len(a_an) <= len(q_an) + 10:
+        extra = a_an[len(q_an):]
+        if len(extra) <= 5:
+            return True, f"echo_plus_suffix extra='{extra}'"
+    # high difflib ratio on alphanum (catches spaced-hyphen echo)
+    if len(q_an) >= 20 and len(a_an) >= 20:
+        ratio = difflib.SequenceMatcher(None, q_an, a_an).ratio()
+        if ratio > 0.88:
+            return True, f"high_echo_ratio {ratio:.2f}"
+        # token Jaccard — answer tokens subset of query
+        q_tokens = set(q_norm.split())
+        a_tokens = set(a_norm.split())
+        if q_tokens and a_tokens:
+            inter = len(q_tokens & a_tokens)
+            union = len(q_tokens | a_tokens)
+            jacc = inter / union if union else 0
+            # high overlap + similar length => echo
+            if jacc > 0.85 and abs(len(a_tokens) - len(q_tokens)) <= 2 and len(a_tokens) >= 5:
+                return True, f"high_token_jaccard {jacc:.2f}"
+            if len(a_tokens) >= 5 and len(a_tokens) <= len(q_tokens) + 1 and inter / max(len(a_tokens), 1) > 0.9:
+                return True, "answer_tokens_subset_of_query"
+
+    # 5. degenerate repeated word
+    if len(words) >= 5:
+        uniq = len(set(w.lower() for w in words))
+        if uniq / len(words) < 0.3:
+            return True, f"repeated_word uniq={uniq}/{len(words)}"
+
+    # 6. prompt fragment dominance — answer is just a long substring of query
+    q_low = q_stripped.lower()
+    a_low = stripped.lower()
+    if len(q_low) >= 30 and len(a_low) <= len(q_low) + 15:
+        # check if first 30 chars of query appear in answer
+        if q_low[:30] in a_low:
+            return True, "prompt_fragment_dominant"
+
+    return False, "ok"
+
+
 # Try to load a real VLM if available — optional, never required
 # Real adapter loading: checks for checkpoints produced by training/train_lora_real.py
 # Preserves heuristic fallback if no checkpoint or no GPU.
@@ -428,7 +526,9 @@ def analyze(query: str, image_array: np.ndarray, task: str = "vqa") -> Dict[str,
     """
     Unified entry for VQA / captioning / grounding.
     Tries real LoRA-adapted VLM first; falls back to heuristic (always succeeds).
-    Architecture: REAL ADAPTED MODEL + HEURISTIC FALLBACK
+    Architecture: REAL ADAPTED MODEL + HEURISTIC FALLBACK + OUTPUT GUARD
+    Guard: garbage BLIP smoke generations (prompt-echo, underscores, degenerate)
+    are rejected and routed to deterministic heuristic fallback.
     """
     import time
     t0 = time.time()
@@ -440,37 +540,40 @@ def analyze(query: str, image_array: np.ndarray, task: str = "vqa") -> Dict[str,
     if use_real:
         try:
             real_answer = _vqa_with_model(image_array, query)
-            # Real caption: for captioning task, use real answer; for VQA, also use it
-            # Keep heuristic grounding boxes (model doesn't produce precise boxes)
-            boxes = []
-            if task in ("grounding", "vqa") and any(k in query.lower() for k in ["where", "highlight", "locate", "show", "box", "water", "built", "forest", "vegetation", "building"]):
-                boxes = _heuristic_grounding(image_array, query)
-            # Real model caption is the generated text
-            # For captioning task, answer == caption
-            if task == "captioning" or "describe" in query.lower():
-                real_caption = real_answer
+            # Guard: reject obvious garbage before exposing to user
+            is_invalid, reason = _is_invalid_generation(query, real_answer)
+            if is_invalid:
+                print(f"[VQA] Guard rejected invalid VLM output ({reason}): '{real_answer[:80]}...' -> falling back to heuristic")
             else:
-                real_caption = _heuristic_caption(image_array)  # keep heuristic caption as fallback
+                # Keep heuristic grounding boxes (model doesn't produce precise boxes)
+                boxes = []
+                if task in ("grounding", "vqa") and any(k in query.lower() for k in ["where", "highlight", "locate", "show", "box", "water", "built", "forest", "vegetation", "building"]):
+                    boxes = _heuristic_grounding(image_array, query)
+                # For captioning task, answer == caption
+                if task == "captioning" or "describe" in query.lower():
+                    real_caption = real_answer
+                else:
+                    real_caption = _heuristic_caption(image_array)
 
-            h, w = image_array.shape[0], image_array.shape[1]
-            input_q = 0.92 if min(h, w) >= 256 else 0.78
-            model_conf = 0.88  # higher for adapted model
-            elapsed_ms = int((time.time() - t0) * 1000)
-            ckpt = _find_checkpoint()
-            return {
-                "answer": real_answer,
-                "caption": real_caption,
-                "boxes": boxes,
-                "confidence": {
-                    "input_quality": round(input_q, 2),
-                    "model_confidence": round(model_conf, 2),
-                    "evidence_agreement": 0.0,
-                    "overall": round(0.5 * input_q + 0.5 * model_conf, 2),
-                    "is_heuristic": False,
-                },
-                "model_used": f"SatQuery-RS-VLM ({_VLM_MODEL_NAME} + LoRA {ckpt})",
-                "elapsed_ms": elapsed_ms,
-            }
+                h, w = image_array.shape[0], image_array.shape[1]
+                input_q = 0.92 if min(h, w) >= 256 else 0.78
+                model_conf = 0.88  # higher for adapted model
+                elapsed_ms = int((time.time() - t0) * 1000)
+                ckpt = _find_checkpoint()
+                return {
+                    "answer": real_answer,
+                    "caption": real_caption,
+                    "boxes": boxes,
+                    "confidence": {
+                        "input_quality": round(input_q, 2),
+                        "model_confidence": round(model_conf, 2),
+                        "evidence_agreement": 0.0,
+                        "overall": round(0.5 * input_q + 0.5 * model_conf, 2),
+                        "is_heuristic": False,
+                    },
+                    "model_used": f"SatQuery-RS-VLM ({_VLM_MODEL_NAME} + LoRA {ckpt})",
+                    "elapsed_ms": elapsed_ms,
+                }
         except Exception as e:
             print(f"[VQA] Real model inference failed, falling back to heuristic: {e}")
             import traceback

@@ -237,13 +237,20 @@ def run_analysis(query: str, image_datas: List[Dict[str, Any]]) -> Dict[str, Any
         if fusion_res:
             overall = fusion_res["confidence"]["overall"]
             cross = fusion_res["confidence"]["cross_modal_support"]
+        # Fix: is_heuristic must reflect actual tool execution, not hardcoded True.
+        # For single-image VQA/captioning/grounding, the VLM's flag is authoritative.
+        # For multi-tool tasks, overall is heuristic if all contributions are heuristic.
+        if vqa_res is not None and task in ("single_vqa", "captioning", "grounding"):
+            is_heuristic_flag = bool(vqa_res["confidence"].get("is_heuristic", True))
+        else:
+            is_heuristic_flag = all(c.get("is_heuristic", True) for c in confidences)
         conf = {
             "input_quality": round(input_q,2),
             "model_confidence": round(model_c,2),
             "evidence_agreement": round(ev_agree,2),
             "cross_modal_support": round(cross,2) if cross is not None else None,
             "overall": round(overall,2),
-            "is_heuristic": True
+            "is_heuristic": is_heuristic_flag
         }
     else:
         conf = {"input_quality": 0.75, "model_confidence": 0.60, "evidence_agreement": 0.60, "overall": 0.65, "is_heuristic": True}
@@ -279,7 +286,8 @@ def run_analysis(query: str, image_datas: List[Dict[str, Any]]) -> Dict[str, Any
     else:
         final_answer = " ".join(answer_parts) if answer_parts else "No answer generated."
 
-    step(base_step, "Evidence fusion", f"Combined {len(answer_parts)} evidence streams; overall confidence {conf['overall']:.2f} (heuristic)", "ok")
+    heuristic_label = "" if not conf.get("is_heuristic", True) else " (heuristic)"
+    step(base_step, "Evidence fusion", f"Combined {len(answer_parts)} evidence streams; overall confidence {conf['overall']:.2f}{heuristic_label}", "ok")
     base_step+=1
     step(base_step, "Confidence estimated", f"Input {conf['input_quality']:.2f} | Model {conf['model_confidence']:.2f} | Evidence {conf['evidence_agreement']:.2f}" + (f" | Cross-modal {conf['cross_modal_support']:.2f}" if conf['cross_modal_support'] is not None else ""), "ok")
     base_step+=1
