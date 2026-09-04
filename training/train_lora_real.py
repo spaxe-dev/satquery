@@ -36,10 +36,12 @@ def parse_args():
     p.add_argument("--lora_alpha", type=int, default=16)
     p.add_argument("--lora_dropout", type=float, default=0.05)
     p.add_argument("--output", type=str, default="models/checkpoints/satquery-eurosat-blip-lora")
-    p.add_argument("--use_4bit", action="store_true", help="QLoRA 4-bit via bitsandbytes")
+    p.add_argument("--use_4bit", action="store_true", help="QLoRA 4-bit via bitsandbytes (NOT viable on Windows RTX 3050 4GB for BLIP; will auto-fallback to low-VRAM FP16)")
     p.add_argument("--dry_run", action="store_true", help="Verify loader and config without training")
     p.add_argument("--max_length", type=int, default=128)
     p.add_argument("--image_size", type=int, default=224)
+    # Low-VRAM mode is auto-enabled for BLIP on <6GB Windows GPUs; explicit flag for testing
+    p.add_argument("--low_vram", action="store_true", help="Force safe low-VRAM mode for BLIP: FP16 + grad checkpointing, batch 1, CPU offload")
     return p.parse_args()
 
 def get_lora_target_modules(model_name: str):
@@ -56,6 +58,52 @@ def get_lora_target_modules(model_name: str):
     else:
         return ["q_proj", "v_proj"]
 
+
+def _get_vram_gb() -> float | None:
+    """Return total VRAM in GB if CUDA available, else None. Safe, no side effects."""
+    try:
+        import torch
+        if torch.cuda.is_available():
+            return torch.cuda.get_device_properties(0).total_memory / (1024**3)
+    except Exception:
+        pass
+    return None
+
+
+def _should_use_low_vram(args, vram_gb: float | None) -> bool:
+    """Decide if safe low-VRAM mode should be enabled for BLIP.
+    Enabled on Windows or <6GB GPUs, or when explicitly needed for BLIP BigEarthNet.
+    Keeps LoRA restricted to text_decoder query/value.
+    """
+    is_blip = "blip" in args.model.lower()
+    if not is_blip:
+        return False
+    # Explicit flag via env or future CLI could extend here
+    # Auto-enable for Windows RTX 3050 4GB and similar <6GB GPUs
+    if vram_gb is not None and vram_gb < 5.5:
+        return True
+    # Also enable if user requested 4-bit on Windows (since 4-bit is not viable, fallback to low-VRAM)
+    if getattr(args, "use_4bit", False) and sys.platform == "win32" and is_blip:
+        return True
+    return False
+
+
+def _adjust_for_low_vram(args) -> tuple[int, int, bool]:
+    """Compute low-VRAM batch/grad_accum preserving effective batch 16.
+    Returns (new_batch, new_grad_accum, did_adjust).
+    Preserves dataset 160/40, epochs 2, effective batch 16.
+    """
+    effective = args.batch_size * args.gradient_accumulation
+    # Target effective is 16 (existing config). If already 16, keep it.
+    target_effective = 16
+    # If effective is not 16 (custom), preserve original effective
+    if effective != 16:
+        target_effective = effective
+    new_batch = 1
+    new_grad = target_effective // new_batch
+    did_adjust = (new_batch != args.batch_size or new_grad != args.gradient_accumulation)
+    return new_batch, new_grad, did_adjust
+
 def main():
     args = parse_args()
     print("="*70)
@@ -67,6 +115,66 @@ def main():
     print(f"LoRA: r={args.lora_r} alpha={args.lora_alpha} dropout={args.lora_dropout} 4bit={args.use_4bit}")
     print(f"Output: {args.output}")
     print(f"Dry run: {args.dry_run}")
+    print()
+
+    # --- Startup VRAM / config check & low-VRAM handling (before any heavy downloads) ---
+    # Remove assumption that --use_4bit is viable on Windows RTX 3050 4GB for BLIP
+    is_blip = "blip" in args.model.lower()
+    # Early torch import for VRAM probe (safe, no side effects)
+    vram_gb = None
+    try:
+        import torch as _torch_probe
+        if _torch_probe.cuda.is_available():
+            vram_gb = _torch_probe.cuda.get_device_properties(0).total_memory / (1024**3)
+            print(f"[TRAIN] Detected GPU: {_torch_probe.cuda.get_device_name(0)} {vram_gb:.1f} GB, CUDA { _torch_probe.version.cuda if hasattr(_torch_probe.version, 'cuda') and _torch_probe.version.cuda else 'unknown'}")
+        else:
+            print("[TRAIN] CUDA not available (torch reports cuda.is_available()==False)")
+    except Exception as e:
+        print(f"[TRAIN] VRAM probe skipped (torch not importable: {e})")
+
+    # On Windows, bitsandbytes 4-bit NF4 for BLIP fails with CUDA invalid resource handle after 473 weights
+    if getattr(args, "use_4bit", False) and is_blip and sys.platform == "win32":
+        print("[TRAIN] WARNING: --use_4bit (bitsandbytes NF4) is not viable on Windows for BLIP")
+        print("[TRAIN]          Failure: BlipForConditionalGeneration.from_pretrained with quantization_config after 473 weights -> CUDA invalid resource handle")
+        print("[TRAIN]          Disabling 4-bit. Switching to safe low-VRAM FP16 mode (batch 1, grad checkpointing, CPU offload where compatible).")
+        args.use_4bit = False
+        args.low_vram = True
+
+    # Auto-enable low-VRAM for BLIP on <6GB GPUs (RTX 3050 4GB)
+    if not getattr(args, "low_vram", False) and is_blip and vram_gb is not None and vram_gb < 5.5:
+        print(f"[TRAIN] Detected low-VRAM GPU ({vram_gb:.1f} GB) for BLIP. Auto-enabling safe low-VRAM mode (FP16 where supported, grad checkpointing, batch 1, effective batch 16).")
+        args.low_vram = True
+
+    # Apply low-VRAM adjustments preserving effective batch 16 (160 train / 40 val, 2 epochs)
+    if getattr(args, "low_vram", False) and is_blip:
+        # Preserve effective batch 16
+        eff_before = args.batch_size * args.gradient_accumulation
+        target_eff = 16
+        # If user had custom effective, preserve it; otherwise target 16
+        if eff_before != 16:
+            target_eff = eff_before
+        new_batch = 1
+        new_grad = target_eff // new_batch
+        if new_batch != args.batch_size or new_grad != args.gradient_accumulation:
+            print(f"[TRAIN] Low-VRAM mode: batch_size {args.batch_size} -> {new_batch}, gradient_accumulation {args.gradient_accumulation} -> {new_grad} (effective {new_batch*new_grad}, preserved {eff_before} -> {target_eff})")
+            args.batch_size = new_batch
+            args.gradient_accumulation = new_grad
+        print("[TRAIN] Low-VRAM active: FP16 where supported, gradient checkpointing enabled, CPU offload/device mapping if compatible. LoRA remains text_decoder query/value.")
+
+    # Clean failure: if config still cannot fit on detected VRAM, fail before downloading 473 weights
+    if not args.dry_run and is_blip and vram_gb is not None:
+        # BLIP FP32/ FP16 batch 4 needs 6-8GB; on 4GB only batch 1 + checkpointing fits
+        if vram_gb < 5.0 and args.batch_size > 1:
+            print(f"[TRAIN] ERROR: Configuration cannot fit on {vram_gb:.1f} GB GPU.")
+            print(f"[TRAIN]        BLIP BigEarthNet requires batch 1 + gradient checkpointing + FP16 on 4GB. Requested batch_size={args.batch_size} (effective {args.batch_size*args.gradient_accumulation}).")
+            print("[TRAIN]        Fix: use default low-VRAM auto (batch 1, grad_accum 16, FP16) or pass --low_vram. Aborting before model download.")
+            sys.exit(1)
+        # If use_4bit still set on Windows (should have been disabled above), fail
+        if getattr(args, "use_4bit", False) and sys.platform == "win32" and is_blip:
+            print("[TRAIN] ERROR: --use_4bit still enabled on Windows for BLIP — will fail with CUDA invalid resource handle. Abort.")
+            sys.exit(1)
+
+    print(f"[TRAIN] Effective config: batch={args.batch_size} grad_accum={args.gradient_accumulation} effective={args.batch_size*args.gradient_accumulation} low_vram={getattr(args,'low_vram',False)} 4bit={args.use_4bit}")
     print()
 
     # Dataset paths
@@ -271,7 +379,15 @@ def main():
     # Real training requires heavy deps
     try:
         import torch
-        from transformers import AutoProcessor, AutoModelForVision2Seq, AutoModelForCausalLM, TrainingArguments, Trainer, BitsAndBytesConfig
+        from transformers import AutoProcessor, TrainingArguments, Trainer, BitsAndBytesConfig
+        # AutoModelForVision2Seq / AutoModelForCausalLM are unused for BLIP BigEarthNet path
+        # (we use BlipForConditionalGeneration / Qwen2VL directly) and are missing in
+        # some transformers installs. Import optionally for compatibility.
+        try:
+            from transformers import AutoModelForVision2Seq, AutoModelForCausalLM
+        except ImportError:
+            AutoModelForVision2Seq = None  # type: ignore
+            AutoModelForCausalLM = None  # type: ignore
         from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training, PeftModel
         print(f"Torch {torch.__version__} CUDA={torch.cuda.is_available()} {torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'CPU'}")
         if args.use_4bit and not torch.cuda.is_available():
@@ -314,8 +430,11 @@ def main():
     processor_type = "blip" if "blip" in args.model.lower() else "qwen2_vl" if "qwen" in args.model.lower() else "blip"
     print(f"Processor type: {processor_type}")
 
+    # BitsAndBytes 4-bit is disabled for BLIP on Windows (invalid resource handle). Already handled in startup check.
     bnb_config = None
     if args.use_4bit:
+        # This path is now only reachable on Linux with sufficient VRAM and non-BLIP or user forced
+        # Keep for Qwen on Linux, but BLIP on Windows will have been auto-disabled above
         bnb_config = BitsAndBytesConfig(
             load_in_4bit=True,
             bnb_4bit_quant_type="nf4",
@@ -324,17 +443,66 @@ def main():
         )
         print("Using 4-bit NF4 QLoRA")
 
+    # Low-VRAM mode for BLIP: FP16 where supported, grad checkpointing, batch 1, CPU offload if compatible
+    low_vram_active = getattr(args, "low_vram", False) and processor_type == "blip"
+    if low_vram_active:
+        print("[TRAIN] Low-VRAM BLIP mode: FP16, gradient checkpointing, batch 1, effective batch 16, CPU offload/device mapping where compatible")
+        # Ensure FP16 where CUDA available, else float32
+        # Gradient checkpointing will be enabled via TrainingArguments and model.config.use_cache=False
+        # Device mapping: try auto with offload_folder if accelerate supports it, else stay on single device
+        # Trainer is compatible with gradient_checkpointing; device_map="auto" is left None for max compatibility
+        # (CPU offload via accelerate can be added externally via `accelerate launch --cpu` if needed)
+
     if processor_type == "blip":
         from transformers import BlipProcessor, BlipForConditionalGeneration
         processor = BlipProcessor.from_pretrained(args.model)
-        model = BlipForConditionalGeneration.from_pretrained(
-            args.model,
-            quantization_config=bnb_config if args.use_4bit else None,
-            torch_dtype=torch.float16 if not args.use_4bit else None,
-            device_map="auto" if args.use_4bit else None,
-        )
+        # Determine dtype: FP16 where CUDA available, else float32
+        use_fp16 = torch.cuda.is_available() and not args.use_4bit
+        # For low-VRAM, still FP16; for non-low-VRAM non-4bit also FP16
+        model_kwargs = {}
+        if args.use_4bit:
+            model_kwargs["quantization_config"] = bnb_config
+            model_kwargs["device_map"] = "auto"
+        else:
+            # Safe non-4-bit path: FP16 if CUDA
+            model_kwargs["torch_dtype"] = torch.float16 if use_fp16 else torch.float32
+            # For low-VRAM, try device_map auto with offload if accelerate supports it for Trainer
+            # Keep None for max Trainer compatibility, but enable checkpointing below
+            # If low_vram and accelerate available, we can hint device_map auto
+            if low_vram_active:
+                # Attempt CPU offload via device_map="auto" if compatible; fallback to None
+                # Trainer with device_map auto requires accelerate dispatch; keep None for safety and use checkpointing
+                # We log intent but keep device_map None to avoid Trainer conflicts
+                # If user wants explicit offload, they can run via `accelerate launch --cpu`
+                model_kwargs["device_map"] = None
+            else:
+                model_kwargs["device_map"] = None
+        model = BlipForConditionalGeneration.from_pretrained(args.model, **model_kwargs)
         if args.use_4bit:
             model = prepare_model_for_kbit_training(model)
+        # Low-VRAM: enable gradient checkpointing and disable cache
+        if low_vram_active:
+            try:
+                # BLIP text_decoder supports gradient checkpointing via model.gradient_checkpointing_enable()
+                if hasattr(model, "gradient_checkpointing_enable"):
+                    model.gradient_checkpointing_enable()
+                    print("[TRAIN] Enabled model.gradient_checkpointing_enable() for low-VRAM")
+                # Also ensure text_decoder can checkpoint
+                if hasattr(model, "text_decoder") and hasattr(model.text_decoder, "gradient_checkpointing_enable"):
+                    model.text_decoder.gradient_checkpointing_enable()
+                # Must disable use_cache for checkpointing
+                if hasattr(model, "config"):
+                    model.config.use_cache = False
+                # Try CPU offload via accelerate if available and compatible
+                try:
+                    import accelerate
+                    # Check if we can dispatch with offload (optional, non-fatal)
+                    # We do not force device_map auto here to keep Trainer simple; log capability
+                    print("[TRAIN] CPU offload: accelerate available, Trainer will handle device placement (use `accelerate launch --cpu` for explicit offload if needed)")
+                except Exception:
+                    pass
+            except Exception as e:
+                print(f"[TRAIN] Warning: failed to enable gradient checkpointing: {e}")
     elif processor_type == "qwen2_vl":
         from transformers import Qwen2VLForConditionalGeneration, AutoProcessor
         processor = AutoProcessor.from_pretrained(args.model)
@@ -411,6 +579,8 @@ def main():
     output_dir = args.output
     os.makedirs(output_dir, exist_ok=True)
 
+    # Low-VRAM: FP16 where CUDA, gradient checkpointing, adamw_torch, no paged optimizer
+    is_low_vram = getattr(args, "low_vram", False) and processor_type == "blip"
     training_args = TrainingArguments(
         output_dir=output_dir,
         per_device_train_batch_size=args.batch_size,
@@ -423,13 +593,17 @@ def main():
         save_strategy="epoch",
         save_total_limit=2,
         bf16=False,
-        fp16=not args.use_4bit,
+        fp16=torch.cuda.is_available() and not args.use_4bit,  # FP16 where supported (CUDA), else False (CPU)
         optim="paged_adamw_8bit" if args.use_4bit else "adamw_torch",
         report_to="none",
         remove_unused_columns=False,
         label_names=["labels"],
         load_best_model_at_end=True,
+        gradient_checkpointing=is_low_vram,
+        dataloader_pin_memory=False if is_low_vram else True,
     )
+    if is_low_vram:
+        print(f"[TRAIN] TrainingArguments low-VRAM: fp16={training_args.fp16} gradient_checkpointing={is_low_vram} batch={args.batch_size} grad_accum={args.gradient_accumulation} effective={args.batch_size*args.gradient_accumulation}")
 
     # Custom data collator for BLIP/Qwen
     from transformers import DataCollatorForSeq2Seq
@@ -476,6 +650,7 @@ def main():
         model.save_pretrained(output_dir)
         processor.save_pretrained(output_dir)
     # Save manifest
+    quant_str = "4-bit NF4 QLoRA" if args.use_4bit else ("FP16 (low-VRAM, grad checkpointing, batch 1)" if getattr(args, "low_vram", False) and processor_type == "blip" else "FP16")
     manifest = {
         "base_model": args.model,
         "dataset": args.dataset,
@@ -485,10 +660,13 @@ def main():
         "lora_r": args.lora_r,
         "lora_alpha": args.lora_alpha,
         "target_modules": target_modules,
-        "quantization": "4-bit NF4 QLoRA" if args.use_4bit else "FP16",
+        "quantization": quant_str,
         "epochs": args.epochs,
         "batch_size": args.batch_size,
         "gradient_accumulation": args.gradient_accumulation,
+        "effective_batch": args.batch_size * args.gradient_accumulation,
+        "gradient_checkpointing": getattr(args, "low_vram", False) and processor_type == "blip",
+        "low_vram": getattr(args, "low_vram", False),
         "lr": args.lr,
         "status": "trained",
         "checkpoint": f"{output_dir}/adapter_model.safetensors",
