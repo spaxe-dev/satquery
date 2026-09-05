@@ -12,8 +12,9 @@ import numpy as np
 from agent.router import classify_query, decide_task, plan_tools, validate_inputs
 from backend.app.services.validation import validate_image_file, validate_temporal_pair, validate_optical_sar_pair
 
-# Import tools
+# Import tools via capability registry (single dispatch point; concrete modules only via registry adapters)
 from tools import vqa_tool, change_tool, optical_tool, sar_tool, fusion_tool
+from packages.tools.dispatcher import dispatch as registry_dispatch
 
 def _now_iso():
     return datetime.datetime.utcnow().isoformat() + "Z"
@@ -141,7 +142,7 @@ def run_analysis(query: str, image_datas: List[Dict[str, Any]]) -> Dict[str, Any
                 if p["params"].get("context")=="change" and len(arrays)>=2:
                     arr = arrays[1]
                 task_param = p["params"].get("task", "vqa")
-                res = vqa_tool.analyze(query, arr, task=task_param)
+                res = registry_dispatch(tid, [arr], query, {"task": task_param, **p["params"]})
                 vqa_res = res
                 answer_parts.append(res["answer"])
                 if task_param in ("captioning","vqa"):
@@ -175,7 +176,7 @@ def run_analysis(query: str, image_datas: List[Dict[str, Any]]) -> Dict[str, Any
                 step(base_step, "VLM status", vlm_detail, vlm_status, tool=tid)
             elif tid == "change-detector":
                 if len(arrays)>=2:
-                    res = change_tool.analyze(arrays[0], arrays[1], query)
+                    res = registry_dispatch(tid, [arrays[0], arrays[1]], query, p["params"])
                     change_res = res
                     change_description = res["description"]
                     change_area_pct = res["changed_pct"]
@@ -194,7 +195,7 @@ def run_analysis(query: str, image_datas: List[Dict[str, Any]]) -> Dict[str, Any
                     if m["modality"]=="optical":
                         idx=i; break
                 # if both are sar, still run on first but note
-                res = optical_tool.analyze(arrays[idx], query)
+                res = registry_dispatch(tid, [arrays[idx]], query, p["params"])
                 optical_res = res
                 answer_parts.append(res["answer"])
                 optical_overlay_b64 = res["water_overlay_b64"]
@@ -215,7 +216,7 @@ def run_analysis(query: str, image_datas: List[Dict[str, Any]]) -> Dict[str, Any
                 elif task=="compound_temporal_sar" and len(arrays)==2:
                     # T1,T2 are temporal; synthesize SAR corroboration from T2 analysis
                     idx = 1
-                res = sar_tool.analyze(arrays[idx], query)
+                res = registry_dispatch(tid, [arrays[idx]], query, p["params"])
                 sar_res = res
                 # For compound, answer is corroboration perspective
                 answer_parts.append(res["answer"])
