@@ -14,7 +14,7 @@ from backend.app.services.validation import validate_image_file, validate_tempor
 
 # Import tools via capability registry (single dispatch point; concrete modules only via registry adapters)
 from tools import vqa_tool, change_tool, optical_tool, sar_tool, fusion_tool
-from packages.tools.dispatcher import dispatch as registry_dispatch
+from packages.tools.dispatcher import dispatch as registry_dispatch, select_images, check_compat
 
 def _now_iso():
     return datetime.datetime.utcnow().isoformat() + "Z"
@@ -60,6 +60,11 @@ def run_analysis(query: str, image_datas: List[Dict[str, Any]]) -> Dict[str, Any
         ok2, r2, w2 = validate_optical_sar_pair(metas[0], metas[1])
         extra_warnings.extend(w2)
     all_warnings = warnings + extra_warnings
+    # Authoritative geospatial compatibility (no silent resize into compatibility)
+    _compat_ok, _compat_reason, _compat_warnings, _approximate = check_compat(task, metas)
+    all_warnings = all_warnings + _compat_warnings
+    if not _compat_ok:
+        valid, reason = False, _compat_reason
     if not valid:
         step(base_step, "Input compatibility validated", f"FAILED: {reason}", "error")
         # Return refusal — this is correct trust behavior
@@ -136,11 +141,8 @@ def run_analysis(query: str, image_datas: List[Dict[str, Any]]) -> Dict[str, Any
         t0 = time.time()
         try:
             if tid == "satquery-rs-vlm":
-                # choose appropriate array
-                arr = arrays[0] if arrays else None
-                # for change follow-up, use T2 if available
-                if p["params"].get("context")=="change" and len(arrays)>=2:
-                    arr = arrays[1]
+                imgs = select_images(task, tid, arrays, metas, p["params"])
+                arr = imgs[0] if imgs else None
                 task_param = p["params"].get("task", "vqa")
                 res = registry_dispatch(tid, [arr], query, {"task": task_param, **p["params"]})
                 vqa_res = res
@@ -176,7 +178,9 @@ def run_analysis(query: str, image_datas: List[Dict[str, Any]]) -> Dict[str, Any
                 step(base_step, "VLM status", vlm_detail, vlm_status, tool=tid)
             elif tid == "change-detector":
                 if len(arrays)>=2:
-                    res = registry_dispatch(tid, [arrays[0], arrays[1]], query, p["params"])
+                    res = registry_dispatch(tid, select_images(task, tid, arrays, metas, p["params"]), query, p["params"])
+                    if _approximate:
+                        res["description"] = (res.get("description", "") + " [APPROXIMATE: pair lacks shared georeferencing]").strip()
                     change_res = res
                     change_description = res["description"]
                     change_area_pct = res["changed_pct"]
@@ -189,34 +193,26 @@ def run_analysis(query: str, image_datas: List[Dict[str, Any]]) -> Dict[str, Any
                 else:
                     step(base_step, "Executed", "ChangeDetector skipped: need 2 images", "warn", tool=tid)
             elif tid == "optical-analyzer":
-                # Heuristic: pick first optical-like image, or first
-                idx = 0
-                for i, m in enumerate(metas):
-                    if m["modality"]=="optical":
-                        idx=i; break
-                # if both are sar, still run on first but note
-                res = registry_dispatch(tid, [arrays[idx]], query, p["params"])
+                imgs = select_images(task, tid, arrays, metas, p["params"])
+                _m = metas[0]
+                for _i, _a in enumerate(arrays):
+                    if imgs and _a is imgs[0]:
+                        _m = metas[_i]
+                        break
+                res = registry_dispatch(tid, imgs, query, {**p["params"], "_meta": _m})
                 optical_res = res
                 answer_parts.append(res["answer"])
                 optical_overlay_b64 = res["water_overlay_b64"]
                 confidences.append(res["confidence"])
                 step(base_step, "Executed", f"OpticalAnalyzer: water {res['water_pct']}% veg {res['veg_pct']}% built {res['built_pct']}%", "ok", tool=tid, dur=res["elapsed_ms"])
             elif tid == "sar-analyzer":
-                idx = 0
-                for i, m in enumerate(metas):
-                    if m["modality"]=="sar":
-                        idx=i; break
-                    if m["modality"]=="unknown" and len(arrays)>=2:
-                        # second image as SAR fallback
-                        idx = 1 if len(arrays)>1 else 0
+                imgs = select_images(task, tid, arrays, metas, p["params"])
+                _m = metas[0]
+                for _i, _a in enumerate(arrays):
+                    if imgs and _a is imgs[0]:
+                        _m = metas[_i]
                         break
-                # For compound case with 3 images, SAR is last
-                if task=="compound_temporal_sar" and len(arrays)>=3:
-                    idx = 2
-                elif task=="compound_temporal_sar" and len(arrays)==2:
-                    # T1,T2 are temporal; synthesize SAR corroboration from T2 analysis
-                    idx = 1
-                res = registry_dispatch(tid, [arrays[idx]], query, p["params"])
+                res = registry_dispatch(tid, imgs, query, {**p["params"], "_meta": _m})
                 sar_res = res
                 # For compound, answer is corroboration perspective
                 answer_parts.append(res["answer"])
@@ -232,11 +228,13 @@ def run_analysis(query: str, image_datas: List[Dict[str, Any]]) -> Dict[str, Any
                     # Ensure we have both; if one missing, create dummy
                     if optical_res is None:
                         # Use first image as optical proxy
-                        optical_res = optical_tool.analyze(arrays[0], query)
+                        optical_res = registry_dispatch("optical-analyzer", [arrays[0]], query, {"_meta": metas[0]})
                     if sar_res is None:
-                        sar_res = sar_tool.analyze(arrays[-1], query)
+                        sar_res = registry_dispatch("sar-analyzer", [arrays[-1]], query, {"_meta": metas[-1]})
                     h,w = arrays[0].shape[0], arrays[0].shape[1]
                     res = fusion_tool.fuse(optical_res, sar_res, h, w)
+                    if _approximate:
+                        res["corroboration"] = (res.get("corroboration", "") + " [APPROXIMATE: unregistered pair]").strip()
                     fusion_res = res
                     fused_statement = res["corroboration"]
                     answer_parts.append(res["corroboration"])
