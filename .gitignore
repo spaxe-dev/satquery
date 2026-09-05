@@ -26,6 +26,9 @@ reports/*.pdf
 # Frontend
 frontend/dist/assets/
 frontend/node_modules/
+apps/web/node_modules/
+apps/web/.next/
+apps/web/tsconfig.tsbuildinfo
 
 # OS
 .DS_Store
