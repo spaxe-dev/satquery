@@ -11,7 +11,10 @@ from pathlib import Path
 
 router = APIRouter()
 
-REPORTS_DIR = Path("reports")
+MAX_BYTES_PER_IMAGE = 25 * 1024 * 1024
+REPORT_ID_RE = __import__("re").compile(r"^[a-f0-9]{8}$")
+
+REPORTS_DIR = Path(__file__).resolve().parents[4] / "reports"
 REPORTS_DIR.mkdir(exist_ok=True)
 
 @router.get("/health")
@@ -50,6 +53,8 @@ async def analyze(
         data = await upl.read()
         if len(data) == 0:
             raise HTTPException(status_code=400, detail=f"Empty file: {upl.filename}")
+        if len(data) > MAX_BYTES_PER_IMAGE:
+            raise HTTPException(status_code=400, detail=f"File too large: {upl.filename} ({len(data)} bytes, max {MAX_BYTES_PER_IMAGE})")
         # validate
         res = validate_image_file(data, upl.filename or "image.png")
         if not res["valid"]:
@@ -64,10 +69,10 @@ async def analyze(
 
     try:
         result = run_analysis(query, image_datas)
-    except Exception as e:
-        import traceback
-        traceback.print_exc()
-        raise HTTPException(status_code=500, detail=f"Analysis failed: {e}")
+    except Exception:
+        import logging
+        logging.getLogger("satquery").exception("analysis failed")
+        raise HTTPException(status_code=500, detail="Analysis failed due to internal error")
 
     # Convert numpy arrays / non-serializable
     # Prepare JSON-safe response
@@ -177,6 +182,8 @@ async def analyze(
 
 @router.get("/reports/{report_id}")
 def get_report(report_id: str):
+    if not REPORT_ID_RE.match(report_id):
+        raise HTTPException(status_code=400, detail="Invalid report id")
     p = REPORTS_DIR / f"report_{report_id}.json"
     if not p.exists():
         raise HTTPException(status_code=404, detail="Report not found")

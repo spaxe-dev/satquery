@@ -410,7 +410,12 @@ CHECKPOINT_CANDIDATES = [
 
 def _find_checkpoint():
     from pathlib import Path
+    import os
+    allow_smoke = os.environ.get("SATQUERY_ALLOW_SMOKE", "0") == "1"
     for cand in CHECKPOINT_CANDIDATES:
+        # Quarantine: smoke adapter (8-sample, loss 9.82) must never load in prod
+        if "smoke-" in cand and not allow_smoke:
+            continue
         p = Path(cand)
         # Check for adapter_config.json (PEFT) or pytorch_model.bin / adapter_model.safetensors
         if (p / "adapter_config.json").exists() or (p / "adapter_model.safetensors").exists() or (p / "adapter_model.bin").exists():
