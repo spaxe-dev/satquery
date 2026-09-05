@@ -1,0 +1,3 @@
+# Geospatial Architecture
+
+Single boundary `packages/geospatial`. Extraction preserves numeric `crs/transform/bounds/GSD/nodata/dtype` (not str). Compat checks: dim tol 15% temporal refuse / 25% opt-SAR warn + CRS numeric compare + GSD-ratio + date order (new). No silent `resize`; if dims differ within tol, resample with note + scale factor returned for overlays. Tiling: `should_tile>1024`, `tiles()` wired in orchestrator for change/optical/SAR; previews return `scale_x/scale_y` so grounding boxes align. Masks carry `crs/transform` when georeferenced; else labeled `pixel-space, not m²`. Never claim pixel % as area.

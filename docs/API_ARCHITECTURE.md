@@ -1,0 +1,3 @@
+# API Architecture
+
+Thin FastAPI over `packages/core`. Endpoints: `GET /health`, `GET /capabilities` (tools+models), `GET /models`, `GET /tools`, `POST /analyses` (multipart, response_model=AnalysisResult), `GET /analyses/{id}`, `GET /analyses/{id}/events`, `GET /analyses/{id}/report` (JSON, PDF future). Current `POST /api/analyze`, `GET /api/registry|reports` are legacy aliases to keep until frontend migrates. Every endpoint: request/response pydantic, error `{code,message}`, validation via core, no domain math in handlers, `run_in_executor` for numpy, `REPORTS_DIR` absolute, id regex `^[a-f0-9]{8}$`, bytes cap 25MB.
