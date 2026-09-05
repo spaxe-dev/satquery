@@ -16,6 +16,10 @@ except ImportError:
 
 SUPPORTED_EXTS = {".tif", ".tiff", ".png", ".jpg", ".jpeg"}
 
+MAX_PIXELS = 16_000_000  # warn above, refuse above 64M
+HARD_MAX_PIXELS = 64_000_000
+MAX_BANDS = 12
+
 # Heuristic: SAR images are typically single-band, low dynamic range, speckle texture
 def _detect_modality_from_array(arr: np.ndarray, filename: str = "") -> str:
     fname = filename.lower()
@@ -68,6 +72,18 @@ def validate_image_file(file_bytes: bytes, filename: str) -> Dict[str, Any]:
                     meta["bands"] = ds.count
                     meta["crs"] = str(ds.crs) if ds.crs else None
                     meta["transform"] = str(ds.transform) if ds.transform else None
+                    # Numeric preservation (no longer read-then-discard only)
+                    try:
+                        meta["transform_list"] = list(ds.transform)[:6] if ds.transform else None
+                    except Exception:
+                        meta["transform_list"] = None
+                    try:
+                        b = ds.bounds
+                        meta["bounds"] = [float(b.left), float(b.bottom), float(b.right), float(b.top)] if b else None
+                    except Exception:
+                        meta["bounds"] = None
+                    meta["nodata"] = float(ds.nodata) if ds.nodata is not None else None
+                    meta["gsd_m"] = None  # populated when catalog provides it; never invented
                     meta["dtype"] = str(ds.dtypes[0]) if ds.dtypes else None
                     meta["has_georef"] = ds.crs is not None
                     # read as array (first 3 bands max for preview)
@@ -103,6 +119,11 @@ def validate_image_file(file_bytes: bytes, filename: str) -> Dict[str, Any]:
             meta["bands"] = 1 if arr.ndim == 2 else arr.shape[2] if arr.ndim == 3 else 1
             meta["format"] = ext
             meta["crs"] = None
+            meta["transform"] = None
+            meta["transform_list"] = None
+            meta["bounds"] = None
+            meta["nodata"] = None
+            meta["gsd_m"] = None
             meta["has_georef"] = False
             meta["dtype"] = str(arr.dtype)
         except Exception as e:
@@ -112,6 +133,17 @@ def validate_image_file(file_bytes: bytes, filename: str) -> Dict[str, Any]:
 
     # dimension checks
     h, w = meta["height"], meta["width"]
+    if meta.get("bands", 1) and meta["bands"] > MAX_BANDS:
+        result["valid"] = False
+        result["reason"] = f"Too many bands: {meta['bands']} (max {MAX_BANDS})"
+        return result
+    npix = h * w
+    if npix > HARD_MAX_PIXELS:
+        result["valid"] = False
+        result["reason"] = f"Image too large: {w}x{h} ({npix} px, max {HARD_MAX_PIXELS})"
+        return result
+    if npix > MAX_PIXELS:
+        result["warnings"].append(f"Large image ({w}x{h}); tiled/windowed processing required")
     if h < 64 or w < 64:
         result["warnings"].append(f"Image very small ({w}x{h}); results may be unreliable")
     if h > 4096 or w > 4096:
