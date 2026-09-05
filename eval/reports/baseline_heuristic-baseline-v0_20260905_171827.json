@@ -1,0 +1,125 @@
+{
+  "impl": "heuristic-baseline-v0",
+  "ts": "2026-09-05T17:18:26.820812Z",
+  "results": [
+    {
+      "case_id": "single_vqa",
+      "implementation": "heuristic-baseline-v0",
+      "model_tool": "satquery-rs-vlm",
+      "heuristic": true,
+      "time_s": 0.15,
+      "status": "OK",
+      "passed": true,
+      "task": "captioning",
+      "confidence": {
+        "input_quality": 0.88,
+        "model_confidence": 0.77,
+        "evidence_agreement": 0.0,
+        "cross_modal_support": null,
+        "overall": 0.82,
+        "is_heuristic": true
+      },
+      "warnings": [],
+      "eval_type": "REGRESSION"
+    },
+    {
+      "case_id": "temporal_change",
+      "implementation": "heuristic-baseline-v0",
+      "model_tool": "change-detector,satquery-rs-vlm",
+      "heuristic": true,
+      "time_s": 0.37,
+      "status": "OK",
+      "passed": true,
+      "task": "temporal_change",
+      "confidence": {
+        "input_quality": 0.9,
+        "model_confidence": 0.83,
+        "evidence_agreement": 0.36,
+        "cross_modal_support": null,
+        "overall": 0.84,
+        "is_heuristic": true
+      },
+      "warnings": [],
+      "eval_type": "REGRESSION"
+    },
+    {
+      "case_id": "optical_sar",
+      "implementation": "heuristic-baseline-v0",
+      "model_tool": "optical-analyzer,sar-analyzer,fusion-engine",
+      "heuristic": true,
+      "time_s": 0.18,
+      "status": "OK",
+      "passed": true,
+      "task": "optical_sar_fusion",
+      "confidence": {
+        "input_quality": 0.88,
+        "model_confidence": 0.67,
+        "evidence_agreement": 0.52,
+        "cross_modal_support": 0.48,
+        "overall": 0.65,
+        "is_heuristic": true
+      },
+      "warnings": [],
+      "eval_type": "REGRESSION"
+    },
+    {
+      "case_id": "compound_hero",
+      "implementation": "heuristic-baseline-v0",
+      "model_tool": "change-detector,sar-analyzer,fusion-engine",
+      "heuristic": true,
+      "time_s": 0.28,
+      "status": "OK",
+      "passed": true,
+      "task": "compound_temporal_sar",
+      "confidence": {
+        "input_quality": 0.89,
+        "model_confidence": 0.69,
+        "evidence_agreement": 0.38,
+        "cross_modal_support": 0.33,
+        "overall": 0.58,
+        "is_heuristic": true
+      },
+      "warnings": [],
+      "eval_type": "REGRESSION"
+    },
+    {
+      "case_id": "invalid_refusal",
+      "implementation": "heuristic-baseline-v0",
+      "model_tool": "",
+      "heuristic": true,
+      "time_s": 0.02,
+      "status": "REFUSED",
+      "passed": true,
+      "task": "temporal_change",
+      "confidence": {
+        "input_quality": 0.0,
+        "model_confidence": 0.0,
+        "evidence_agreement": 0.0,
+        "overall": 0.0,
+        "is_heuristic": true
+      },
+      "warnings": [],
+      "eval_type": "REGRESSION"
+    },
+    {
+      "case_id": "grounding_probe",
+      "implementation": "heuristic-baseline-v0",
+      "model_tool": "satquery-rs-vlm",
+      "heuristic": true,
+      "time_s": 0.1,
+      "status": "OK",
+      "passed": true,
+      "task": "grounding",
+      "confidence": {
+        "input_quality": 0.88,
+        "model_confidence": 0.77,
+        "evidence_agreement": 0.0,
+        "cross_modal_support": null,
+        "overall": 0.82,
+        "is_heuristic": true
+      },
+      "warnings": [],
+      "eval_type": "QUALITATIVE"
+    }
+  ]
+}

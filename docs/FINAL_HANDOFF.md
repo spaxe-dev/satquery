@@ -1,4 +1,19 @@
-# SatQuery AI — Final Engineering Handoff
+# SatQuery AI — Final Engineering Handoff (Phase 2 appended 2026-09-05)
+
+## Phase 2 summary (b7f8c87 → here, no training, inference-only)
+
+- Eval harness `eval/runners/run_baseline.py`: 6 cases (5 REGRESSION demos + 1 QUALITATIVE grounding probe), no invented ground truth; baseline 6/6 passed heuristic (`eval/reports/`).
+- Registry real: `packages/tools/dispatcher.py` + orchestrator routes VQA/change/optical/SAR via `registry_dispatch`; `tests/test_registry_dispatch.py` proves replacement without orchestrator edit (FAKE_OPTICAL_MARKER).
+- Models tested: BLIP-base (RUNNABLE CPU, BSD-3, optical-only) INTEGRATED gated `SATQUERY_ENABLE_VLM=1` via `packages/models/blip_adapter.py` (grounding explicitly unsupported); Qwen2-VL-2B/GeoChat/EarthMind/TEOChat BLOCKED CPU (see `docs/MODEL_EVALUATION.md`). Fallback: REAL(optical VQA/cap only)→HEURISTIC; SAR/temporal/grounding never sent to RGB-only model as understanding (capability guard).
+- Geo/raster: `validation.py` preserves numeric transform/bounds/nodata/GSD (PIL fills None), MAX_BANDS 12, HARD_MAX 64M px, warn >16M; `packages/geospatial/registration.py` returns unregistered/approximately_aligned/registered + aspect-preserved `box_to_preview` (no stretch); change `_resize_match` documented approximate (validation refuses >15%).
+- Tiling: contract tested + wired as warn path (large → tiled/windowed required); full tile-execute-aggregate NOT wired (documented limitation).
+- Registration: structured status only; pixel fusion on unregistered labeled approximate (no research-grade registration this phase).
+- Manifests: eurosat `training_manifest.json` mislabel fixed locally to `eurosat-UNAVAILABLE-needs-regeneration` (file is gitignored under `models/checkpoints`, so fix is local-only, noted here); reBEN 0 bytes already honest UNAVAILABLE-by-note.
+- Frontend: additive `ConfidencePanel/EvidencePanel/DemoSelector` + existing heuristic badges; `page.tsx` still monolith (PARTIAL); build PASS 22.1kB/109kB.
+- Perf: eval `time_s` per case recorded; no Rust (no profiling justification); bottleneck is numpy/CV + full-raster loads (documented).
+- Tests: 79 passed, 1 skipped (was 73/1); demos 5/5; eval 6/6; frontend build PASS.
+
+## Executive Summary (Phase 1, retained)
 
 ## Executive Summary
 
